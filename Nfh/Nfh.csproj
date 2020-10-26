@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Image.Tga\Image.Tga.csproj" />
     <ProjectReference Include="..\Steam.Acf\Steam.Acf.csproj" />
   </ItemGroup>
 
