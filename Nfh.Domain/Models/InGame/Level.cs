@@ -9,7 +9,7 @@ namespace Nfh.Domain.Models.InGame
     /// </summary>
     public class Level : IIdentifiable
     {
-        public string Id { get; }
+        public string Id => Meta.Id;
         public LevelMeta Meta { get; set; }
         public Size Size { get; set; }
         public IDictionary<string, Room> Rooms { get; set; } = new Dictionary<string, Room>();

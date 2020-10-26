@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Nfh.Domain.Models.InGame
 {
-    public class Animation
+    public class Animation : IIdentifiable
     {
         public enum Kind
         {
@@ -18,7 +18,7 @@ namespace Nfh.Domain.Models.InGame
             public string? SoundPath { get; set; }
         }
 
-        public string Id { get; set; }
+        public string Id { get; }
         public Kind Kind_ { get; set; }
         public IList<Frame> Frames { get; set; } = new List<Frame>();
     }

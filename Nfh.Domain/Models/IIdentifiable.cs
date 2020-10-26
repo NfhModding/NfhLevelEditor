@@ -1,4 +1,4 @@
-﻿namespace Nfh.Domain.Models.InGame
+﻿namespace Nfh.Domain.Models
 {
     public interface IIdentifiable
     {
