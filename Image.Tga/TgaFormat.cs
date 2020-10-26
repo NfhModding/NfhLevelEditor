@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Image.Tga
+﻿namespace Image.Tga
 {
     /// <summary>
     /// The possible TGA image formats.

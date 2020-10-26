@@ -1,7 +1,5 @@
 ﻿using Format.Xml.Syntax;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Format.Xml
 {

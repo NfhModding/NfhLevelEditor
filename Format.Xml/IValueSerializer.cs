@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Format.Xml
+﻿namespace Format.Xml
 {
     /// <summary>
     /// The value serializer used by <see cref="XmlSerializer"/>.

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Format.Xml.Helpers
+﻿namespace Format.Xml.Helpers
 {
     internal static class StringExtensions
     {

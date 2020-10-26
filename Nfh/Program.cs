@@ -1,10 +1,8 @@
 ﻿using Image.Tga;
-using Steam.Acf;
-using System;
 
 namespace Nfh
 {
-	class Program
+    class Program
     {
         static void Main(string[] args)
         {

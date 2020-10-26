@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Format.Xml.Syntax
+﻿namespace Format.Xml.Syntax
 {
     /// <summary>
     /// Describes user-friendly position in a text file.
