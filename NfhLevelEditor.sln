@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Image.Tga", "Image.Tga\Imag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Format.Xml", "Format.Xml\Format.Xml.csproj", "{A2B8CB03-F05A-4D2A-814D-A26B81D6C473}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Format.Xml.Tests", "Format.Xml.Tests\Format.Xml.Tests.csproj", "{AAB1799E-E6D7-4C94-A18D-CF3F6F41A35E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Format.Xml.Tests", "Format.Xml.Tests\Format.Xml.Tests.csproj", "{AAB1799E-E6D7-4C94-A18D-CF3F6F41A35E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfh.Domain", "Nfh.Domain\Nfh.Domain.csproj", "{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{AAB1799E-E6D7-4C94-A18D-CF3F6F41A35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAB1799E-E6D7-4C94-A18D-CF3F6F41A35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAB1799E-E6D7-4C94-A18D-CF3F6F41A35E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
