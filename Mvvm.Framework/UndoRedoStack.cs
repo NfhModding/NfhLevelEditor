@@ -28,6 +28,8 @@ namespace Mvvm.Framework
             undoStack.Push(undoCommand);
             // Finally execute the command
             command.Execute();
+            // Make sure to invalidate save if needed
+            if (saveIndex >= undoStack.Count) saveIndex = -1;
         }
 
         public void Undo()
