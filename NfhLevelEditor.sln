@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Format.Xml", "Format.Xml\Fo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Format.Xml.Tests", "Format.Xml.Tests\Format.Xml.Tests.csproj", "{AAB1799E-E6D7-4C94-A18D-CF3F6F41A35E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfh.Domain", "Nfh.Domain\Nfh.Domain.csproj", "{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfh.Domain", "Nfh.Domain\Nfh.Domain.csproj", "{9ECB4B06-F364-4CD8-AADE-8A24BA2CA89D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfh.Services", "Nfh.Services\Nfh.Services.csproj", "{544044CC-F912-49AA-B1F7-31DA61B4168A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfh.Services", "Nfh.Services\Nfh.Services.csproj", "{544044CC-F912-49AA-B1F7-31DA61B4168A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfh.Editor", "Nfh.Editor\Nfh.Editor.csproj", "{CF5422F2-20E9-404C-958A-361D034D1B42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfh.Editor", "Nfh.Editor\Nfh.Editor.csproj", "{CF5422F2-20E9-404C-958A-361D034D1B42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Framework", "Mvvm.Framework\Mvvm.Framework.csproj", "{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{CF5422F2-20E9-404C-958A-361D034D1B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF5422F2-20E9-404C-958A-361D034D1B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF5422F2-20E9-404C-958A-361D034D1B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

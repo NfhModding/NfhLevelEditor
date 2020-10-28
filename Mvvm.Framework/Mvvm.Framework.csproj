@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5</TargetFramework>
+	<LanguageVersion>9.0</LanguageVersion>
+  </PropertyGroup>
+
+</Project>
