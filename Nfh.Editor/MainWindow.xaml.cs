@@ -21,30 +21,13 @@ namespace Nfh.Editor
         public string Text { get; set; } = string.Empty;
     }
 
-    public class SetTextCommand : ModelChangeCommand
-    {
-        private TextModel tm;
-        private string toText;
-
-        public SetTextCommand(IModelChangeNotifier modelChangeNotifier, TextModel tm, string toText) 
-            : base(modelChangeNotifier, tm)
-        {
-            this.tm = tm;
-            this.toText = toText;
-        }
-
-        protected override void ExecuteWithoutNotify() => tm.Text = toText;
-
-        public override IModelChangeCommand GetUndoCommand() =>
-            new SetTextCommand(ModelChangeNotifier, tm, tm.Text);
-    }
-
     public class TextViewModel : ViewModelBase
     {
         public string Text 
         { 
             get => tm.Text; 
-            set => ur.Execute(new SetTextCommand(ModelChangeNotifier, tm, value)); 
+            set => ur.Execute(new ModelPropertyChangeCommand<TextModel, string>(
+                ModelChangeNotifier, tm, tm => tm.Text, value)); 
         }
         public string SaveStatus => ur.HasUnsavedChanges ? "Unsaved changes!" : "Saved";
         public ICommand AppendChar { get; }
