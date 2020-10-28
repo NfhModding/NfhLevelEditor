@@ -1,8 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5</TargetFramework>
+    <TargetFramework>net5-windows</TargetFramework>
 	<LanguageVersion>9.0</LanguageVersion>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
   </PropertyGroup>
 
 </Project>

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mvvm.Framework\Mvvm.Framework.csproj" />
     <ProjectReference Include="..\Nfh.Domain\Nfh.Domain.csproj" />
   </ItemGroup>
 
