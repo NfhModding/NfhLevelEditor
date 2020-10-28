@@ -55,7 +55,7 @@ namespace Mvvm.Framework
         /// <summary>
         /// Triggers a property changed event for the property with the given name.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">The name of the changed property to send the notification about.</param>
         protected void NotifyPropertyChanged([CallerMemberName] string name = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
