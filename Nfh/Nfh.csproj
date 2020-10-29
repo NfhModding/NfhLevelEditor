@@ -2,11 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <TargetFramework>net5</TargetFramework>
+	  <LanguageVersion>9.0</LanguageVersion>
+	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Image.Tga\Image.Tga.csproj" />
+    <ProjectReference Include="..\Nfh.Services\Nfh.Services.csproj" />
     <ProjectReference Include="..\Steam.Acf\Steam.Acf.csproj" />
   </ItemGroup>
 
