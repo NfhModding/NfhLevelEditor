@@ -7,14 +7,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvvm.Framework
+namespace Mvvm.Framework.ViewModel
 {
     /// <summary>
     /// A base class for all the viewmodels. Helps registering change notifications.
     /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// The <see cref="IModelChangeNotifier"/> that helps dispatching change notifications

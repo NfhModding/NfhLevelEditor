@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvvm.Framework
+namespace Mvvm.Framework.ViewModel
 {
     /// <summary>
     /// A command that can be executed to modify the model.

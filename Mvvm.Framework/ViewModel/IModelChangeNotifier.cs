@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mvvm.Framework
+namespace Mvvm.Framework.ViewModel
 {
     /// <summary>
     /// A dispatcher that runs some action on certain model changes.

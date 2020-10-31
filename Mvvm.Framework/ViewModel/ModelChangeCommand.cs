@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvvm.Framework
+namespace Mvvm.Framework.ViewModel
 {
     /// <summary>
     /// Base class for <see cref="IModelChangeCommand"/>s that auto-raise modelview property changed 

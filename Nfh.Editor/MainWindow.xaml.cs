@@ -1,7 +1,13 @@
 ﻿using Mvvm.Framework;
+using Mvvm.Framework.Command;
+using Mvvm.Framework.UndoRedo;
+using Mvvm.Framework.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,6 +22,30 @@ using System.Windows.Shapes;
 
 namespace Nfh.Editor
 {
+    public class ModelPropertyChangeCommand : ModelChangeCommand
+    {
+        private object model;
+        private object? newValue;
+        private PropertyInfo property;
+
+        public ModelPropertyChangeCommand(
+            IModelChangeNotifier notifier, 
+            object model, 
+            object? newValue, 
+            PropertyInfo property)
+            : base(notifier, model)
+        {
+            this.model = model;
+            this.newValue = newValue; 
+            this.property = property;
+        }
+
+        protected override void ExecuteWithoutNotify() => property.SetValue(model, newValue);
+
+        public override IModelChangeCommand GetUndoCommand() => 
+            new ModelPropertyChangeCommand(ModelChangeNotifier, model, property.GetValue(model), property);
+    }
+
     public class TextModel
     {
         public string Text { get; set; } = string.Empty;
@@ -26,8 +56,8 @@ namespace Nfh.Editor
         public string Text 
         { 
             get => tm.Text; 
-            set => ur.Execute(new ModelPropertyChangeCommand<TextModel, string>(
-                ModelChangeNotifier, tm, tm => tm.Text, value)); 
+            set => ur.Execute(new ModelPropertyChangeCommand(
+                ModelChangeNotifier, tm, value, tm.GetType().GetProperty("Text"))); 
         }
         public string SaveStatus => ur.HasUnsavedChanges ? "Unsaved changes!" : "Saved";
         public ICommand AppendChar { get; }

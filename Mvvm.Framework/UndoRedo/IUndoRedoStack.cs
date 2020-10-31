@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Mvvm.Framework.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mvvm.Framework
+namespace Mvvm.Framework.UndoRedo
 {
     /// <summary>
     /// A container to handle the undo and redo of <see cref="IModelChangeCommand"/>s.

@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Mvvm.Framework
+namespace Mvvm.Framework.Command
 {
     /// <summary>
     /// A simple <see cref="ICommand"/> that takes regular C# functions to implement functionality.
     /// </summary>
     public class RelayCommand<T> : ICommand
     {
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;
@@ -33,7 +33,7 @@ namespace Mvvm.Framework
             this.canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter) => canExecute?.Invoke((T)parameter) ?? true;
-        public void Execute(object parameter) => execute((T)parameter);
+        public bool CanExecute(object? parameter) => canExecute?.Invoke((T)parameter) ?? true;
+        public void Execute(object? parameter) => execute((T)parameter);
     }
 }

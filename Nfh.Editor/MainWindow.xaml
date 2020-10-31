@@ -8,13 +8,21 @@
         Title="MainWindow" Height="450" Width="800"
         x:Name="mainWindow"
         DataContext="{Binding TextViewModel, ElementName=mainWindow}">
-    <Grid>
-        <Button x:Name="btnUndo" Content="&lt;-" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" Command="{Binding Undo}" />
-        <Button x:Name="btnRedo" Content="-&gt;" HorizontalAlignment="Left" Margin="66,10,0,0" VerticalAlignment="Top" Command="{Binding Redo}"/>
-        <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Command="{Binding Save}"/>
-        <Label x:Name="lblSaveState" Content="{Binding SaveStatus}" HorizontalAlignment="Left" Margin="88,7,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTextContent" Content="{Binding Text}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnAppendChar" Content="Append" HorizontalAlignment="Left" Margin="205,10,0,0" VerticalAlignment="Top" Command="{Binding AppendChar}"/>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Undo}" Gesture="CTRL+Z"/>
+    </Window.InputBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+        </Menu>
 
-    </Grid>
+        <Grid>
+            <Button x:Name="btnUndo" Content="&lt;-" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" Command="{Binding Undo}" />
+            <Button x:Name="btnRedo" Content="-&gt;" HorizontalAlignment="Left" Margin="66,10,0,0" VerticalAlignment="Top" Command="{Binding Redo}"/>
+            <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Command="{Binding Save}"/>
+            <Label x:Name="lblSaveState" Content="{Binding SaveStatus}" HorizontalAlignment="Left" Margin="88,7,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="lblTextContent" Content="{Binding Text}" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnAppendChar" Content="Append" HorizontalAlignment="Left" Margin="205,10,0,0" VerticalAlignment="Top" Command="{Binding AppendChar}"/>
+        </Grid>
+
+    </DockPanel>
 </Window>
