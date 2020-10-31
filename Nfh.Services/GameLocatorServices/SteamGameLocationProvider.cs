@@ -13,11 +13,11 @@ namespace Nfh.Services
         public DirectoryInfo Locate(string gameName)
         {
             var installationFolder = GetSteamInstallationFolder()
-                ?? throw new Exception("Could not find the Steam installation folder"); // ToDo custom exception
+                ?? throw new DirectoryNotFoundException("Could not find the Steam installation folder");
 
             var appFolders = GetSteamAppFolders(installationFolder);
             var gameFolder = GetGameFolder(gameName, appFolders)
-                ?? throw new Exception($"Could not find the {gameName} installation folder");
+                ?? throw new DirectoryNotFoundException($"Could not find the {gameName} installation folder");
 
             return gameFolder;
         }
@@ -33,16 +33,12 @@ namespace Nfh.Services
                 {
                     Architecture.X86 => @"SOFTWARE\Valve\Steam",
                     Architecture.X64 => @"SOFTWARE\Wow6432Node\Valve\Steam",
-                    _ => throw new NotImplementedException(),
+                    _ => throw new NotSupportedException(),
                 };
 
-                using (var key = Registry.LocalMachine.OpenSubKey(steamRegistryPath))
-                {
-                    if (key?.GetValue("InstallPath") is string folderPath && Directory.Exists(folderPath))
-                    {
-                        return new DirectoryInfo(folderPath);
-                    }
-                }
+                using var key = Registry.LocalMachine.OpenSubKey(steamRegistryPath);
+                if (key?.GetValue("InstallPath") is string folderPath && Directory.Exists(folderPath))
+                    return new DirectoryInfo(folderPath);
             }
             return null;
         }
@@ -56,7 +52,7 @@ namespace Nfh.Services
 
             if (!defaultAppsFolder.Exists)
             {
-                throw new Exception("The default steam library folder could not be found");
+                throw new DirectoryNotFoundException("The default steam library folder could not be found");
             }
 
             var libraryFolderMeta = defaultAppsFolder.GetFiles(

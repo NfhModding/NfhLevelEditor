@@ -9,7 +9,7 @@ namespace Nfh.Services.BackupServices
     internal class BackupService : IBackupService
     {
         private readonly IReadOnlyCollection<string> FilesToBackup =
-            new List<string> { "gamedata.bnd", "gfxdata.bnd" };
+            new List<string> { "gamedata.bnd" };
 
         private readonly IApplicationWorkFolder applicationWorkFolder;
 
