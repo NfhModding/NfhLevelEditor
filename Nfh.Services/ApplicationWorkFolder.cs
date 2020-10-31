@@ -20,12 +20,10 @@ namespace Nfh.Services
                     var appDataFolder = new DirectoryInfo(
                         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
-                    var workFolder = new DirectoryInfo(Path.Combine(appDataFolder.FullName, ApplicationInformation.ApplicationName));
+                    var workFolder = new DirectoryInfo(
+                        Path.Combine(appDataFolder.FullName, ApplicationInformation.ApplicationName));
 
-                    if (!workFolder.Exists)
-                    {
-                        appDataFolder.Create();
-                    }
+                    workFolder.Create();                    
 
                     info = workFolder;
                 }

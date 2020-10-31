@@ -13,6 +13,8 @@ namespace Nfh
             var gameLocator = new GameLocator();
             foreach (var location in gameLocator.GetGameLocations())
                 System.Console.WriteLine(location);
+
+            Playground.BackupGameData();
 		}
     }
 }

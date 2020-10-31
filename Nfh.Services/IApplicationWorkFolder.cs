@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nfh.Services
 {
-    internal interface IWorkFolder
+    internal interface IApplicationWorkFolder
     {
         public DirectoryInfo Info { get; }
     }
