@@ -5,12 +5,15 @@ using System.Linq;
 
 namespace Nfh.Services
 {
-    public class GameLocator : IGameLocator
+    internal class GameLocator : IGameLocator
     {
         private readonly string GameName = ApplicationInformation.GameName;
+        private IReadOnlyCollection<IGameLocationProvider> gameLocationProviders;
 
-        private IReadOnlyCollection<IGameLocationProvider> gameLocationProviders
-            = new List<IGameLocationProvider>() { new SteamGameLocationProvider() };
+        public GameLocator(IEnumerable<IGameLocationProvider> gameLocationProviders)
+        {
+            this.gameLocationProviders = gameLocationProviders.ToList();
+        }
 
         public IEnumerable<string> GetGameLocations() =>
             gameLocationProviders.Select(p => p.Locate(GameName).FullName);
