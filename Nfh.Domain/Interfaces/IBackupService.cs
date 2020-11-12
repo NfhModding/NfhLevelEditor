@@ -5,10 +5,10 @@
         /// <summary>
         /// Backs up the gamedata.bnd file from the game to somewhere else.
         /// </summary>
-        public void BackupGameData(string sourceGamePath, string targetBackupPath);
+        public void BackupGameData(string sourceGamePath);
         /// <summary>
         /// Restores the gamedata.bnd from a source to the game.
         /// </summary>
-        public void RestoreGameData(string sourceBackupPath, string targetGamePath);
+        public void RestoreGameData(string targetGamePath);
     }
 }
