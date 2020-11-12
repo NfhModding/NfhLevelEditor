@@ -19,39 +19,67 @@ namespace Nfh.Editor.ViewModels
         public string Title 
         { 
             get => levelMeta.Description.Title; 
-            set => levelMeta.Description.Title = value; 
+            set 
+            { 
+                levelMeta.Description.Title = value;
+                NotifyAllModelChanges(); 
+            }
         }
         public BitmapImage Thumbnail { get; set; }
         public string ThumbnailDescription
         {
             get => levelMeta.Description.ThumbnailDescription;
-            set => levelMeta.Description.ThumbnailDescription = value;
+            set
+            {
+                levelMeta.Description.ThumbnailDescription = value;
+                NotifyAllModelChanges();
+            }
         }
         public string Description
         {
             get => levelMeta.Description.Description;
-            set => levelMeta.Description.Description = value;
+            set
+            {
+                levelMeta.Description.Description = value;
+                NotifyAllModelChanges();
+            }
         }
         public string Hint
         {
             get => levelMeta.Description.Hint;
-            set => levelMeta.Description.Hint = value;
+            set
+            {
+                levelMeta.Description.Hint = value;
+                NotifyAllModelChanges();
+            }
         }
         public bool Unlocked 
         { 
-            get => levelMeta.Unlocked; 
-            set => levelMeta.Unlocked = value; 
+            get => levelMeta.Unlocked;
+            set
+            {
+                levelMeta.Unlocked = value;
+                NotifyAllModelChanges();
+            }
         }
         public int TrickCount => levelMeta.TrickCount;
         public int MinPercent
         {
             get => levelMeta.MinPercent;
-            set => levelMeta.MinPercent = value;
+            set
+            {
+                levelMeta.MinPercent = value;
+                NotifyAllModelChanges();
+            }
         }
         public TimeSpan? TimeLimit
         {
             get => levelMeta.TimeLimit;
-            set => levelMeta.TimeLimit = value;
+            set
+            {
+                levelMeta.TimeLimit = value;
+                NotifyAllModelChanges();
+            }
         }
 
         private LevelMeta levelMeta;

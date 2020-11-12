@@ -9,7 +9,7 @@ namespace Nfh.Domain.Interfaces
         /// <summary>
         /// A default user preference for project directory.
         /// </summary>
-        public string? DefaultWorkDirectory {​​​​​​ get; set; }
+        public string? DefaultWorkDirectory { get; set; }
         /// <summary>
         /// Lists the valid projects in the given root (non-recursive).
         /// </summary>

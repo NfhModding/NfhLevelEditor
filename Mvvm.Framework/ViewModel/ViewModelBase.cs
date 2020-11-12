@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Mvvm.Framework.ViewModel
 {
@@ -22,6 +23,7 @@ namespace Mvvm.Framework.ViewModel
         /// </summary>
         protected IModelChangeNotifier ModelChangeNotifier { get; }
 
+        private object[] watchedModels;
         private PropertyInfo[] cachedProperties;
 
         /// <summary>
@@ -32,9 +34,18 @@ namespace Mvvm.Framework.ViewModel
         /// <param name="watchedModels">The models relevant to this viewmodel.</param>
         public ViewModelBase(IModelChangeNotifier modelChangeNotifier, params object[] watchedModels)
         {
+            this.watchedModels = watchedModels;
             cachedProperties = GetRelevantProperties();
             ModelChangeNotifier = modelChangeNotifier;
             foreach (var model in watchedModels) ModelChangeNotifier.Subscribe(model, NotifyAllPropertyChanges);
+        }
+
+        /// <summary>
+        /// Notifies about all models changed.
+        /// </summary>
+        protected void NotifyAllModelChanges()
+        {
+            foreach (var model in watchedModels) ModelChangeNotifier.Notify(model);
         }
 
         /// <summary>

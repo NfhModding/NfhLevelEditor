@@ -27,6 +27,8 @@ namespace Nfh.Editor
         // TODO: Stub
         private class ProjectService : IProjectService
         {
+            public string? DefaultWorkDirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
             public void CreateProject(string gameSourcePath, string targetProjectPath) =>
                 throw new NotImplementedException();
 

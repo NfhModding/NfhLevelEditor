@@ -11,8 +11,13 @@ namespace Nfh.Editor.ViewModels
 {
     public class SeasonPackViewModel : ViewModelBase
     {
-        public ReadOnlyObservableCollection<SeasonViewModel> Seasons { get; set; }
-        public SeasonViewModel? SelectedSeason { get; set; }
+        public ReadOnlyObservableCollection<SeasonViewModel> Seasons { get; }
+        private SeasonViewModel? selectedSeason;
+        public SeasonViewModel? SelectedSeason
+        { 
+            get => selectedSeason; 
+            set { selectedSeason = value; NotifyPropertyChanged(); }
+        }
 
         public SeasonPackViewModel(SeasonPack seasonPack) 
             : base(Services.ModelChangeNotifier, seasonPack)
