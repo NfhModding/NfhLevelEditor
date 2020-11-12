@@ -7,6 +7,69 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Label Content="{Binding Title}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"/>
+            <RowDefinition Height="200px"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80px"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <Label Grid.Row="0" Content="{Binding Title}" FontSize="24" FontWeight="Bold"/>
+        
+        <!-- Things above description -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Thumbnail -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" HorizontalAlignment="Left" Source="{Binding Thumbnail}"/>
+                <Label Grid.Row="1" Content="{Binding ThumbnailDescription}"/>
+            </Grid>
+            
+            <!-- Minimum rating, time and hint -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Minimum rating and time -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="{Binding MinPercent}"/>
+                    <Label Grid.Column="1" Content="{Binding TimeLimit}"/>
+                </Grid>
+                
+                <!-- Hint -->
+                <Label Grid.Row="1" Content="{Binding Hint}"/>
+            </Grid>
+        </Grid>
+        
+        <!-- Description -->
+        <Label Grid.Row="2" Content="{Binding Description}"/>
+
+        <!-- Bottom -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="{Binding TrickCount}"/>
+            <Button Grid.Column="1" Content="Edit this level"/>
+        </Grid>
     </Grid>
 </UserControl>

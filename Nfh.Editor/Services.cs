@@ -21,7 +21,7 @@ namespace Nfh.Editor
                 throw new NotImplementedException();
 
             public Bitmap LoadLevelThumbnail(string levelId, string gamePath) =>
-                new Bitmap("C:/TMP/NfhModdingLogo.png");
+                new Bitmap("c:/TMP/NeighborsFromHell_Assets/tutorial_1.png");
         }
 
         // TODO: Stub
