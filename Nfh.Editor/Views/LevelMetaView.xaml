@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              mc:Ignorable="d" 
+             Width="400px"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,8 +21,8 @@
         <!-- Things above description -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="45*"/>
+                <ColumnDefinition Width="55*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Thumbnail -->
@@ -49,12 +50,73 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Content="{Binding MinPercent}"/>
-                    <Label Grid.Column="1" Content="{Binding TimeLimit}"/>
+                    <!-- Minimum rating -->
+                    <Border Grid.Column="0" CornerRadius="10" BorderThickness="2" BorderBrush="#9b9b7d" Background="#506441">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel 
+                                Grid.Row="0" 
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                                Orientation="Horizontal">
+                                <Label VerticalAlignment="Bottom" Padding="0,0,0,3" Content="{Binding MinPercent}" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                                <Label VerticalAlignment="Bottom" Padding="5" Content="%" Foreground="White"/>
+                            </StackPanel>
+                            <Label 
+                                Grid.Row="1" 
+                                Content="Minimum Rating" 
+                                HorizontalContentAlignment="Center"
+                                Foreground="White" Background="#8c917d"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Time limit -->
+                    <Border Grid.Column="1" CornerRadius="10" BorderThickness="2" BorderBrush="#9b9b7d" Background="#4b5a50">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel 
+                                Grid.Row="0" 
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                                Orientation="Horizontal">
+                                <Label VerticalAlignment="Bottom" Padding="0,0,0,3" Content="{Binding TimeLimit}" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                                <Label VerticalAlignment="Bottom" Padding="5" Content="min" Foreground="White"/>
+                            </StackPanel>
+                            <Label 
+                                Grid.Row="1" 
+                                Content="Duration" 
+                                HorizontalContentAlignment="Center"
+                                Foreground="White" Background="#8c917d"/>
+                        </Grid>
+                    </Border>
                 </Grid>
                 
                 <!-- Hint -->
-                <Label Grid.Row="1" Content="{Binding Hint}"/>
+                <Border Grid.Row="1" CornerRadius="10" BorderThickness="2" BorderBrush="#0062ff" Background="#9ac6e6">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label 
+                            Grid.Row="0" 
+                            Content="Hint!" 
+                            HorizontalAlignment="Center" 
+                            Foreground="#0062ff" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock 
+                            Grid.Row="1" 
+                            Text="{Binding Hint}" 
+                            TextAlignment="Center" TextWrapping="WrapWithOverflow"
+                            FontWeight="Bold"/>
+                    </Grid>
+                </Border>
             </Grid>
         </Grid>
         

@@ -71,7 +71,7 @@ namespace Nfh.Editor
                     Description = new LevelDescription
                     {
                         Description = "Blah",
-                        Hint = "hhhh",
+                        Hint = "Playing several tricks one after the other makes for better ratings!",
                         ThumbnailDescription = "ttt",
                         Title = $"title_{id}",
                     },
