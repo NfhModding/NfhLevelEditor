@@ -11,5 +11,10 @@ namespace Nfh.Domain.Models.InGame
         public Localization Localization { get; set; }
         public IDictionary<string, Point> InteractionSpots { get; set; } = new Dictionary<string, Point>();
         public Visuals? Visuals { get; set; }
+
+        public LevelObject(string id)
+        {
+            Id = id;
+        }
     }
 }

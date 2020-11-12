@@ -15,5 +15,10 @@ namespace Nfh.Domain.Models.InGame
         public IList<Floor> Floors { get; set; } = new List<Floor>();
         public IList<Wall> Walls { get; set; } = new List<Wall>();
         public IDictionary<string, LevelObject> Objects { get; set; } = new Dictionary<string, LevelObject>();
+
+        public Room(string id)
+        {
+            Id = id;
+        }
     }
 }

@@ -7,5 +7,10 @@
         /// Can be null, if this doesn't lead anywhere.
         /// </summary>
         public Door? Exit { get; set; }
+
+        public Door(string id) 
+            : base(id)
+        {
+        }
     }
 }
