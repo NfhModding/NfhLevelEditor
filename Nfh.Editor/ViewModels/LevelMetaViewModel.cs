@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace Nfh.Editor.ViewModels
 {
-    internal class LevelMetaViewModel : ViewModelBase
+    public class LevelMetaViewModel : ViewModelBase
     {
         public string Name => levelMeta.Id;
         public string Title 

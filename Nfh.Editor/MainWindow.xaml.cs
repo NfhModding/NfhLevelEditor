@@ -11,7 +11,7 @@ namespace Nfh.Editor
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal SeasonPackViewModel SeasonPack { get; set; }
+        public SeasonPackViewModel SeasonPack { get; set; }
 
         public MainWindow()
         {

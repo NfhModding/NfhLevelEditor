@@ -8,12 +8,11 @@
         xmlns:views="clr-namespace:Nfh.Editor.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        x:Name="mainWindow"
-        DataContext="{Binding TextViewModel, ElementName=mainWindow}">
+        x:Name="mainWindow">
     <Window.Resources>
     </Window.Resources>
     <DockPanel>
-        <views:SeasonPackView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}}, Path=SeasonPack}">
+        <views:SeasonPackView DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=SeasonPack}">
         </views:SeasonPackView>
     </DockPanel>
 </Window>

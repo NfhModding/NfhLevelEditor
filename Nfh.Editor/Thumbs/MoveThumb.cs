@@ -9,7 +9,7 @@ using System.Windows.Controls.Primitives;
 
 namespace Nfh.Editor.Thumbs
 {
-    internal class MoveThumb : Thumb
+    public class MoveThumb : Thumb
     {
         public MoveThumb()
         {

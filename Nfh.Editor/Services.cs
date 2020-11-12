@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Nfh.Editor
 {
@@ -24,7 +25,7 @@ namespace Nfh.Editor
         }
 
         // TODO: Stub
-        private class ProjectServide : IProjectService
+        private class ProjectService : IProjectService
         {
             public void CreateProject(string gameSourcePath, string targetProjectPath) =>
                 throw new NotImplementedException();
@@ -52,6 +53,32 @@ namespace Nfh.Editor
             private static Season GenerateSeason(string id)
             {
                 var s = new Season(id);
+                s.Unlocked = true;
+                for (int i = 0; i < 5; ++i)
+                {
+                    var l = GenerateLevelMeta($"level{i}");
+                    s.Levels.Add(l.Id, (l, i));
+                }
+                return s;
+            }
+
+            private static LevelMeta GenerateLevelMeta(string id)
+            {
+                var meta = new LevelMeta(id)
+                {
+                    Description = new LevelDescription
+                    {
+                        Description = "Blah",
+                        Hint = "hhhh",
+                        ThumbnailDescription = "ttt",
+                        Title = "title",
+                    },
+                    MinPercent = 60,
+                    TimeLimit = null,
+                    TrickCount = 7,
+                    Unlocked = true,
+                };
+                return meta;
             }
 
             public void PatchGame(string sourceProjectPath, string targetGamePath) =>
@@ -70,7 +97,7 @@ namespace Nfh.Editor
         public static IBackupService Backup { get; }
         public static IGameLocator GameLocator { get; }
         public static IImageService Image { get; } = new TempImageService();
-        public static IProjectService Project { get; }
+        public static IProjectService Project { get; } = new ProjectService();
 
         // Frontend
         public static IModelChangeNotifier ModelChangeNotifier { get; } = new ModelChangeNotifier();

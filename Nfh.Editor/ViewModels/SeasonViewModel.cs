@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nfh.Editor.ViewModels
 {
-    internal class SeasonViewModel : ViewModelBase
+    public class SeasonViewModel : ViewModelBase
     {
         public string Name => season.Id;
 

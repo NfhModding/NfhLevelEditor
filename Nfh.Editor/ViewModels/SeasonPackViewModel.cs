@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Nfh.Editor.ViewModels
 {
-    internal class SeasonPackViewModel : ViewModelBase
+    public class SeasonPackViewModel : ViewModelBase
     {
         public ReadOnlyObservableCollection<SeasonViewModel> Seasons { get; set; }
         public SeasonViewModel? SelectedSeason { get; set; }
