@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ListView ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}">
+    <DockPanel>
+        <ListView DockPanel.Dock="Left" ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -16,5 +16,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </Grid>
+        <local:LevelMetaView DataContext="{Binding SelectedLevel}"/>
+    </DockPanel>
 </UserControl>

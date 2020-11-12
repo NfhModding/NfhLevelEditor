@@ -73,7 +73,7 @@ namespace Nfh.Editor
                         Description = "Blah",
                         Hint = "hhhh",
                         ThumbnailDescription = "ttt",
-                        Title = "title",
+                        Title = $"title_{id}",
                     },
                     MinPercent = 60,
                     TimeLimit = null,
