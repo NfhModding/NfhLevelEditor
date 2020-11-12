@@ -20,5 +20,10 @@ namespace Nfh.Domain.Models.Meta
         /// Can be null, if there's no time limit.
         /// </summary>
         public TimeSpan? TimeLimit { get; set; }
+
+        public LevelMeta(string id)
+        {
+            Id = id;
+        }
     }
 }

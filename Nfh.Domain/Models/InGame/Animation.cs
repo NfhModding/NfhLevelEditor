@@ -21,5 +21,10 @@ namespace Nfh.Domain.Models.InGame
         public string Id { get; }
         public Kind Kind_ { get; set; }
         public IList<Frame> Frames { get; set; } = new List<Frame>();
+
+        public Animation(string id)
+        {
+            Id = id;
+        }
     }
 }

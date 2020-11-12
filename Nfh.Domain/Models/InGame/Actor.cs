@@ -2,5 +2,9 @@
 {
     public class Actor : LevelObject
     {
+        public Actor(string id) 
+            : base(id)
+        {
+        }
     }
 }

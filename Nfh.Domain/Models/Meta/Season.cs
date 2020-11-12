@@ -9,5 +9,10 @@ namespace Nfh.Domain.Models.Meta
         public Season? Unlocks { get; set; }
         public IDictionary<string, (LevelMeta Level, int Index)> Levels { get; set; } 
             = new Dictionary<string, (LevelMeta Level, int Index)>();
+
+        public Season(string id)
+        {
+            Id = id;
+        }
     }
 }
