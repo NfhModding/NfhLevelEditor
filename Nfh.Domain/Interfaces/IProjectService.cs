@@ -7,6 +7,10 @@ namespace Nfh.Domain.Interfaces
     public interface IProjectService
     {
         /// <summary>
+        /// A default user preference for project directory.
+        /// </summary>
+        public string? DefaultWorkDirectory {​​​​​​ get; set; }
+        /// <summary>
         /// Lists the valid projects in the given root (non-recursive).
         /// </summary>
         public IList<string> ListProjects(string rootFolder);
