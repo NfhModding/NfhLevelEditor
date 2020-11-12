@@ -70,12 +70,16 @@ namespace Nfh.Editor
                 {
                     Description = new LevelDescription
                     {
-                        Description = "Blah",
+                        Description = @"Cleanliness is next to godliness! The old stinker next door is happily looking forward to soaking in a nice relaxing bath.
+
+With the bath running, he is leafing through an old photo album full of pictures of dear mummy while pigging out on sweets and preparing a pudding. 
+
+But Woody has some more tricks up his sleeve...",
                         Hint = "Playing several tricks one after the other makes for better ratings!",
-                        ThumbnailDescription = "ttt",
-                        Title = $"title_{id}",
+                        ThumbnailDescription = "The neighbour (almost) naked",
+                        Title = $"Bath Time",
                     },
-                    MinPercent = 60,
+                    MinPercent = 75,
                     TimeLimit = null,
                     TrickCount = 7,
                     Unlocked = true,
