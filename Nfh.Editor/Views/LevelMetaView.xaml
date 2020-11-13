@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Nfh.Editor.Views"
+             xmlns:local="clr-namespace:Nfh.Editor.Views" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             xmlns:converters="clr-namespace:Nfh.Editor.Converters"
              mc:Ignorable="d" 
              Width="400px"
              Height="550px"
@@ -17,6 +19,8 @@
             </Style.Triggers>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
+
+        <converters:TimeSpanToDateTimeConverter x:Key="timeSpanToDateTimeConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -86,7 +90,12 @@
                                     Grid.Row="0" 
                                     HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                     Orientation="Horizontal">
-                                    <Label VerticalAlignment="Bottom" Padding="0,0,0,3" Content="{Binding MinPercent}" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                                    <xctk:IntegerUpDown 
+                                        VerticalAlignment="Bottom" 
+                                        Padding="0,0,0,3" 
+                                        Value="{Binding MinPercent}" Minimum="0" Maximum="100"
+                                        Foreground="White" Background="Transparent" 
+                                        FontSize="16" FontWeight="Bold"/>
                                     <Label VerticalAlignment="Bottom" Padding="5" Content="%" Foreground="White"/>
                                 </StackPanel>
                                 <Label 
@@ -109,10 +118,12 @@
                                     Grid.Row="0" 
                                     HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                     Orientation="Horizontal">
-                                    <TextBlock 
+                                    <xctk:DateTimeUpDown
                                         VerticalAlignment="Bottom" Padding="0,0,0,3" 
-                                        Text="{Binding TimeLimit, StringFormat=m\\:ss}" 
-                                        Foreground="White" 
+                                        Value="{Binding TimeLimit, Converter={StaticResource timeSpanToDateTimeConverter}, FallbackValue=0:00}"
+                                        Format="Custom" FormatString="m:ss"
+                                        Minimum="00:00:00" Maximum="00:59:59"
+                                        Foreground="White" Background="Transparent"
                                         FontSize="16" FontWeight="Bold"/>
                                     <Label VerticalAlignment="Bottom" Padding="5" Content="min" Foreground="White"/>
                                 </StackPanel>

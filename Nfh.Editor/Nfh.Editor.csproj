@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Mvvm.Framework\Mvvm.Framework.csproj" />
     <ProjectReference Include="..\Nfh.Domain\Nfh.Domain.csproj" />
+
+	<PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.1" />
   </ItemGroup>
 
 </Project>
