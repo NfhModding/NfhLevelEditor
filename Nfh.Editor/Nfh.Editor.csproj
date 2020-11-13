@@ -12,6 +12,7 @@
     <ProjectReference Include="..\Nfh.Domain\Nfh.Domain.csproj" />
 
 	<PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.1" />
+	<PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="4.8.0" />
   </ItemGroup>
 
 </Project>

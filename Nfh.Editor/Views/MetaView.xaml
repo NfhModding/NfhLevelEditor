@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Nfh.Editor.Views.MetaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Nfh.Editor.Views"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Command="{Binding New}">
+                <iconPacks:PackIconModern Kind="PageNew" />
+            </Button>
+            <Button Command="{Binding Open}">
+                <iconPacks:PackIconModern Kind="FolderOpen" />
+            </Button>
+            <Button Command="{Binding Save}">
+                <iconPacks:PackIconModern Kind="Save" />
+            </Button>
+
+            <Separator/>
+
+            <Button Command="{Binding Undo}">
+                <iconPacks:PackIconModern Kind="UndoCurve" />
+            </Button>
+            <Button Command="{Binding Redo}">
+                <iconPacks:PackIconModern Kind="RedoCurve" />
+            </Button>
+        </ToolBar>
+
+        <local:SeasonPackView DataContext="{Binding SeasonPack}">
+            
+        </local:SeasonPackView>
+    </DockPanel>
+</UserControl>
