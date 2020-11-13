@@ -17,14 +17,21 @@ namespace Nfh.Editor.ViewModels
         public LevelMetaViewModel? SelectedLevel 
         { 
             get => selectedLevel; 
-            set { selectedLevel = value; NotifyPropertyChanged(); }
+            set 
+            {
+                seasonPackVm.SelectedSeason = this;
+                selectedLevel = value; 
+                NotifyPropertyChanged(); 
+            }
         }
 
+        private SeasonPackViewModel seasonPackVm;
         private Season season;
 
-        public SeasonViewModel(Season season) 
+        public SeasonViewModel(SeasonPackViewModel seasonPackVm, Season season) 
             : base(Services.ModelChangeNotifier, season)
         {
+            this.seasonPackVm = seasonPackVm;
             this.season = season;
             Levels = new ReadOnlyObservableCollection<LevelMetaViewModel>(
                 new ObservableCollection<LevelMetaViewModel>(

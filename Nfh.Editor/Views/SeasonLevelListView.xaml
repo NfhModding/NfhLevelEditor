@@ -6,16 +6,26 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <ListView DockPanel.Dock="Left" ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}">
+    <Grid>
+        <ListView ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Label Content="{Binding Name}"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" Source="{Binding Thumbnail}"/>
+                        <Label Grid.Row="1" Content="{Binding Title}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <local:LevelMetaView DataContext="{Binding SelectedLevel}"/>
-    </DockPanel>
+    </Grid>
 </UserControl>

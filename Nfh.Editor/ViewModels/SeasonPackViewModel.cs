@@ -26,7 +26,7 @@ namespace Nfh.Editor.ViewModels
                 new ObservableCollection<SeasonViewModel>(
                     seasonPack.Seasons
                     .OrderBy(s => s.Value.Index)
-                    .Select(s => new SeasonViewModel(s.Value.Season))));
+                    .Select(s => new SeasonViewModel(this, s.Value.Season))));
         }
     }
 }

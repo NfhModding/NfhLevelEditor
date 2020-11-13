@@ -8,14 +8,26 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
         <ListView DockPanel.Dock="Left" ItemsSource="{Binding Seasons}" SelectedItem="{Binding SelectedSeason}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <Label Content="{Binding Name}"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Grid.Row="0" Content="{Binding Name}"/>
+                        <local:SeasonLevelListView Grid.Row="1"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <local:SeasonLevelListView DataContext="{Binding SelectedSeason}" DockPanel.Dock="Right"/>
+
+        <local:LevelMetaView DockPanel.Dock="Right" DataContext="{Binding SelectedSeason.SelectedLevel}"/>
     </DockPanel>
 </UserControl>
