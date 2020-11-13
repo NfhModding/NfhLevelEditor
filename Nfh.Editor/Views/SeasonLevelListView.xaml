@@ -7,10 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}">
+        <ListView ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}"
+                  PreviewMouseWheel="HandlePreviewMouseWheel">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <WrapPanel Width="360px" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -21,7 +22,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" Source="{Binding Thumbnail}"/>
+                        <Image Grid.Row="0" Width="80px" Source="{Binding Thumbnail}"/>
                         <Label Grid.Row="1" Content="{Binding Title}"/>
                     </Grid>
                 </DataTemplate>
