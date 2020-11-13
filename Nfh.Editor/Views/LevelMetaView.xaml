@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              mc:Ignorable="d" 
              Width="400px"
+             Height="550px"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <!-- Title -->
-        <Label Grid.Row="0" Content="{Binding Title}" FontSize="24" FontWeight="Bold"/>
+        <Label Grid.Row="0" Content="{Binding Title}" FontSize="32" FontWeight="Bold"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -90,7 +91,11 @@
                                     Grid.Row="0" 
                                     HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                                     Orientation="Horizontal">
-                                    <Label VerticalAlignment="Bottom" Padding="0,0,0,3" Content="{Binding TimeLimit}" Foreground="White" FontSize="16" FontWeight="Bold"/>
+                                    <TextBlock 
+                                        VerticalAlignment="Bottom" Padding="0,0,0,3" 
+                                        Text="{Binding TimeLimit, StringFormat=m\\:ss}" 
+                                        Foreground="White" 
+                                        FontSize="16" FontWeight="Bold"/>
                                     <Label VerticalAlignment="Bottom" Padding="5" Content="min" Foreground="White"/>
                                 </StackPanel>
                                 <Label 
@@ -135,7 +140,16 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Content="{Binding TrickCount}"/>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="Number of tricks: "/>
+                    <Label Grid.Column="1" Content="{Binding TrickCount}"/>
+                </Grid>
+                
                 <Button Grid.Column="1" Content="Edit this level"/>
             </Grid>
         </Grid>

@@ -80,7 +80,7 @@ But Woody has some more tricks up his sleeve...",
                         Title = $"Bath Time",
                     },
                     MinPercent = 75,
-                    TimeLimit = null,
+                    TimeLimit = new TimeSpan(0, 0, 10, 0, 0),
                     TrickCount = 7,
                     Unlocked = true,
                 };
