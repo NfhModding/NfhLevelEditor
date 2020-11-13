@@ -121,7 +121,7 @@
                                     Orientation="Horizontal">
                                     <xctk:DateTimeUpDown
                                         VerticalAlignment="Bottom" Padding="0,0,0,3" 
-                                        Value="{Binding TimeLimit, Converter={StaticResource timeSpanToDateTimeConverter}, FallbackValue=0:00}"
+                                        Value="{Binding TimeLimit, Converter={StaticResource timeSpanToDateTimeConverter}}"
                                         Format="Custom" FormatString="m:ss"
                                         Minimum="00:00:00" Maximum="00:59:59"
                                         Foreground="White" Background="Transparent"

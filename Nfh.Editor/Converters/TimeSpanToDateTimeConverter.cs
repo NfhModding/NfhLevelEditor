@@ -20,7 +20,7 @@ namespace Nfh.Editor.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) return new DateTime();
+            if (value == null) return new TimeSpan();
             if (value is DateTime dt) return dt.TimeOfDay;
 
             throw new ArgumentException("Invalid value type!", nameof(value));
