@@ -21,8 +21,9 @@
         </Style>
 
         <converters:TimeSpanToDateTimeConverter x:Key="timeSpanToDateTimeConverter"/>
+        <converters:NullToHiddenVisibilityConverter x:Key="nullToVisibilityConverter"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid Visibility="{Binding Converter={StaticResource nullToVisibilityConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="9*"/>
