@@ -8,6 +8,16 @@
              Width="400px"
              Height="550px"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="BorderlessTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="False">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -15,7 +25,11 @@
         </Grid.RowDefinitions>
 
         <!-- Title -->
-        <Label Grid.Row="0" Content="{Binding Title}" FontSize="32" FontWeight="Bold"/>
+        <TextBox 
+            Grid.Row="0" 
+            FontSize="32" FontWeight="Bold"
+            Style="{StaticResource BorderlessTextBoxStyle}"
+            Text="{Binding Title}"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -39,7 +53,11 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" HorizontalAlignment="Left" Source="{Binding Thumbnail}"/>
-                    <Label Grid.Row="1" Content="{Binding ThumbnailDescription}"/>
+                    <TextBox 
+                        Grid.Row="1" 
+                        TextWrapping="WrapWithOverflow" 
+                        Style="{StaticResource BorderlessTextBoxStyle}"
+                        Text="{Binding ThumbnailDescription}" />
                 </Grid>
                 
                 <!-- Minimum rating, time and hint -->
@@ -120,18 +138,24 @@
                                 Content="Hint!" 
                                 HorizontalAlignment="Center" 
                                 Foreground="#0062ff" FontSize="16" FontWeight="Bold"/>
-                            <TextBlock 
+                            <TextBox 
                                 Grid.Row="1" 
-                                Text="{Binding Hint}" 
+                                Style="{StaticResource BorderlessTextBoxStyle}"
+                                FontWeight="Bold"
                                 TextAlignment="Center" TextWrapping="WrapWithOverflow"
-                                FontWeight="Bold"/>
+                                Text="{Binding Hint}" />
                         </Grid>
                     </Border>
                 </Grid>
             </Grid>
             
             <!-- Description -->
-            <TextBlock Grid.Row="1" Margin="0,5,0,0" Text="{Binding Description}" TextWrapping="WrapWithOverflow"/>
+            <TextBox 
+                Grid.Row="1" 
+                Style="{StaticResource BorderlessTextBoxStyle}"
+                AcceptsReturn="True"
+                Margin="0,5,0,5" TextWrapping="WrapWithOverflow"
+                Text="{Binding Description}"/>
 
             <!-- Bottom -->
             <Grid Grid.Row="2">

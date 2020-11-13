@@ -19,6 +19,10 @@ namespace Nfh.Editor.ViewModels
             get => selectedLevel; 
             set 
             {
+                if (seasonPackVm.SelectedSeason != null && seasonPackVm.SelectedSeason != this)
+                {
+                    seasonPackVm.SelectedSeason.SelectedLevel = null;
+                }
                 seasonPackVm.SelectedSeason = this;
                 selectedLevel = value; 
                 NotifyPropertyChanged(); 
