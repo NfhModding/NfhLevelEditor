@@ -56,7 +56,7 @@ namespace Nfh.Editor
             {
                 var s = new Season(id);
                 s.Unlocked = true;
-                for (int i = 0; i < 5; ++i)
+                for (int i = 0; i < (id == "set0" ? 3 : id == "set1" ? 6 : 4); ++i)
                 {
                     var l = GenerateLevelMeta($"level{i}");
                     s.Levels.Add(l.Id, (l, i));

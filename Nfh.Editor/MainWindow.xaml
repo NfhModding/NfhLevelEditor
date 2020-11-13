@@ -7,7 +7,7 @@
         xmlns:thumbs="clr-namespace:Nfh.Editor.Thumbs" 
         xmlns:views="clr-namespace:Nfh.Editor.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="650" Width="850"
         x:Name="mainWindow">
     <Window.Resources>
     </Window.Resources>
