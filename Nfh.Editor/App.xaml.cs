@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -16,10 +17,10 @@ namespace Nfh.Editor
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            new SelectInstallationDialog(new string[] 
-            { 
-                "C:/AAAAAAAAAA",
-                "C:/BBBBBBBBBB",
+            new LoadingDialog(() =>
+            {
+                Thread.Sleep(5000);
+                return null;
             }).ShowDialog();
         }
     }
