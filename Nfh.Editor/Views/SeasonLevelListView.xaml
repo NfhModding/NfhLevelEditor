@@ -17,14 +17,14 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Width="80px" Height="85px">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
                         <Image Grid.Row="0" Width="80px" Height="60px" Stretch="Fill" Source="{Binding Thumbnail}"/>
-                        <Label Grid.Row="1" Content="{Binding Title}"/>
+                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
