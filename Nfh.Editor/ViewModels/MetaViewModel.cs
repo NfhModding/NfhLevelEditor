@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nfh.Editor.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,8 @@ namespace Nfh.Editor.ViewModels
         public ICommand Open { get; } = ApplicationCommands.Open;
         public ICommand Save { get; } = ApplicationCommands.Save;
 
-        public ICommand Undo { get; } = ApplicationCommands.Undo;
-        public ICommand Redo { get; } = ApplicationCommands.Redo;
+        public ICommand Undo { get; } = new UndoCommand();
+        public ICommand Redo { get; } = new RedoCommand();
 
         public SeasonPackViewModel SeasonPack { get; }
 

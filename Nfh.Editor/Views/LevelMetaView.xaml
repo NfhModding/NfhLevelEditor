@@ -34,7 +34,8 @@
             Grid.Row="0" 
             FontSize="32" FontWeight="Bold"
             Style="{StaticResource BorderlessTextBoxStyle}"
-            Text="{Binding Title}"/>
+            Text="{Binding Title}"
+            IsUndoEnabled="False"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -62,7 +63,8 @@
                         Grid.Row="1" 
                         TextWrapping="WrapWithOverflow" 
                         Style="{StaticResource BorderlessTextBoxStyle}"
-                        Text="{Binding ThumbnailDescription}" />
+                        Text="{Binding ThumbnailDescription}"
+                        IsUndoEnabled="False"/>
                 </Grid>
                 
                 <!-- Minimum rating, time and hint -->
@@ -95,6 +97,7 @@
                                         VerticalAlignment="Bottom" 
                                         Padding="0,0,0,3" 
                                         Value="{Binding MinPercent}" Minimum="0" Maximum="100"
+                                        IsUndoEnabled="False"
                                         Foreground="White" Background="Transparent" 
                                         FontSize="16" FontWeight="Bold"/>
                                     <Label VerticalAlignment="Bottom" Padding="5" Content="%" Foreground="White"/>
@@ -122,6 +125,7 @@
                                     <xctk:DateTimeUpDown
                                         VerticalAlignment="Bottom" Padding="0,0,0,3" 
                                         Value="{Binding TimeLimit, Converter={StaticResource timeSpanToDateTimeConverter}}"
+                                        IsUndoEnabled="False"
                                         Format="Custom" FormatString="m:ss"
                                         Minimum="00:00:00" Maximum="00:59:59"
                                         Foreground="White" Background="Transparent"
@@ -155,7 +159,8 @@
                                 Style="{StaticResource BorderlessTextBoxStyle}"
                                 FontWeight="Bold"
                                 TextAlignment="Center" TextWrapping="WrapWithOverflow"
-                                Text="{Binding Hint}" />
+                                Text="{Binding Hint}"
+                                IsUndoEnabled="False"/>
                         </Grid>
                     </Border>
                 </Grid>
@@ -167,7 +172,8 @@
                 Style="{StaticResource BorderlessTextBoxStyle}"
                 AcceptsReturn="True"
                 Margin="0,5,0,5" TextWrapping="WrapWithOverflow"
-                Text="{Binding Description}"/>
+                Text="{Binding Description}"
+                IsUndoEnabled="False"/>
 
             <!-- Bottom -->
             <Grid Grid.Row="2">

@@ -4,9 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Nfh.Editor.Views"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+             xmlns:converters="clr-namespace:Nfh.Editor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:UiCommandToTooltipConverter x:Key="uiCommandToTooltipConverter"/>
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        
+    </UserControl.InputBindings>
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
             <Button Command="{Binding New}">
@@ -21,16 +28,14 @@
 
             <Separator/>
 
-            <Button Command="{Binding Undo}">
+            <Button Command="{Binding Undo}" ToolTip="{Binding Undo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="UndoCurve" />
             </Button>
-            <Button Command="{Binding Redo}">
+            <Button Command="{Binding Redo}" ToolTip="{Binding Redo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="RedoCurve" />
             </Button>
         </ToolBar>
 
-        <local:SeasonPackView DataContext="{Binding SeasonPack}">
-            
-        </local:SeasonPackView>
+        <local:SeasonPackView DataContext="{Binding SeasonPack}"/>
     </DockPanel>
 </UserControl>
