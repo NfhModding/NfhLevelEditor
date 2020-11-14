@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Nfh.Editor.Commands
+namespace Nfh.Editor.Commands.UiCommands
 {
     public class UndoCommand : UiCommand
     {

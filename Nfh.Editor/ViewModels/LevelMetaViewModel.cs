@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace Nfh.Editor.ViewModels
 {
-    public class LevelMetaViewModel : ViewModelBase
+    public class LevelMetaViewModel : EditorViewModelBase
     {
         public string Name => levelMeta.Id;
         public string Title 
@@ -66,20 +66,12 @@ namespace Nfh.Editor.ViewModels
         public int MinPercent
         {
             get => levelMeta.MinPercent;
-            set
-            {
-                levelMeta.MinPercent = value;
-                NotifyAllModelChanges();
-            }
+            set => ChangeProperty(levelMeta, value);
         }
         public TimeSpan? TimeLimit
         {
             get => levelMeta.TimeLimit;
-            set
-            {
-                levelMeta.TimeLimit = value;
-                NotifyAllModelChanges();
-            }
+            set => ChangeProperty(levelMeta, value);
         }
 
         private LevelMeta levelMeta;

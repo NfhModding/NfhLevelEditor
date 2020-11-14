@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Nfh.Editor.Commands
+namespace Nfh.Editor.Commands.UiCommands
 {
     public abstract class UiCommand : RelayCommand<object>
     {
