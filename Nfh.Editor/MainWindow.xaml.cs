@@ -15,5 +15,10 @@ namespace Nfh.Editor
         {
             InitializeComponent();
         }
+
+        private void MainWindow_Closed(object sender, System.EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

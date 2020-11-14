@@ -96,24 +96,41 @@ Do as I say lol.",
                 throw new NotImplementedException();
         }
 
-        // Backend
-        public static string GamePath { get; }
+        // TODO: Stub
+        private class GameLocatorA : IGameLocator
+        {
+            public IEnumerable<string> GetGameLocations()
+            {
+                yield return "C:/Nfh";
+                yield return "C:/Nfh2";
+                yield return "C:/Nfh3";
+            }
+        }
 
-        public static IBackupService Backup { get; }
-        public static IGameLocator GameLocator { get; }
+        // TODO: Stub
+        private class BackupService : IBackupService
+        {
+            public bool BackupExists => true;
+
+            public void BackupGameData(string sourceGamePath)
+            {
+            }
+
+            public void RestoreGameData(string targetGamePath)
+            {
+            }
+        }
+
+        // Backend
+        public static string? GamePath { get; set; }
+
+        public static IBackupService Backup { get; } = new BackupService();
+        public static IGameLocator GameLocator { get; } = new GameLocatorA();
         public static IImageService Image { get; } = new TempImageService();
         public static IProjectService Project { get; } = new ProjectService();
 
         // Frontend
         public static IModelChangeNotifier ModelChangeNotifier { get; } = new ModelChangeNotifier();
         public static IUndoRedoStack UndoRedo { get; } = new UndoRedoStack();
-
-        static Services()
-        {
-            GamePath = LocateGame();
-        }
-
-        // TODO: Temporary stub
-        private static string LocateGame() => "C:/TMP";
     }
 }

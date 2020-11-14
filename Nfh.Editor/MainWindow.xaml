@@ -9,7 +9,7 @@
         xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="850"
-        x:Name="mainWindow">
+        Closed="MainWindow_Closed">
     <Window.Resources>
     </Window.Resources>
     <Grid>
