@@ -18,49 +18,29 @@ namespace Nfh.Editor.ViewModels
         public string Name => levelMeta.Id;
         public string Title 
         { 
-            get => levelMeta.Description.Title; 
-            set 
-            { 
-                levelMeta.Description.Title = value;
-                NotifyAllModelChanges(); 
-            }
+            get => levelMeta.Description.Title;
+            set => ChangeProperty(levelMeta, value, "Description.Title");
         }
         public BitmapImage Thumbnail { get; set; }
         public string ThumbnailDescription
         {
             get => levelMeta.Description.ThumbnailDescription;
-            set
-            {
-                levelMeta.Description.ThumbnailDescription = value;
-                NotifyAllModelChanges();
-            }
+            set => ChangeProperty(levelMeta, value, "Description.ThumbnailDescription");
         }
         public string Description
         {
             get => levelMeta.Description.Description;
-            set
-            {
-                levelMeta.Description.Description = value;
-                NotifyAllModelChanges();
-            }
+            set => ChangeProperty(levelMeta, value, "Description.Description");
         }
         public string Hint
         {
             get => levelMeta.Description.Hint;
-            set
-            {
-                levelMeta.Description.Hint = value;
-                NotifyAllModelChanges();
-            }
+            set => ChangeProperty(levelMeta, value, "Description.Hint");
         }
         public bool Unlocked 
         { 
             get => levelMeta.Unlocked;
-            set
-            {
-                levelMeta.Unlocked = value;
-                NotifyAllModelChanges();
-            }
+            set => ChangeProperty(levelMeta, value);
         }
         public int TrickCount => levelMeta.TrickCount;
         public int MinPercent

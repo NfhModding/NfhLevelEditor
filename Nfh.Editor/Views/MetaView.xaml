@@ -12,7 +12,8 @@
         <converters:UiCommandToTooltipConverter x:Key="uiCommandToTooltipConverter"/>
     </UserControl.Resources>
     <UserControl.InputBindings>
-        
+        <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y"/>
     </UserControl.InputBindings>
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
