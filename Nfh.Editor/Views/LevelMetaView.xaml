@@ -34,7 +34,7 @@
             Grid.Row="0" 
             FontSize="32" FontWeight="Bold"
             Style="{StaticResource BorderlessTextBoxStyle}"
-            Text="{Binding Title}"
+            Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
             IsUndoEnabled="False"/>
 
         <Grid Grid.Row="1">
@@ -63,7 +63,7 @@
                         Grid.Row="1" 
                         TextWrapping="WrapWithOverflow" 
                         Style="{StaticResource BorderlessTextBoxStyle}"
-                        Text="{Binding ThumbnailDescription}"
+                        Text="{Binding ThumbnailDescription, UpdateSourceTrigger=PropertyChanged}"
                         IsUndoEnabled="False"/>
                 </Grid>
                 
@@ -159,7 +159,7 @@
                                 Style="{StaticResource BorderlessTextBoxStyle}"
                                 FontWeight="Bold"
                                 TextAlignment="Center" TextWrapping="WrapWithOverflow"
-                                Text="{Binding Hint}"
+                                Text="{Binding Hint, UpdateSourceTrigger=PropertyChanged}"
                                 IsUndoEnabled="False"/>
                         </Grid>
                     </Border>
@@ -172,7 +172,7 @@
                 Style="{StaticResource BorderlessTextBoxStyle}"
                 AcceptsReturn="True"
                 Margin="0,5,0,5" TextWrapping="WrapWithOverflow"
-                Text="{Binding Description}"
+                Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
                 IsUndoEnabled="False"/>
 
             <!-- Bottom -->

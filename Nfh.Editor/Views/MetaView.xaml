@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
              xmlns:converters="clr-namespace:Nfh.Editor.Converters"
+             xmlns:behaviors="clr-namespace:Nfh.Editor.Behaviors"
+             behaviors:InputBindingsBehavior.TakesInputBindingPrecedence="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
