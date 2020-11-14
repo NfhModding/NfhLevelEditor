@@ -11,9 +11,9 @@ namespace Nfh.Editor.ViewModels
 {
     public class MetaViewModel
     {
-        public ICommand New { get; } = ApplicationCommands.New;
-        public ICommand Open { get; } = ApplicationCommands.Open;
-        public ICommand Save { get; } = ApplicationCommands.Save;
+        public ICommand New { get; } = new NewCommand();
+        public ICommand Open { get; } = new OpenCommand();
+        public ICommand Save { get; } = new SaveCommand();
 
         public ICommand Undo { get; } = new UndoCommand();
         public ICommand Redo { get; } = new RedoCommand();
