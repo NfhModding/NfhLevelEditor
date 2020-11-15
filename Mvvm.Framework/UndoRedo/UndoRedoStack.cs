@@ -56,5 +56,12 @@ namespace Mvvm.Framework.UndoRedo
         }
 
         public void Save() => saveIndex = undoStack.Count;
+
+        public void Reset()
+        {
+            undoStack.Clear();
+            redoStack.Clear();
+            saveIndex = 0;
+        }
     }
 }

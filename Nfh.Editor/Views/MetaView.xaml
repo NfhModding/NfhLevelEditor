@@ -15,7 +15,7 @@
     </UserControl.Resources>
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding New}" Gesture="Ctrl+N"/>
-        <KeyBinding Command="{Binding Open}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding Open}" CommandParameter="{Binding}" Gesture="Ctrl+O"/>
         <KeyBinding Command="{Binding Save}" Gesture="Ctrl+S"/>
         
         <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z"/>
@@ -29,7 +29,7 @@
                         <iconPacks:PackIconModern Kind="PageNew" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Open" Command="{Binding Open}" InputGestureText="{Binding Open.GestureText}">
+                <MenuItem Header="_Open" Command="{Binding Open}" CommandParameter="{Binding}" InputGestureText="{Binding Open.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="FolderOpen" />
                     </MenuItem.Icon>
@@ -61,7 +61,9 @@
             <Button Command="{Binding New}" ToolTip="{Binding New, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="PageNew" />
             </Button>
-            <Button Command="{Binding Open}" ToolTip="{Binding Open, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Open}" CommandParameter="{Binding}" 
+                    ToolTip="{Binding Open, Converter={StaticResource uiCommandToTooltipConverter}}" 
+                    ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="FolderOpen" />
             </Button>
             <Button Command="{Binding Save}" ToolTip="{Binding Save, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">

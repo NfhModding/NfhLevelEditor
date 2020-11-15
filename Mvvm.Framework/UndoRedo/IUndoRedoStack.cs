@@ -42,5 +42,9 @@ namespace Mvvm.Framework.UndoRedo
         /// Marks the current state as a save point.
         /// </summary>
         public void Save();
+        /// <summary>
+        /// Resets this stack so that there os nothing to undo, redo or save.
+        /// </summary>
+        public void Reset();
     }
 }
