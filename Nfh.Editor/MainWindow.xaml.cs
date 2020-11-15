@@ -20,5 +20,13 @@ namespace Nfh.Editor
         {
             Application.Current.Shutdown();
         }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (App.SaveIfHasChanges() == MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 }

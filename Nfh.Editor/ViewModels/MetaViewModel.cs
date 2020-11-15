@@ -12,6 +12,8 @@ namespace Nfh.Editor.ViewModels
 {
     public class MetaViewModel : ViewModelBase
     {
+        public ICommand Exit { get; } = new ExitCommand();
+
         public ICommand New { get; } = new NewCommand();
         public ICommand Open { get; } = new OpenCommand();
         public ICommand Save { get; } = new SaveCommand();

@@ -43,7 +43,9 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="_Exit"/>
+                <MenuItem Header="_Exit" Command="{Binding Exit}" 
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  
+                          InputGestureText="{Binding Exit.GestureText}"/>
             </MenuItem>
 
             <MenuItem Header="_Edit">

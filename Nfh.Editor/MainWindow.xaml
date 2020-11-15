@@ -9,6 +9,7 @@
         xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="650" Width="850"
+        Closing="MainWindow_Closing"
         Closed="MainWindow_Closed">
     <Window.Resources>
     </Window.Resources>
