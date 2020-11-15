@@ -35,6 +35,7 @@ namespace Nfh.Editor.Commands.UiCommands
             // Load the project from there
             Services.UndoRedo.Reset();
             metaViewModel.SeasonPack = new SeasonPackViewModel(
+                dialog.SelectedPath,
                 Services.Project.LoadSeasonPack(dialog.SelectedPath));
         }
     }

@@ -11,6 +11,9 @@ namespace Nfh.Editor.ViewModels
 {
     public class SeasonPackViewModel : ViewModelBase
     {
+        public string Path { get; }
+        public SeasonPack SeasonPack { get; }
+
         public ReadOnlyObservableCollection<SeasonViewModel> Seasons { get; }
         private SeasonViewModel? selectedSeason;
         public SeasonViewModel? SelectedSeason
@@ -19,9 +22,11 @@ namespace Nfh.Editor.ViewModels
             set { selectedSeason = value; NotifyPropertyChanged(); }
         }
 
-        public SeasonPackViewModel(SeasonPack seasonPack) 
+        public SeasonPackViewModel(string path, SeasonPack seasonPack) 
             : base(Services.ModelChangeNotifier, seasonPack)
         {
+            Path = path;
+            SeasonPack = seasonPack;
             Seasons = new ReadOnlyObservableCollection<SeasonViewModel>(
                 new ObservableCollection<SeasonViewModel>(
                     seasonPack.Seasons

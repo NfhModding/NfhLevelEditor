@@ -35,6 +35,7 @@ namespace Nfh.Editor.Commands.UiCommands
             Services.UndoRedo.Reset();
             Services.Project.CreateProject(Services.GamePath, dialog.SelectedPath);
             metaViewModel.SeasonPack = new SeasonPackViewModel(
+                dialog.SelectedPath,
                 Services.Project.LoadSeasonPack(dialog.SelectedPath));
         }
     }

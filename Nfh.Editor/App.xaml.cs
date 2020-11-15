@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using Nfh.Editor.Dialogs;
+using Nfh.Editor.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +23,12 @@ namespace Nfh.Editor
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            if (!FindGameInstallation()) return;
+            BackupIfNeeded();
+        }
+
+        private static bool FindGameInstallation()
+        {
             // Find game installations
             var gameInstalls = Services.GameLocator.GetGameLocations().ToList();
             // Choose one
@@ -35,8 +42,8 @@ namespace Nfh.Editor
                 var dialog = new FolderBrowserDialog();
                 if (dialog.ShowDialog() != DialogResult.OK)
                 {
-                    Shutdown();
-                    return;
+                    Current.Shutdown();
+                    return false;
                 }
                 Services.GamePath = dialog.SelectedPath;
             }
@@ -51,8 +58,8 @@ namespace Nfh.Editor
                 var dialog = new SelectInstallationDialog(gameInstalls);
                 if ((dialog.ShowDialog() ?? false) == false)
                 {
-                    Shutdown();
-                    return;
+                    Current.Shutdown();
+                    return false;
                 }
                 Services.GamePath = dialog.ChosenInstallation;
             }
@@ -64,15 +71,19 @@ namespace Nfh.Editor
                     "Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                Shutdown();
-                return;
+                Current.Shutdown();
+                return false;
             }
-            // Backup
+            return true;
+        }
+
+        private static void BackupIfNeeded()
+        {
             if (!Services.Backup.BackupExists)
             {
                 if (MessageBox.Show(
-                    "There's no backup from your original game. Would you like create one now?", 
-                    "Backup", 
+                    "There's no backup from your original game. Would you like create one now?",
+                    "Backup",
                     MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Services.Backup.BackupGameData(Services.GamePath);
@@ -82,7 +93,13 @@ namespace Nfh.Editor
 
         public static void Save()
         {
-            // TODO: Actually do the saving
+            if (MetaViewModel.Current != null && MetaViewModel.Current.SeasonPack != null)
+            {
+                Services.Project.SaveSeasonPack(
+                    MetaViewModel.Current.SeasonPack.SeasonPack,
+                    MetaViewModel.Current.SeasonPack.Path);
+            }
+            // TODO: Save level if needed
             Services.UndoRedo.Save();
         }
 
@@ -101,8 +118,12 @@ namespace Nfh.Editor
         public static void PatchGame()
         {
             Save();
-            // TODO: Actually patch
-            //Services.Project.PatchGame();
+            if (MetaViewModel.Current != null && MetaViewModel.Current.SeasonPack != null)
+            {
+                Services.Project.PatchGame(
+                    MetaViewModel.Current.SeasonPack.Path,
+                    Services.GamePath);
+            }
         }
     }
 }

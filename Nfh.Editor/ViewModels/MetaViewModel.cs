@@ -12,6 +12,8 @@ namespace Nfh.Editor.ViewModels
 {
     public class MetaViewModel : ViewModelBase
     {
+        public static MetaViewModel? Current { get; private set; }
+
         public ICommand Exit { get; } = new ExitCommand();
 
         public ICommand New { get; } = new NewCommand();
@@ -37,6 +39,7 @@ namespace Nfh.Editor.ViewModels
         public MetaViewModel() 
             : base(Services.ModelChangeNotifier)
         {
+            Current = this;
         }
     }
 }
