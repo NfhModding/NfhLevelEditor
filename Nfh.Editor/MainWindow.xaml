@@ -6,18 +6,50 @@
         xmlns:local="clr-namespace:Nfh.Editor" 
         xmlns:thumbs="clr-namespace:Nfh.Editor.Thumbs" 
         xmlns:views="clr-namespace:Nfh.Editor.Views" 
-        xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
+        xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels" 
+        xmlns:selectors="clr-namespace:Nfh.Editor.Selectors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="850"
+        Title="Nfh Level Editor" Height="650" Width="850"
         Closing="MainWindow_Closing"
         Closed="MainWindow_Closed">
     <Window.Resources>
+        <selectors:LevelObjectDataTemplateSelector x:Key="levelObjectSelector"/>
+
+        <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
+            <Rectangle Width="50" Height="50" Fill="Blue"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="doorDataTemplate" DataType="{x:Type viewmodels:DoorViewModel}">
+            <Rectangle Width="100" Height="100" Fill="Green"/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="actorDataTemplate" DataType="{x:Type viewmodels:ActorViewModel}">
+            <Rectangle Width="100" Height="100" Fill="Red"/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
+        <!--
         <views:MetaView>
             <views:MetaView.DataContext>
                 <viewmodels:MetaViewModel/>
             </views:MetaView.DataContext>
-        </views:MetaView>
+        -->
+
+        <ItemsControl 
+            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=LevelLayer}"
+            ItemsSource="{Binding Objects}"
+            ItemTemplateSelector="{StaticResource levelObjectSelector}">
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </Window>

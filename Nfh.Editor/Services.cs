@@ -39,8 +39,42 @@ namespace Nfh.Editor
             public IList<string> ListProjects(string rootFolder) =>
                 throw new NotImplementedException();
 
-            public Level LoadLevel(string sourcePath, string levelId) =>
-                throw new NotImplementedException();
+            public Level LoadLevel(string sourcePath, string levelId)
+            {
+                var result = new Level { Meta = GenerateLevelMeta(levelId) };
+                for (int i = 0; i < 20; ++i)
+                {
+                    var ob = MakeLevelObject(i);
+                    result.Object.Add(ob.Id, ob);
+                }
+                return result;
+            }
+
+            private LevelObject MakeLevelObject(int seed)
+            {
+                string id = $"lo_{seed}";
+                if (seed % 3 == 0)
+                {
+                    return new Door(id)
+                    {
+                        Position = new Point(seed * 40, 30),
+                    };
+                }
+                else if (seed % 7 == 0)
+                {
+                    return new Actor(id)
+                    {
+                        Position = new Point(seed * 40, 150),
+                    };
+                }
+                else
+                {
+                    return new LevelObject(id)
+                    {
+                        Position = new Point(seed * 40, 350),
+                    };
+                }
+            }
 
             public SeasonPack LoadSeasonPack(string sourcePath)
             {
