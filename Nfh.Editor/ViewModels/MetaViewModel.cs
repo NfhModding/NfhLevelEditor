@@ -1,4 +1,5 @@
-﻿using Nfh.Editor.Commands;
+﻿using Mvvm.Framework.ViewModel;
+using Nfh.Editor.Commands;
 using Nfh.Editor.Commands.UiCommands;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Windows.Input;
 
 namespace Nfh.Editor.ViewModels
 {
-    public class MetaViewModel
+    public class MetaViewModel : ViewModelBase
     {
         public ICommand New { get; } = new NewCommand();
         public ICommand Open { get; } = new OpenCommand();
@@ -18,11 +19,20 @@ namespace Nfh.Editor.ViewModels
         public ICommand Undo { get; } = new UndoCommand();
         public ICommand Redo { get; } = new RedoCommand();
 
-        public SeasonPackViewModel SeasonPack { get; }
+        private SeasonPackViewModel? seasonPack;
+        public SeasonPackViewModel? SeasonPack 
+        { 
+            get => seasonPack; 
+            set
+            {
+                seasonPack = value;
+                NotifyPropertyChanged();
+            }
+        }
 
-        public MetaViewModel()
+        public MetaViewModel() 
+            : base(Services.ModelChangeNotifier)
         {
-            SeasonPack = new SeasonPackViewModel(Services.Project.LoadSeasonPack(Services.GamePath));
         }
     }
 }
