@@ -65,6 +65,7 @@ namespace Nfh.Editor
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 Shutdown();
+                return;
             }
             // Backup
             if (!Services.Backup.BackupExists)

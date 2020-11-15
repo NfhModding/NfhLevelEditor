@@ -102,8 +102,6 @@ Do as I say lol.",
             public IEnumerable<string> GetGameLocations()
             {
                 yield return "C:/Nfh";
-                yield return "C:/Nfh2";
-                yield return "C:/Nfh3";
             }
         }
 

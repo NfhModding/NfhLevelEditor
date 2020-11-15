@@ -14,18 +14,22 @@
         <converters:UiCommandToTooltipConverter x:Key="uiCommandToTooltipConverter"/>
     </UserControl.Resources>
     <UserControl.InputBindings>
+        <KeyBinding Command="{Binding New}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding Open}" Gesture="Ctrl+O"/>
+        <KeyBinding Command="{Binding Save}" Gesture="Ctrl+S"/>
+        
         <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z"/>
         <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y"/>
     </UserControl.InputBindings>
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
-            <Button Command="{Binding New}">
+            <Button Command="{Binding New}" ToolTip="{Binding New, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="PageNew" />
             </Button>
-            <Button Command="{Binding Open}">
+            <Button Command="{Binding Open}" ToolTip="{Binding Open, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="FolderOpen" />
             </Button>
-            <Button Command="{Binding Save}">
+            <Button Command="{Binding Save}" ToolTip="{Binding Save, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="Save" />
             </Button>
 
