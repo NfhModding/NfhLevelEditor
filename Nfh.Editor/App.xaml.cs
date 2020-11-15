@@ -79,5 +79,23 @@ namespace Nfh.Editor
                 }
             }
         }
+
+        public static void Save()
+        {
+            // TODO: Actually do the saving
+            Services.UndoRedo.Save();
+        }
+
+        public static MessageBoxResult SaveIfHasChanges()
+        {
+            if (!Services.UndoRedo.HasUnsavedChanges) return MessageBoxResult.Yes;
+            // Prompt if we want to save
+            var result = MessageBox.Show(
+                "Would you like to save the current changes?",
+                "Save",
+                MessageBoxButton.YesNoCancel);
+            if (result == MessageBoxResult.Yes) Save();
+            return result;
+        }
     }
 }

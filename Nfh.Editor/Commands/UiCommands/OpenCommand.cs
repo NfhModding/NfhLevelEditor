@@ -28,29 +28,14 @@ namespace Nfh.Editor.Commands.UiCommands
             {
                 throw new ArgumentException("Wrong command parameter type!", nameof(parameter));
             }
-            // TODO: Factor this out? Exit and new also need this
-            if (Services.UndoRedo.HasUnsavedChanges)
-            {
-                // Save unsaved changes
-                var result = MessageBox.Show(
-                    "Would you like to save the current changes?", 
-                    "Save", 
-                    MessageBoxButton.YesNoCancel);
-                if (result == MessageBoxResult.Cancel) return;
-                if (result == MessageBoxResult.Yes)
-                {
-                    // TODO: Do the saving
-                    // Maybe even invoke the save command
-                    Services.UndoRedo.Save();
-                }
-            }
+            if (App.SaveIfHasChanges() == MessageBoxResult.Cancel) return;
             // Browse the folder
             var dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK) return;
             // Load the project from there
+            Services.UndoRedo.Reset();
             metaViewModel.SeasonPack = new SeasonPackViewModel(
                 Services.Project.LoadSeasonPack(dialog.SelectedPath));
-            Services.UndoRedo.Reset();
         }
     }
 }

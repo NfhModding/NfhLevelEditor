@@ -13,11 +13,7 @@ namespace Nfh.Editor.Commands.UiCommands
         public override InputGesture Gesture { get; } = new KeyGesture(Key.S, ModifierKeys.Control);
 
         public SaveCommand()
-            : base(p =>
-            {
-                Services.UndoRedo.Save();
-                // TODO: Initiate save
-            }, p => Services.UndoRedo.HasUnsavedChanges)
+            : base(p => App.Save(), p => Services.UndoRedo.HasUnsavedChanges)
         {
         }
     }

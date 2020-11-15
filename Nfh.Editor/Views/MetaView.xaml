@@ -17,7 +17,7 @@
         <converters:UiCommandToTooltipConverter x:Key="uiCommandToTooltipConverter"/>
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding New}" Gesture="Ctrl+N"/>
+        <KeyBinding Command="{Binding New}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding Open}" CommandParameter="{Binding}" Gesture="Ctrl+O"/>
         <KeyBinding Command="{Binding Save}" Gesture="Ctrl+S"/>
         
@@ -27,7 +27,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_New" Command="{Binding New}" InputGestureText="{Binding New.GestureText}">
+                <MenuItem Header="_New" Command="{Binding New}" CommandParameter="{Binding}" InputGestureText="{Binding New.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="PageNew" />
                     </MenuItem.Icon>
@@ -61,7 +61,9 @@
         </Menu>
         
         <ToolBar DockPanel.Dock="Top">
-            <Button Command="{Binding New}" ToolTip="{Binding New, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding New}" CommandParameter="{Binding}"
+                    ToolTip="{Binding New, Converter={StaticResource uiCommandToTooltipConverter}}" 
+                    ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="PageNew" />
             </Button>
             <Button Command="{Binding Open}" CommandParameter="{Binding}" 
