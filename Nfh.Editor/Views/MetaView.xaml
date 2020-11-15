@@ -9,7 +9,10 @@
              xmlns:behaviors="clr-namespace:Nfh.Editor.Behaviors"
              behaviors:InputBindingsBehavior.TakesInputBindingPrecedence="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Focusable="True"
+             FocusVisualStyle="{x:Null}"
+             Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <converters:UiCommandToTooltipConverter x:Key="uiCommandToTooltipConverter"/>
     </UserControl.Resources>
