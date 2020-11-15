@@ -60,6 +60,10 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+
+            <MenuItem Header="_Game">
+                <MenuItem Header="_Patch" Command="{Binding Patch}" CommandParameter="{Binding}"/>
+            </MenuItem>
         </Menu>
         
         <ToolBar DockPanel.Dock="Top">

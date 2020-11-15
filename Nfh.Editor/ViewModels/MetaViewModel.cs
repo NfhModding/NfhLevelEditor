@@ -21,6 +21,8 @@ namespace Nfh.Editor.ViewModels
         public ICommand Undo { get; } = new UndoCommand();
         public ICommand Redo { get; } = new RedoCommand();
 
+        public ICommand Patch { get; } = new PatchCommand();
+
         private SeasonPackViewModel? seasonPack;
         public SeasonPackViewModel? SeasonPack 
         { 

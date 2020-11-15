@@ -97,5 +97,12 @@ namespace Nfh.Editor
             if (result == MessageBoxResult.Yes) Save();
             return result;
         }
+
+        public static void PatchGame()
+        {
+            Save();
+            // TODO: Actually patch
+            //Services.Project.PatchGame();
+        }
     }
 }
