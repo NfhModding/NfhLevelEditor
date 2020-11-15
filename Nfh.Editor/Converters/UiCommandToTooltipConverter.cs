@@ -19,14 +19,11 @@ namespace Nfh.Editor.Converters
             if (value is UiCommand uiCommand)
             {
                 var result = uiCommand.Name ?? string.Empty;
-                if (uiCommand.Gesture is KeyGesture keyGesture)
+                var gestureStr = uiCommand.GestureText ?? string.Empty;
+                if (gestureStr.Length > 0)
                 {
-                    var gestureStr = keyGesture.GetDisplayStringForCulture(CultureInfo.CurrentCulture);
-                    if (gestureStr.Length > 0)
-                    {
-                        if (result.Length > 0) result += ' ';
-                        result += '(' + gestureStr + ')';
-                    }
+                    if (result.Length > 0) result += ' ';
+                    result += '(' + gestureStr + ')';
                 }
                 return result;
             }

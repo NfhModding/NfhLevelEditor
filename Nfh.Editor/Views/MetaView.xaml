@@ -22,6 +22,41 @@
         <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y"/>
     </UserControl.InputBindings>
     <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="{Binding New}" InputGestureText="{Binding New.GestureText}">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconModern Kind="PageNew" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Open" Command="{Binding Open}" InputGestureText="{Binding Open.GestureText}">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconModern Kind="FolderOpen" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Save" Command="{Binding Save}" InputGestureText="{Binding Save.GestureText}">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconModern Kind="Save" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="_Exit"/>
+            </MenuItem>
+
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" Command="{Binding Undo}" InputGestureText="{Binding Undo.GestureText}">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconModern Kind="UndoCurve" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Redo" Command="{Binding Redo}" InputGestureText="{Binding Refo.GestureText}">
+                    <MenuItem.Icon>
+                        <iconPacks:PackIconModern Kind="RedoCurve" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        
         <ToolBar DockPanel.Dock="Top">
             <Button Command="{Binding New}" ToolTip="{Binding New, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="PageNew" />
