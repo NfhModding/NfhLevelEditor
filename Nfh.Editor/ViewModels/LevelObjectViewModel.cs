@@ -10,15 +10,10 @@ namespace Nfh.Editor.ViewModels
 {
     public class LevelObjectViewModel : EditorViewModelBase
     {
-        public int X
+        public Point Position
         {
-            get => levelObject.Position.X;
-            set => ChangeProperty(levelObject, value, "Position.X");
-        }
-        public int Y
-        {
-            get => levelObject.Position.Y;
-            set => ChangeProperty(levelObject, value, "Position.Y");
+            get => levelObject.Position;
+            set => ChangeProperty(levelObject, value);
         }
 
         private LevelObject levelObject;

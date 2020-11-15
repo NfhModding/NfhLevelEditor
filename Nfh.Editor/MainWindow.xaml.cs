@@ -1,8 +1,10 @@
 using Mvvm.Framework.ViewModel;
+using Nfh.Editor.Commands.UiCommands;
 using Nfh.Editor.ViewModels;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Nfh.Editor
@@ -12,6 +14,8 @@ namespace Nfh.Editor
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ICommand Undo { get; set; } = new UndoCommand();
+
         public LevelLayerViewModel LevelLayer { get; set; }
 
         public MainWindow()
@@ -33,6 +37,11 @@ namespace Nfh.Editor
             {
                 e.Cancel = true;
             }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            Keyboard.Focus((Grid)sender);
         }
     }
 }

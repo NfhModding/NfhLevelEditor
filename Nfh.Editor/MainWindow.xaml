@@ -16,18 +16,37 @@
         <selectors:LevelObjectDataTemplateSelector x:Key="levelObjectSelector"/>
 
         <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
-            <Rectangle Width="50" Height="50" Fill="Blue"/>
+            <Grid>
+                <Rectangle Width="50" Height="50" Fill="Blue"/>
+                <thumbs:MoveThumb/>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="doorDataTemplate" DataType="{x:Type viewmodels:DoorViewModel}">
-            <Rectangle Width="100" Height="100" Fill="Green"/>
+            <Grid>
+                <thumbs:MoveThumb/>
+                <Rectangle Width="100" Height="100" Fill="Green">
+                    <Rectangle.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Set Output"/>
+                        </ContextMenu>
+                    </Rectangle.ContextMenu>
+                </Rectangle>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="actorDataTemplate" DataType="{x:Type viewmodels:ActorViewModel}">
-            <Rectangle Width="100" Height="100" Fill="Red"/>
+            <Grid>
+                <thumbs:MoveThumb/>
+                <Rectangle Width="100" Height="100" Fill="Red"/>
+            </Grid>
         </DataTemplate>
     </Window.Resources>
-    <Grid>
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=LevelLayer}"
+          Focusable="True" Loaded="Grid_Loaded">
+        <Grid.InputBindings>
+            <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Undo}" Gesture="Ctrl+Z"/>
+        </Grid.InputBindings>
         <!--
         <views:MetaView>
             <views:MetaView.DataContext>
@@ -36,13 +55,12 @@
         -->
 
         <ItemsControl 
-            DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=LevelLayer}"
             ItemsSource="{Binding Objects}"
             ItemTemplateSelector="{StaticResource levelObjectSelector}">
             <ItemsControl.ItemContainerStyle>
                 <Style>
-                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    <Setter Property="Canvas.Left" Value="{Binding Position.X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Position.Y}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemsPanel>

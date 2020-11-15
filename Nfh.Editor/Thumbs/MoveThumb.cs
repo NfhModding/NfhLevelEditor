@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Nfh.Domain.Models.InGame;
+using Nfh.Editor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,41 +15,24 @@ namespace Nfh.Editor.Thumbs
     {
         public MoveThumb()
         {
-            DragStarted += MoveThumb_DragStarted;
             DragDelta += MoveThumb_DragDelta;
-        }
-
-        private void MoveThumb_DragStarted(object sender, DragStartedEventArgs e)
-        {
-            var element = DataContext as UIElement;
-            if (element == null) return;
-
-            double left = Canvas.GetLeft(element);
-            double top = Canvas.GetTop(element);
-
-            if (double.IsNaN(left)) Canvas.SetLeft(element, 0.0);
-            if (double.IsNaN(top)) Canvas.SetTop(element, 0.0);
         }
 
         private void MoveThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            var element = DataContext as UIElement;
+            var element = DataContext as LevelObjectViewModel;
             if (element == null) return;
 
-            double left = Canvas.GetLeft(element);
-            double top = Canvas.GetTop(element);
-
-            double newLeft = left + e.HorizontalChange;
-            double newTop = top + e.VerticalChange;
+            double newX = element.Position.X + e.HorizontalChange;
+            double newY = element.Position.Y + e.VerticalChange;
             
             if (SnapsToDevicePixels)
             {
-                newLeft = Math.Round(newLeft);
-                newTop = Math.Round(newTop);
+                newX = Math.Round(newX);
+                newY = Math.Round(newY);
             }
 
-            Canvas.SetLeft(element, newLeft);
-            Canvas.SetTop(element, newTop);
+            element.Position = new System.Drawing.Point((int)newX, (int)newY);
         }
     }
 }
