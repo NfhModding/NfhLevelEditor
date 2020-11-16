@@ -16,30 +16,15 @@
         <selectors:LevelObjectDataTemplateSelector x:Key="levelObjectSelector"/>
 
         <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
-            <Grid>
-                <Image Source="{Binding Image}"/>
-                <thumbs:MoveThumb Opacity="0" Cursor="SizeAll"/>
-            </Grid>
+            <views:LevelObjectView/>
         </DataTemplate>
 
         <DataTemplate x:Key="doorDataTemplate" DataType="{x:Type viewmodels:DoorViewModel}">
-            <Grid>
-                <Image Source="{Binding Image}"/>
-                <thumbs:MoveThumb Opacity="0" Cursor="SizeAll">
-                    <thumbs:MoveThumb.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Set Output"/>
-                        </ContextMenu>
-                    </thumbs:MoveThumb.ContextMenu>
-                </thumbs:MoveThumb>
-            </Grid>
+            <views:DoorView/>
         </DataTemplate>
 
         <DataTemplate x:Key="actorDataTemplate" DataType="{x:Type viewmodels:ActorViewModel}">
-            <Grid>
-                <Image Source="{Binding Image}"/>
-                <thumbs:MoveThumb Opacity="0" Cursor="SizeAll"/>
-            </Grid>
+            <views:ActorView/>
         </DataTemplate>
     </Window.Resources>
     <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=LevelLayer}"
