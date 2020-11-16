@@ -15,7 +15,7 @@ namespace Nfh.Editor.ViewModels
             get => levelObject.Position;
             set => ChangeProperty(levelObject, value);
         }
-
+        
         private LevelObject levelObject;
 
         public LevelObjectViewModel(LevelObject levelObject)

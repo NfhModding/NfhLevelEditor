@@ -46,6 +46,7 @@
           Focusable="True" Loaded="Grid_Loaded">
         <Grid.InputBindings>
             <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Undo}" Gesture="Ctrl+Z"/>
+            <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Redo}" Gesture="Ctrl+Y"/>
         </Grid.InputBindings>
         <!--
         <views:MetaView>

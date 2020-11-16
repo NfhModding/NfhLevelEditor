@@ -3,6 +3,7 @@ using Mvvm.Framework.ViewModel;
 using Nfh.Domain.Interfaces;
 using Nfh.Domain.Models.InGame;
 using Nfh.Domain.Models.Meta;
+using Nfh.Editor.Commands.ModelCommands;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -163,6 +164,9 @@ Do as I say lol.",
 
         // Frontend
         public static IModelChangeNotifier ModelChangeNotifier { get; } = new ModelChangeNotifier();
-        public static IUndoRedoStack UndoRedo { get; } = new UndoRedoStack();
+        public static IUndoRedoStack UndoRedo { get; } = new UndoRedoStack
+        {
+            MergeStrategy = new CommandMergeStrategy(),
+        };
     }
 }

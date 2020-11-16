@@ -13,6 +13,11 @@ namespace Mvvm.Framework.UndoRedo
     public interface IUndoRedoStack
     {
         /// <summary>
+        /// The <see cref="ICommandMergeStrategy"/> to use.
+        /// </summary>
+        public ICommandMergeStrategy MergeStrategy { get; set; }
+
+        /// <summary>
         /// True, if there are changes that hasn't been saved.
         /// </summary>
         public bool HasUnsavedChanges { get; }

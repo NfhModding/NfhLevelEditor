@@ -1,4 +1,5 @@
 ﻿using Nfh.Domain.Models.InGame;
+using Nfh.Editor.Commands.ModelCommands;
 using Nfh.Editor.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,21 @@ namespace Nfh.Editor.Thumbs
     {
         public MoveThumb()
         {
+            DragStarted += MoveThumb_DragStarted;
             DragDelta += MoveThumb_DragDelta;
+            DragCompleted += MoveThumb_DragCompleted;
+        }
+
+        private void MoveThumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            var element = DataContext as LevelObjectViewModel;
+            if (element == null) return;
+
+            // First we force a new command on the stack
+            element.Position = element.Position;
+            // Then allow merging to this command
+            var ms = (CommandMergeStrategy)Services.UndoRedo.MergeStrategy;
+            ms.AllowMerge = true;
         }
 
         private void MoveThumb_DragDelta(object sender, DragDeltaEventArgs e)
@@ -33,6 +48,12 @@ namespace Nfh.Editor.Thumbs
             }
 
             element.Position = new System.Drawing.Point((int)newX, (int)newY);
+        }
+
+        private void MoveThumb_DragCompleted(object sender, DragCompletedEventArgs e)
+        {
+            var ms = (CommandMergeStrategy)Services.UndoRedo.MergeStrategy;
+            ms.AllowMerge = false;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Nfh.Editor
     public partial class MainWindow : Window
     {
         public ICommand Undo { get; set; } = new UndoCommand();
+        public ICommand Redo { get; set; } = new RedoCommand();
 
         public LevelLayerViewModel LevelLayer { get; set; }
 

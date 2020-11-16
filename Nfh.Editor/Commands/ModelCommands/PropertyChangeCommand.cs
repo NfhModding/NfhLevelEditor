@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 
 namespace Nfh.Editor.Commands.ModelCommands
 {
-    public class PropertyChangeCommand : IModelChangeCommand
+    public class PropertyChangeCommand : ModelChangeCommand
     {
-        private object model;
-        private object target;
-        private PropertyInfo propertyInfo;
+        public object Model { get; }
+        public object Target { get; }
+        public PropertyInfo PropertyInfo { get; }
+
         private object? newValue;
 
         public PropertyChangeCommand(object model, object target, PropertyInfo propertyInfo, object? newValue)
+            : base(Services.ModelChangeNotifier, model)
         {
-            this.model = model;
-            this.target = target;
-            this.propertyInfo = propertyInfo;
+            Model = model;
+            Target = target;
+            PropertyInfo = propertyInfo;
             this.newValue = newValue;
         }
 
@@ -29,13 +31,9 @@ namespace Nfh.Editor.Commands.ModelCommands
         {
         }
 
-        public void Execute()
-        {
-            propertyInfo.SetValue(target, newValue);
-            Services.ModelChangeNotifier.Notify(model);
-        }
+        protected override void ExecuteWithoutNotify() => PropertyInfo.SetValue(Target, newValue);
 
-        public IModelChangeCommand GetUndoCommand() => 
-            new PropertyChangeCommand(model, target, propertyInfo, propertyInfo.GetValue(target));
+        public override IModelChangeCommand GetUndoCommand() => 
+            new PropertyChangeCommand(Model, Target, PropertyInfo, PropertyInfo.GetValue(Target));
     }
 }

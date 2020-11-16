@@ -12,6 +12,8 @@ namespace Mvvm.Framework.UndoRedo
     /// </summary>
     public class UndoRedoStack : IUndoRedoStack
     {
+        public ICommandMergeStrategy MergeStrategy { get; set; } = new NullCommandMergeStrategy();
+
         public bool HasUnsavedChanges => saveIndex != undoStack.Count;
         public bool CanUndo => undoStack.Count > 0;
         public bool CanRedo => redoStack.Count > 0;
@@ -24,9 +26,19 @@ namespace Mvvm.Framework.UndoRedo
         {
             // We need to throw away redos
             redoStack.Clear();
-            // Make this command undo-able
-            var undoCommand = command.GetUndoCommand();
-            undoStack.Push(undoCommand);
+            // Check if this command can be merged with the previous one
+            bool canMerge = false;
+            if (undoStack.TryPeek(out var prevUndo))
+            {
+                var prevDo = prevUndo.GetUndoCommand();
+                canMerge = MergeStrategy.CanMerge(prevDo, command);
+            }
+            if (!canMerge)
+            {
+                // Make this command undo-able
+                var undoCommand = command.GetUndoCommand();
+                undoStack.Push(undoCommand);
+            }
             // Finally execute the command
             command.Execute();
             // Make sure to invalidate save if needed
