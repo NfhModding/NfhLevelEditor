@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Nfh.Editor.Views"
+             xmlns:local="clr-namespace:Nfh.Editor.Views" 
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -14,7 +15,39 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Content="Layer"/>
-        <CheckBox Grid.Column="1" IsChecked="{Binding Visible}"/>
-        <CheckBox Grid.Column="2" IsChecked="{Binding Editable}"/>
+
+        <CheckBox Grid.Column="1" IsChecked="{Binding Visible}" VerticalAlignment="Center">
+            <CheckBox.Template>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid>
+                        <iconPacks:PackIconModern x:Name="icon" Kind="EyeHide" />
+                        <Rectangle Fill="Transparent"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="icon" Property="Kind" Value="Eye"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </CheckBox.Template>
+        </CheckBox>
+
+        <CheckBox Grid.Column="2" IsChecked="{Binding Editable}" VerticalAlignment="Center">
+            <CheckBox.Template>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid>
+                        <iconPacks:PackIconModern x:Name="icon" Kind="Lock" />
+                        <Rectangle Fill="Transparent"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="icon" Property="Kind" Value="Unlock"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </CheckBox.Template>
+        </CheckBox>
     </Grid>
 </UserControl>
