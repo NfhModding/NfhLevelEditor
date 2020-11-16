@@ -44,22 +44,38 @@ namespace Nfh.Editor
             public Level LoadLevel(string sourcePath, string levelId)
             {
                 var result = new Level { Meta = GenerateLevelMeta(levelId) };
-                for (int i = 0; i < 20; ++i)
+                for (int i = 0; i < 3; ++i)
                 {
-                    var ob = MakeLevelObject(i);
+                    var ob = MakeLevelObject(i, 0);
                     result.Object.Add(ob.Id, ob);
+                }
+                for (int i = 0; i < 3; ++i)
+                {
+                    var room = MakeRoom(i, i);
+                    result.Rooms.Add(room.Id, room);
                 }
                 return result;
             }
 
-            private LevelObject MakeLevelObject(int seed)
+            private Room MakeRoom(int id, int layer)
+            {
+                var result = new Room($"r_{id}");
+                for (int i = 0; i < 15; ++i)
+                {
+                    var obj = MakeLevelObject(i, layer);
+                    result.Objects.Add(obj.Id, obj);
+                }
+                return result;
+            }
+
+            private LevelObject MakeLevelObject(int seed, int layer)
             {
                 string id = $"lo_{seed}";
                 if (seed % 3 == 0)
                 {
                     return new Door(id)
                     {
-                        Position = new Point(seed * 40, 30),
+                        Position = new Point(seed * 40, 30 + layer * 30),
                         Visuals = MakeVisuals('d'),
                     };
                 }
@@ -67,7 +83,7 @@ namespace Nfh.Editor
                 {
                     return new Actor(id)
                     {
-                        Position = new Point(seed * 40, 150),
+                        Position = new Point(seed * 40, 150 + layer * 30),
                         Visuals = MakeVisuals('a'),
                     };
                 }
@@ -75,7 +91,7 @@ namespace Nfh.Editor
                 {
                     return new LevelObject(id)
                     {
-                        Position = new Point(seed * 40, 350),
+                        Position = new Point(seed * 40, 250 + layer * 30),
                         Visuals = MakeVisuals(' '),
                     };
                 }

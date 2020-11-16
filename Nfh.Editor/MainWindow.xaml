@@ -27,7 +27,7 @@
             <views:ActorView/>
         </DataTemplate>
     </Window.Resources>
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=LevelLayer}"
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Level}"
           Focusable="True" Loaded="Grid_Loaded">
         <Grid.InputBindings>
             <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Undo}" Gesture="Ctrl+Z"/>
@@ -40,6 +40,12 @@
             </views:MetaView.DataContext>
         -->
 
-        <views:LevelLayerView/>
+        <ItemsControl ItemsSource="{Binding Layers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <views:LevelLayerView/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

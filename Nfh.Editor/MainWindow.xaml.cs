@@ -17,13 +17,12 @@ namespace Nfh.Editor
         public ICommand Undo { get; set; } = new UndoCommand();
         public ICommand Redo { get; set; } = new RedoCommand();
 
-        public LevelLayerViewModel LevelLayer { get; set; }
+        public LevelViewModel Level { get; set; }
 
         public MainWindow()
         {
             // TODO: Temp
-            var levelObjs = Services.Project.LoadLevel("", "").Object.Values;
-            LevelLayer = new LevelLayerViewModel(levelObjs);
+            Level = new LevelViewModel(Services.Project.LoadLevel("", ""));
             InitializeComponent();
         }
 
