@@ -62,21 +62,5 @@ namespace Nfh.Editor.ViewModels
             this.levelMeta = levelMeta;
             Thumbnail = BitmapToImageSource(Services.Image.LoadLevelThumbnail(levelMeta.Id, Services.GamePath));
         }
-
-        // Source: https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
-        private static BitmapImage BitmapToImageSource(Bitmap bitmap)
-        {
-            using (MemoryStream memory = new MemoryStream())
-            {
-                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                memory.Position = 0;
-                BitmapImage bitmapimage = new BitmapImage();
-                bitmapimage.BeginInit();
-                bitmapimage.StreamSource = memory;
-                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapimage.EndInit();
-                return bitmapimage;
-            }
-        }
     }
 }

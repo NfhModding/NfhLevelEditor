@@ -17,28 +17,28 @@
 
         <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
             <Grid>
-                <Rectangle Width="50" Height="50" Fill="Blue"/>
+                <Image Source="{Binding Image}"/>
                 <thumbs:MoveThumb Opacity="0" Cursor="SizeAll"/>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="doorDataTemplate" DataType="{x:Type viewmodels:DoorViewModel}">
             <Grid>
-                <thumbs:MoveThumb/>
-                <Rectangle Width="100" Height="100" Fill="Green">
-                    <Rectangle.ContextMenu>
+                <Image Source="{Binding Image}"/>
+                <thumbs:MoveThumb Opacity="0" Cursor="SizeAll">
+                    <thumbs:MoveThumb.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Set Output"/>
                         </ContextMenu>
-                    </Rectangle.ContextMenu>
-                </Rectangle>
+                    </thumbs:MoveThumb.ContextMenu>
+                </thumbs:MoveThumb>
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="actorDataTemplate" DataType="{x:Type viewmodels:ActorViewModel}">
             <Grid>
-                <thumbs:MoveThumb/>
-                <Rectangle Width="100" Height="100" Fill="Red"/>
+                <Image Source="{Binding Image}"/>
+                <thumbs:MoveThumb Opacity="0" Cursor="SizeAll"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>

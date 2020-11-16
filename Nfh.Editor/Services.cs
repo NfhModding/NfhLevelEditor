@@ -1,4 +1,5 @@
-﻿using Mvvm.Framework.UndoRedo;
+﻿using Image.Tga;
+using Mvvm.Framework.UndoRedo;
 using Mvvm.Framework.ViewModel;
 using Nfh.Domain.Interfaces;
 using Nfh.Domain.Models.InGame;
@@ -20,7 +21,7 @@ namespace Nfh.Editor
         private class TempImageService : IImageService
         {
             public Bitmap LoadAnimationFrame(string objectId, string frameName, string gamePath) =>
-                throw new NotImplementedException();
+                TgaImage.FromFile($"C:/TMP/NeighborsFromHell_Assets/{frameName}").ToBitmap();
 
             public Bitmap LoadLevelThumbnail(string levelId, string gamePath) =>
                 new Bitmap("c:/TMP/NeighborsFromHell_Assets/tutorial_1.png");
@@ -59,6 +60,7 @@ namespace Nfh.Editor
                     return new Door(id)
                     {
                         Position = new Point(seed * 40, 30),
+                        Visuals = MakeVisuals('d'),
                     };
                 }
                 else if (seed % 7 == 0)
@@ -66,6 +68,7 @@ namespace Nfh.Editor
                     return new Actor(id)
                     {
                         Position = new Point(seed * 40, 150),
+                        Visuals = MakeVisuals('a'),
                     };
                 }
                 else
@@ -73,8 +76,23 @@ namespace Nfh.Editor
                     return new LevelObject(id)
                     {
                         Position = new Point(seed * 40, 350),
+                        Visuals = MakeVisuals(' '),
                     };
                 }
+            }
+
+            private Visuals MakeVisuals(char c)
+            {
+                string path = c == 'a' ? "W_triumph_0000.tga" : c == 'd' ? "W_leave_0009.tga" : "W_Hide_Wardrobe_0019.tga";
+                var visuals = new Visuals();
+                var standing = new Animation("ms");
+                standing.Frames.Add(new Animation.Frame
+                {
+                    ImageOffset = new Point(0, 0),
+                    ImagePath = path,
+                });
+                visuals.Animations.Add(standing.Id, standing);
+                return visuals;
             }
 
             public SeasonPack LoadSeasonPack(string sourcePath)

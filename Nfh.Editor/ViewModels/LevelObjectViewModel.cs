@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Nfh.Editor.ViewModels
 {
@@ -15,6 +16,7 @@ namespace Nfh.Editor.ViewModels
             get => levelObject.Position;
             set => ChangeProperty(levelObject, value);
         }
+        public BitmapImage? Image { get; protected set; }
         
         private LevelObject levelObject;
 
@@ -22,6 +24,18 @@ namespace Nfh.Editor.ViewModels
             : base(levelObject)
         {
             this.levelObject = levelObject;
+            if (   levelObject.Visuals != null 
+                && levelObject.Visuals.Animations.TryGetValue("ms", out var ms))
+            {
+                var firstNonNullPath = ms.Frames
+                    .Select(frame => frame.ImagePath)
+                    .FirstOrDefault(path => path != null);
+                if (firstNonNullPath != null)
+                {
+                    var image = Services.Image.LoadAnimationFrame(levelObject.Id, firstNonNullPath, Services.GamePath);
+                    Image = BitmapToImageSource(image);
+                }
+            }
         }
     }
 }
