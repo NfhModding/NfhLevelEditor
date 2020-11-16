@@ -13,19 +13,6 @@ namespace Nfh.Editor.Commands.ModelCommands
     {
         public bool AllowMerge { get; set; } = false;
 
-        public bool CanMerge(IModelChangeCommand first, IModelChangeCommand second)
-        {
-            if (!AllowMerge) return false;
-
-            if (first is PropertyChangeCommand c1 && second is PropertyChangeCommand c2)
-            {
-                if (c1.Target == c2.Target && c1.PropertyInfo == c2.PropertyInfo && c1.Target is LevelObject
-                    && c1.PropertyInfo.Name == "Position")
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        public bool CanMerge(IModelChangeCommand first, IModelChangeCommand second) => AllowMerge;
     }
 }

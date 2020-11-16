@@ -18,7 +18,7 @@
         <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
             <Grid>
                 <Rectangle Width="50" Height="50" Fill="Blue"/>
-                <thumbs:MoveThumb/>
+                <thumbs:MoveThumb Opacity="0" Cursor="SizeAll"/>
             </Grid>
         </DataTemplate>
 
