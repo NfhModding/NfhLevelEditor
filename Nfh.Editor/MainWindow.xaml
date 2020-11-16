@@ -12,27 +12,13 @@
         Title="Nfh Level Editor" Height="650" Width="850"
         Closing="MainWindow_Closing"
         Closed="MainWindow_Closed">
-    <Window.Resources>
-        <selectors:LevelObjectDataTemplateSelector x:Key="levelObjectSelector"/>
-
-        <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
-            <views:LevelObjectView/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="doorDataTemplate" DataType="{x:Type viewmodels:DoorViewModel}">
-            <views:DoorView/>
-        </DataTemplate>
-
-        <DataTemplate x:Key="actorDataTemplate" DataType="{x:Type viewmodels:ActorViewModel}">
-            <views:ActorView/>
-        </DataTemplate>
-    </Window.Resources>
-    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Level}"
-          Focusable="True" Loaded="Grid_Loaded">
-        <Grid.InputBindings>
+    <DockPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Level}"
+          Focusable="True" Loaded="Grid_Loaded"
+               LastChildFill="False">
+        <DockPanel.InputBindings>
             <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Undo}" Gesture="Ctrl+Z"/>
             <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Redo}" Gesture="Ctrl+Y"/>
-        </Grid.InputBindings>
+        </DockPanel.InputBindings>
         <!--
         <views:MetaView>
             <views:MetaView.DataContext>
@@ -40,12 +26,7 @@
             </views:MetaView.DataContext>
         -->
 
-        <ItemsControl ItemsSource="{Binding Layers}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:LevelLayerView/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+        <views:LevelView DockPanel.Dock="Left"/>
+        <views:LevelLayerListView DockPanel.Dock="Right" Width="150px"/>
+    </DockPanel>
 </Window>

@@ -41,7 +41,7 @@ namespace Nfh.Editor
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            Keyboard.Focus((Grid)sender);
+            Keyboard.Focus((UIElement)sender);
         }
     }
 }

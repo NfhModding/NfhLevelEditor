@@ -75,6 +75,7 @@ namespace Nfh.Editor
                 {
                     return new Door(id)
                     {
+                        Layer = layer,
                         Position = new Point(seed * 40, 30 + layer * 30),
                         Visuals = MakeVisuals('d'),
                     };
@@ -83,6 +84,7 @@ namespace Nfh.Editor
                 {
                     return new Actor(id)
                     {
+                        Layer = layer,
                         Position = new Point(seed * 40, 150 + layer * 30),
                         Visuals = MakeVisuals('a'),
                     };
@@ -91,6 +93,7 @@ namespace Nfh.Editor
                 {
                     return new LevelObject(id)
                     {
+                        Layer = layer,
                         Position = new Point(seed * 40, 250 + layer * 30),
                         Visuals = MakeVisuals(' '),
                     };
