@@ -13,6 +13,17 @@ namespace Nfh.Editor.ViewModels
         public ReadOnlyObservableCollection<LevelLayerViewModel> Layers { get; }
         public ReadOnlyObservableCollection<LevelLayerViewModel> LayersReverse { get; }
 
+        private LevelLayerViewModel? selectedLayer;
+        public LevelLayerViewModel? SelectedLayer 
+        { 
+            get => selectedLayer; 
+            set
+            {
+                selectedLayer = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public LevelViewModel(Level level)
         {
             Layers = new(new(level.Objects

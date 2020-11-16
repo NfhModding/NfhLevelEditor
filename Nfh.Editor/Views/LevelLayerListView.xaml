@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ListView ItemsSource="{Binding LayersReverse}">
+    <ListView ItemsSource="{Binding LayersReverse}" SelectedItem="{Binding SelectedLayer}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <local:LayerListLayerView/>
