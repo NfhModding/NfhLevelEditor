@@ -19,6 +19,7 @@
                 </ContextMenu.ItemContainerStyle>
 
                 <MenuItem Header="Set Output"/>
+                <MenuItem Header="Unset Output"/>
             </ContextMenu>
         </local:LevelObjectView.ContextMenu>
     </local:LevelObjectView>
