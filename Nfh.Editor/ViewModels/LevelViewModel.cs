@@ -14,7 +14,7 @@ namespace Nfh.Editor.ViewModels
 
         public LevelViewModel(Level level)
         {
-            Layers = new(level.Object
+            Layers = new(level.Objects
                 .Concat(level.Rooms.SelectMany(room => room.Value.Objects))
                 .Select(kv => kv.Value)
                 .GroupBy(obj => obj.Layer)

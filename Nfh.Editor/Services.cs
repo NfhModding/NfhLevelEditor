@@ -47,7 +47,7 @@ namespace Nfh.Editor
                 for (int i = 0; i < 3; ++i)
                 {
                     var ob = MakeLevelObject(i, 0);
-                    result.Object.Add(ob.Id, ob);
+                    result.Objects.Add(ob.Id, ob);
                 }
                 for (int i = 0; i < 3; ++i)
                 {
