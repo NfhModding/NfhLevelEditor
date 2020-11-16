@@ -96,7 +96,7 @@ namespace Image.Tga
             {
                 throw new ArgumentNullException(nameof(path));
             }
-            return FromBytes(new BinaryReader(new FileStream(path, FileMode.Open)));
+            return FromBytes(new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)));
         }
 
         /// <summary>
