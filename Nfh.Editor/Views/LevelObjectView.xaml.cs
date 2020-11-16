@@ -33,6 +33,9 @@ namespace Nfh.Editor.Views
         private void Image_MouseDown(object sender, MouseButtonEventArgs e) =>
             SelectProperLayer(sender);
 
+        private void MouseRightButtonDown(object sender, MouseButtonEventArgs e) =>
+            SelectProperLayer(sender);
+
         private void SelectProperLayer(object sender)
         {
             var element = sender as UIElement;

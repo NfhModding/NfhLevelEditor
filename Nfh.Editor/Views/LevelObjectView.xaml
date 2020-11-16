@@ -8,11 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Image Source="{Binding Image}" Cursor="No" MouseDown="Image_MouseDown"/>
+        <Image Source="{Binding Image}" Cursor="No" MouseDown="Image_MouseDown" MouseRightButtonDown="MouseRightButtonDown"/>
         <thumbs:MoveThumb Opacity="0" Cursor="SizeAll" 
                           IsHitTestVisible="{
             Binding RelativeSource={RelativeSource AncestorType={x:Type local:LevelLayerView}},
             Path=DataContext.Editable}"
-            DragStarted="MoveThumb_DragStarted"/>
+            DragStarted="MoveThumb_DragStarted"
+            MouseRightButtonDown="MouseRightButtonDown"/>
     </Grid>
 </UserControl>
