@@ -10,17 +10,19 @@ namespace Nfh.Editor.ViewModels
 {
     public class LevelViewModel : EditorViewModelBase
     {
-        public ObservableCollection<LevelLayerViewModel> Layers { get; }
+        public ReadOnlyObservableCollection<LevelLayerViewModel> Layers { get; }
+        public ReadOnlyObservableCollection<LevelLayerViewModel> LayersReverse { get; }
 
         public LevelViewModel(Level level)
         {
-            Layers = new(level.Objects
+            Layers = new(new(level.Objects
                 .Concat(level.Rooms.SelectMany(room => room.Value.Objects))
                 .Select(kv => kv.Value)
                 .GroupBy(obj => obj.Layer)
                 .Select(g => (LayerIndex: g.Key, Objects: (IEnumerable<LevelObject>)g))
                 .OrderBy(t => t.LayerIndex)
-                .Select(t => new LevelLayerViewModel(t.Objects)));
+                .Select(t => new LevelLayerViewModel(t.Objects))));
+            LayersReverse = new(new(Layers.Reverse()));
         }
     }
 }

@@ -6,11 +6,13 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views" 
              xmlns:views="clr-namespace:Nfh.Editor.Views"
              xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
-             xmlns:selectors="clr-namespace:Nfh.Editor.Selectors"
+             xmlns:selectors="clr-namespace:Nfh.Editor.Selectors" 
+             xmlns:converters="clr-namespace:Nfh.Editor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <selectors:LevelObjectDataTemplateSelector x:Key="levelObjectSelector"/>
+        <converters:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
 
         <DataTemplate x:Key="levelObjectDataTemplate" DataType="{x:Type viewmodels:LevelObjectViewModel}">
             <local:LevelObjectView/>
@@ -27,7 +29,8 @@
     
     <ItemsControl 
             ItemsSource="{Binding Objects}"
-            ItemTemplateSelector="{StaticResource levelObjectSelector}">
+            ItemTemplateSelector="{StaticResource levelObjectSelector}"
+            Visibility="{Binding Visible, Converter={StaticResource boolToVisibilityConverter}}">
         <ItemsControl.ItemContainerStyle>
             <Style>
                 <Setter Property="Canvas.Left" Value="{Binding Position.X}"/>

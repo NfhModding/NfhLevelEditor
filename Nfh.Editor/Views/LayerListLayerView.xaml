@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Content="Layer"/>
-        <Button Grid.Column="1" Content="A"/>
-        <Button Grid.Column="2" Content="B"/>
+        <CheckBox Grid.Column="1" IsChecked="{Binding Visible}"/>
+        <CheckBox Grid.Column="2" IsChecked="{Binding Editable}"/>
     </Grid>
 </UserControl>

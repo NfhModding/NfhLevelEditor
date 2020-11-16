@@ -10,6 +10,26 @@ namespace Nfh.Editor.ViewModels
 {
     public class LevelLayerViewModel : EditorViewModelBase
     {
+        private bool visible = true;
+        public bool Visible 
+        { 
+            get => visible; 
+            set
+            {
+                visible = value;
+                NotifyPropertyChanged();
+            }
+        }
+        private bool editable = true;
+        public bool Editable
+        {
+            get => editable;
+            set
+            {
+                editable = value;
+                NotifyPropertyChanged();
+            }
+        }
         public ObservableCollection<LevelObjectViewModel> Objects { get; }
 
         public LevelLayerViewModel(IEnumerable<LevelObject> levelObjects)
