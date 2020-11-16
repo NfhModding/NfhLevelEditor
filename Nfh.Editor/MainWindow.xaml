@@ -40,20 +40,6 @@
             </views:MetaView.DataContext>
         -->
 
-        <ItemsControl 
-            ItemsSource="{Binding Objects}"
-            ItemTemplateSelector="{StaticResource levelObjectSelector}">
-            <ItemsControl.ItemContainerStyle>
-                <Style>
-                    <Setter Property="Canvas.Left" Value="{Binding Position.X}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Position.Y}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <views:LevelLayerView/>
     </Grid>
 </Window>
