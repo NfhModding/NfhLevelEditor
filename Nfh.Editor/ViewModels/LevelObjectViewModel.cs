@@ -13,29 +13,37 @@ namespace Nfh.Editor.ViewModels
     {
         public Point Position
         {
-            get => levelObject.Position;
-            set => ChangeProperty(levelObject, value);
+            get => Model.Position;
+            set => ChangeProperty(Model, value);
         }
         public BitmapImage? Image { get; protected set; }
         
-        private LevelObject levelObject;
+        // Needed for backreferencing
+        public LevelObject Model { get; }
+        public LevelViewModel Level { get; }
 
-        public LevelObjectViewModel(LevelObject levelObject)
+        public LevelObjectViewModel(LevelViewModel level, LevelObject levelObject)
             : base(levelObject)
         {
-            this.levelObject = levelObject;
-            if (   levelObject.Visuals != null 
-                && levelObject.Visuals.Animations.TryGetValue("ms", out var ms))
-            {
-                var firstNonNullPath = ms.Frames
+            Level = level;
+            Model = levelObject;
+
+            DetermineVisuals();
+        }
+
+        internal virtual void PostInitialize() { }
+
+        private void DetermineVisuals()
+        {
+            if (Model.Visuals == null) return;
+            if (!Model.Visuals.Animations.TryGetValue("ms", out var ms)) return;
+            var firstNonNullPath = ms.Frames
                     .Select(frame => frame.ImagePath)
                     .FirstOrDefault(path => path != null);
-                if (firstNonNullPath != null)
-                {
-                    var image = Services.Image.LoadAnimationFrame(levelObject.Id, firstNonNullPath, Services.GamePath);
-                    Image = BitmapToImageSource(image);
-                }
-            }
+            if (firstNonNullPath == null) return;
+
+            var image = Services.Image.LoadAnimationFrame(Model.Id, firstNonNullPath, Services.GamePath);
+            Image = BitmapToImageSource(image);
         }
     }
 }

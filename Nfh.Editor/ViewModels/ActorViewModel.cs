@@ -9,8 +9,8 @@ namespace Nfh.Editor.ViewModels
 {
     public class ActorViewModel : LevelObjectViewModel
     {
-        public ActorViewModel(Actor actor)
-            : base(actor)
+        public ActorViewModel(LevelViewModel level, Actor actor)
+            : base(level, actor)
         {
         }
     }

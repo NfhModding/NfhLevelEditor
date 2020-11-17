@@ -10,6 +10,7 @@ namespace Nfh.Editor.ViewModels
 {
     public class LevelViewModel : EditorViewModelBase
     {
+        public ReadOnlyDictionary<LevelObject, LevelObjectViewModel> Objects { get; }
         public ReadOnlyObservableCollection<LevelLayerViewModel> Layers { get; }
         public ReadOnlyObservableCollection<LevelLayerViewModel> LayersReverse { get; }
 
@@ -26,14 +27,26 @@ namespace Nfh.Editor.ViewModels
 
         public LevelViewModel(Level level)
         {
-            Layers = new(new(level.Objects
+            Objects = new(level.Objects
                 .Concat(level.Rooms.SelectMany(room => room.Value.Objects))
                 .Select(kv => kv.Value)
-                .GroupBy(obj => obj.Layer)
-                .Select(g => (LayerIndex: g.Key, Objects: (IEnumerable<LevelObject>)g))
+                .Select(ToViewModel)
+                .ToDictionary(obj => obj.Model));
+            Layers = new(new(Objects.Values
+                .GroupBy(obj => obj.Model.Layer)
+                .Select(g => (LayerIndex: g.Key, Objects: (IEnumerable<LevelObjectViewModel>)g))
                 .OrderBy(t => t.LayerIndex)
                 .Select(t => new LevelLayerViewModel(t.Objects))));
             LayersReverse = new(new(Layers.Reverse()));
+
+            foreach (var obj in Objects.Values) obj.PostInitialize();
         }
+
+        private LevelObjectViewModel ToViewModel(LevelObject lo) => lo switch
+        {
+            Door door => new DoorViewModel(this, door),
+            Actor actor => new ActorViewModel(this, actor),
+            _ => new LevelObjectViewModel(this, lo),
+        };
     }
 }

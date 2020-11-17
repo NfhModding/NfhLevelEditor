@@ -32,16 +32,10 @@ namespace Nfh.Editor.ViewModels
         }
         public ObservableCollection<LevelObjectViewModel> Objects { get; }
 
-        public LevelLayerViewModel(IEnumerable<LevelObject> levelObjects)
+        public LevelLayerViewModel(IEnumerable<LevelObjectViewModel> levelObjects)
+            : base(levelObjects.Select(wm => wm.Model).ToArray())
         {
-            Objects = new ObservableCollection<LevelObjectViewModel>(levelObjects.Select(ToViewModel));
+            Objects = new ObservableCollection<LevelObjectViewModel>(levelObjects);
         }
-
-        private static LevelObjectViewModel ToViewModel(LevelObject levelObject) => levelObject switch
-        {
-            Actor actor => new ActorViewModel(actor),
-            Door door => new DoorViewModel(door),
-            _ => new LevelObjectViewModel(levelObject),
-        };
     }
 }
