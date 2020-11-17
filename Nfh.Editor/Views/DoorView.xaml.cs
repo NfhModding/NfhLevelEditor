@@ -29,16 +29,10 @@ namespace Nfh.Editor.Views
             InitializeComponent();
         }
 
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             var adornerLayer = AdornerLayer.GetAdornerLayer(this);
             adornerLayer.Add(doorExit);
-        }
-
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var adornerLayer = AdornerLayer.GetAdornerLayer(this);
-            adornerLayer.Remove(doorExit);
         }
     }
 }
