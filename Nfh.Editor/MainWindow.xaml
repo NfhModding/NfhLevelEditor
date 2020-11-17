@@ -28,9 +28,5 @@
 
         <views:LevelView DockPanel.Dock="Left"/>
         <views:LevelLayerListView DockPanel.Dock="Right" Width="150px"/>
-
-        <Canvas DockPanel.Dock="Bottom" Height="200px">
-            <shapes:Arrow X1="10" Y1="10" X2="200" Y2="100" HeadWidth="5" HeadHeight="5"/>
-        </Canvas>
     </DockPanel>
 </Window>

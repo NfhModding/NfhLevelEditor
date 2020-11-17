@@ -46,7 +46,7 @@ namespace Nfh.Editor
                 var result = new Level { Meta = GenerateLevelMeta(levelId) };
                 for (int i = 0; i < 3; ++i)
                 {
-                    var ob = MakeLevelObject(i, 0);
+                    var ob = MakeLevelObject(i, 0, null);
                     result.Objects.Add(ob.Id, ob);
                 }
                 for (int i = 0; i < 3; ++i)
@@ -62,22 +62,29 @@ namespace Nfh.Editor
                 var result = new Room($"r_{id}");
                 for (int i = 0; i < 15; ++i)
                 {
-                    var obj = MakeLevelObject(i, layer);
+                    var obj = MakeLevelObject(i, layer, 
+                        result.Objects.Values.Where(o => o is Door).Select(o => (Door)o).ToList());
                     result.Objects.Add(obj.Id, obj);
                 }
                 return result;
             }
 
-            private LevelObject MakeLevelObject(int seed, int layer)
+            private LevelObject MakeLevelObject(int seed, int layer, IList<Door>? doors)
             {
                 string id = $"lo_{seed}";
                 if (seed % 3 == 0)
                 {
+                    Door? output = null;
+                    if (doors != null && doors.Count > 0)
+                    {
+                        output = doors[new Random().Next(0, doors.Count)];
+                    }
                     return new Door(id)
                     {
                         Layer = layer,
                         Position = new Point(seed * 40, 30 + layer * 30),
                         Visuals = MakeVisuals('d'),
+                        Exit = output,
                     };
                 }
                 else if (seed % 7 == 0)
