@@ -1,4 +1,5 @@
 ﻿using Nfh.Editor.Adorners;
+using Nfh.Editor.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +22,26 @@ namespace Nfh.Editor.Views
     /// </summary>
     public partial class DoorView : UserControl
     {
-        private Adorner doorExit;
+        private ContentPresenterAdorner adorner;
 
         public DoorView()
         {
-            doorExit = new DoorExitArrowAdorner(this);
             InitializeComponent();
+            adorner = new ContentPresenterAdorner(this);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            var arrow = new Arrow();
+            arrow.DataContext = DataContext;
+            arrow.X1 = 10;
+            arrow.Y1 = 10;
+            arrow.SetBinding(Arrow.X2Property, new Binding("Position.X"));
+            arrow.SetBinding(Arrow.Y2Property, new Binding("Position.Y"));
+            adorner.Content = arrow;
+
             var adornerLayer = AdornerLayer.GetAdornerLayer(this);
-            adornerLayer.Add(doorExit);
+            adornerLayer.Add(adorner);
         }
     }
 }
