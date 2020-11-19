@@ -21,8 +21,6 @@ namespace Nfh.Editor
 
         public MainWindow()
         {
-            // TODO: Temp
-            Level = new LevelViewModel(Services.Project.LoadLevel("", ""));
             InitializeComponent();
         }
 
@@ -37,11 +35,6 @@ namespace Nfh.Editor
             {
                 e.Cancel = true;
             }
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-            Keyboard.Focus((UIElement)sender);
         }
     }
 }

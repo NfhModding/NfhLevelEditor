@@ -13,21 +13,9 @@
         Title="Nfh Level Editor" Height="650" Width="850"
         Closing="MainWindow_Closing"
         Closed="MainWindow_Closed">
-    <DockPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Level}"
-          Focusable="True" Loaded="Grid_Loaded"
-               LastChildFill="False">
-        <DockPanel.InputBindings>
-            <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Undo}" Gesture="Ctrl+Z"/>
-            <KeyBinding Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Redo}" Gesture="Ctrl+Y"/>
-        </DockPanel.InputBindings>
-        <!--
-        <views:MetaView>
-            <views:MetaView.DataContext>
-                <viewmodels:MetaViewModel/>
-            </views:MetaView.DataContext>
-        -->
-
-        <views:LevelView DockPanel.Dock="Left"/>
-        <views:LevelLayerListView DockPanel.Dock="Right" Width="150px"/>
-    </DockPanel>
+    <views:MetaView>
+        <views:MetaView.DataContext>
+            <viewmodels:MetaViewModel/>
+        </views:MetaView.DataContext>
+    </views:MetaView>
 </Window>

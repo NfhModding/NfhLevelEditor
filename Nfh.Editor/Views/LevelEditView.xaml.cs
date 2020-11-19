@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace Nfh.Editor.Views
+{
+    /// <summary>
+    /// Interaction logic for LevelEditView.xaml
+    /// </summary>
+    public partial class LevelEditView : UserControl
+    {
+        public LevelEditView()
+        {
+            InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e) =>
+            Keyboard.Focus(this);
+    }
+}
