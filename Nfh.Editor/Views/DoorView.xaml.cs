@@ -48,6 +48,18 @@ namespace Nfh.Editor.Views
                 throw new NotSupportedException();
         }
 
+        private class VisibilityConverter : IMultiValueConverter
+        {
+            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+            {
+                if (values[0] == null || !(bool)values[1]) return Visibility.Hidden;
+                return Visibility.Visible;
+            }
+
+            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) =>
+                throw new NotSupportedException();
+        }
+
         private ContentPresenterAdorner adorner;
 
         public DoorView()
@@ -79,8 +91,13 @@ namespace Nfh.Editor.Views
                 arrow.SetBinding(Arrow.Y2Property, yBinding);
             }
             {
-                var visBinding = new Binding("Exit");
-                visBinding.Converter = new NullToHiddenVisibilityConverter();
+                var visBinding = new MultiBinding();
+                visBinding.Bindings.Add(new Binding("Exit"));
+                visBinding.Bindings.Add(new Binding("IsVisible")
+                { 
+                    Source = this,
+                });
+                visBinding.Converter = new VisibilityConverter();
                 arrow.SetBinding(VisibilityProperty, visBinding);
             }
             adorner.Content = arrow;
