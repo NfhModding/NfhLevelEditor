@@ -40,8 +40,6 @@ namespace Nfh.Editor.ViewModels
                 .OrderBy(t => t.LayerIndex)
                 .Select(t => new LevelLayerViewModel(t.Objects))));
             LayersReverse = new(new(Layers.Reverse()));
-
-            foreach (var obj in Objects.Values) obj.PostInitialize();
         }
 
         private LevelObjectViewModel ToViewModel(LevelObject lo) => lo switch

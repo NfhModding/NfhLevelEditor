@@ -31,8 +31,6 @@ namespace Nfh.Editor.ViewModels
             DetermineVisuals();
         }
 
-        internal virtual void PostInitialize() { }
-
         internal virtual void EndClickAction()
         {
             if (Level.SettingNeighbor != null)

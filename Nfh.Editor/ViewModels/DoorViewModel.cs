@@ -49,14 +49,6 @@ namespace Nfh.Editor.ViewModels
                 _ => door.Exit != null);
         }
 
-        // TODO: DO we even need this?
-        // Exit is kinda lazy
-        internal override void PostInitialize()
-        {
-            base.PostInitialize();
-            NotifyPropertyChanged(nameof(Exit));
-        }
-
         internal override void EndClickAction()
         {
             if (Level.SettingNeighbor != null)
