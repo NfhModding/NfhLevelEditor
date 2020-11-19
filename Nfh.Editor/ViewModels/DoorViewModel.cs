@@ -11,7 +11,19 @@ namespace Nfh.Editor.ViewModels
 {
     public class DoorViewModel : LevelObjectViewModel
     {
+        public ICommand SetExit { get; }
         public ICommand UnsetExit { get; }
+
+        private bool settingExit = false;
+        public bool SettingExit 
+        { 
+            get => settingExit; 
+            set
+            {
+                settingExit = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public DoorViewModel? Exit
         { 
@@ -20,21 +32,38 @@ namespace Nfh.Editor.ViewModels
                 var exitModel = ((Door)Model).Exit;
                 return exitModel == null ? null : (DoorViewModel)Level.Objects[exitModel];
             }
-            set => ChangeProperty(Model, value);
+            set => ChangeProperty(Model, value?.Model);
         }
 
         public DoorViewModel(LevelViewModel level, Door door) 
             : base(level, door)
         {
+            SetExit = new RelayCommand<object?>(
+                _ =>
+                { 
+                    SettingExit = true;
+                    Level.SettingNeighbor = this;
+                });
             UnsetExit = new RelayCommand<object?>(
                 _ => ChangeProperty(door, (object?)null, nameof(Exit)),
                 _ => door.Exit != null);
         }
 
+        // TODO: DO we even need this?
+        // Exit is kinda lazy
         internal override void PostInitialize()
         {
             base.PostInitialize();
             NotifyPropertyChanged(nameof(Exit));
+        }
+
+        internal override void EndClickAction()
+        {
+            if (Level.SettingNeighbor != null)
+            {
+                Level.SettingNeighbor.Exit = this;
+            }
+            base.EndClickAction();
         }
     }
 }

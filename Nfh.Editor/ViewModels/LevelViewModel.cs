@@ -10,6 +10,8 @@ namespace Nfh.Editor.ViewModels
 {
     public class LevelViewModel : EditorViewModelBase
     {
+        public DoorViewModel? SettingNeighbor { get; set; }
+
         public ReadOnlyDictionary<LevelObject, LevelObjectViewModel> Objects { get; }
         public ReadOnlyObservableCollection<LevelLayerViewModel> Layers { get; }
         public ReadOnlyObservableCollection<LevelLayerViewModel> LayersReverse { get; }

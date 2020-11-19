@@ -25,6 +25,11 @@ namespace Nfh.Editor.Thumbs
         {
             var element = DataContext as LevelObjectViewModel;
             if (element == null) return;
+            if (element.Level.SettingNeighbor != null)
+            {
+                CancelDrag();
+                return;
+            }
 
             // First we force a new command on the stack
             element.Position = element.Position;

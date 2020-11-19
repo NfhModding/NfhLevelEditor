@@ -33,6 +33,17 @@ namespace Nfh.Editor.ViewModels
 
         internal virtual void PostInitialize() { }
 
+        internal virtual void EndClickAction()
+        {
+            if (Level.SettingNeighbor != null)
+            {
+                // TODO: Maybe it's enough for the level to know that a neighbor is being set?
+                // DoorVM could get rid of it's 'SettingExit'
+                Level.SettingNeighbor.SettingExit = false;
+                Level.SettingNeighbor = null;
+            }
+        }
+
         private void DetermineVisuals()
         {
             if (Model.Visuals == null) return;

@@ -27,14 +27,23 @@ namespace Nfh.Editor.Views
             InitializeComponent();
         }
 
-        private void MoveThumb_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e) =>
+        private void MoveThumb_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
             SelectProperLayer(sender);
+            EndClickAction();
+        }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e) =>
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
             SelectProperLayer(sender);
+            EndClickAction();
+        }
 
-        private void MouseRightButtonDown(object sender, MouseButtonEventArgs e) =>
+        private void UserControl_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
             SelectProperLayer(sender);
+            EndClickAction();
+        }
 
         private void SelectProperLayer(object sender)
         {
@@ -43,6 +52,12 @@ namespace Nfh.Editor.Views
             var layerVm = (LevelLayerViewModel)element.FindVisualAncestor<LevelLayerView>().DataContext;
             var levelVm = (LevelViewModel)element.FindVisualAncestor<LevelView>().DataContext;
             levelVm.SelectedLayer = layerVm;
+        }
+
+        private void EndClickAction()
+        {
+            var vm = DataContext as LevelObjectViewModel;
+            if (vm != null) vm.EndClickAction();
         }
     }
 }

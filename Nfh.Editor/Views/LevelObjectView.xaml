@@ -6,14 +6,15 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views" 
              xmlns:thumbs="clr-namespace:Nfh.Editor.Thumbs"
              mc:Ignorable="d" 
+             Background="Transparent"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Image Source="{Binding Image}" Cursor="No" MouseDown="Image_MouseDown" MouseRightButtonDown="MouseRightButtonDown"/>
+        <Image Source="{Binding Image}" Cursor="No" MouseDown="Image_MouseDown" MouseRightButtonDown="UserControl_MouseRightButtonDown"/>
         <thumbs:MoveThumb Opacity="0" Cursor="SizeAll" 
                           IsHitTestVisible="{
             Binding RelativeSource={RelativeSource AncestorType={x:Type local:LevelLayerView}},
             Path=DataContext.Editable}"
             DragStarted="MoveThumb_DragStarted"
-            MouseRightButtonDown="MouseRightButtonDown"/>
+            MouseRightButtonDown="UserControl_MouseRightButtonDown"/>
     </Grid>
 </UserControl>

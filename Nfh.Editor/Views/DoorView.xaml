@@ -19,8 +19,8 @@
                     </Style>
                 </ContextMenu.ItemContainerStyle>
 
-                <MenuItem Header="Set Output"/>
-                <MenuItem Header="Unset Output" Command="{Binding UnsetExit}" />
+                <MenuItem Header="Set Exit" Command="{Binding SetExit}"/>
+                <MenuItem Header="Unset Exit" Command="{Binding UnsetExit}" />
             </ContextMenu>
         </local:LevelObjectView.ContextMenu>
     </local:LevelObjectView>

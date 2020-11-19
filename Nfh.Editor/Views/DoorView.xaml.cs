@@ -35,10 +35,9 @@ namespace Nfh.Editor.Views
 
             public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
             {
-                if (values[0] == DependencyProperty.UnsetValue || values[1] == DependencyProperty.UnsetValue)
-                {
-                    return 0.0;
-                }
+                if (   values[0] == DependencyProperty.UnsetValue 
+                    || values[1] == DependencyProperty.UnsetValue) return 0.0;
+
                 double first = (int)values[0];
                 double second = (int)values[1];
                 return first - second + offset;
@@ -60,12 +59,14 @@ namespace Nfh.Editor.Views
                 throw new NotSupportedException();
         }
 
-        private ContentPresenterAdorner adorner;
+        private ContentPresenterAdorner contentPresenterAdorner;
+        private DoorExitArrowAdorner doorExitArrowAdorner;
 
         public DoorView()
         {
             InitializeComponent();
-            adorner = new ContentPresenterAdorner(this);
+            contentPresenterAdorner = new ContentPresenterAdorner(this);
+            doorExitArrowAdorner = new DoorExitArrowAdorner(this);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -100,10 +101,11 @@ namespace Nfh.Editor.Views
                 visBinding.Converter = new VisibilityConverter();
                 arrow.SetBinding(VisibilityProperty, visBinding);
             }
-            adorner.Content = arrow;
+            contentPresenterAdorner.Content = arrow;
 
             var adornerLayer = AdornerLayer.GetAdornerLayer(this);
-            adornerLayer.Add(adorner);
+            adornerLayer.Add(contentPresenterAdorner);
+            adornerLayer.Add(doorExitArrowAdorner);
         }
     }
 }
