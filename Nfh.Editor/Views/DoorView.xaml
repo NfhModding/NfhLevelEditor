@@ -20,7 +20,7 @@
                 </ContextMenu.ItemContainerStyle>
 
                 <MenuItem Header="Set Output"/>
-                <MenuItem Header="Unset Output"/>
+                <MenuItem Header="Unset Output" Command="{Binding UnsetExit}" />
             </ContextMenu>
         </local:LevelObjectView.ContextMenu>
     </local:LevelObjectView>
