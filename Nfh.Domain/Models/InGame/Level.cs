@@ -13,6 +13,6 @@ namespace Nfh.Domain.Models.InGame
         public LevelMeta Meta { get; set; }
         public Size Size { get; set; }
         public IDictionary<string, Room> Rooms { get; set; } = new Dictionary<string, Room>();
-        public IDictionary<string, LevelObject> Object { get; set; } = new Dictionary<string, LevelObject>();
+        public IDictionary<string, LevelObject> Objects { get; set; } = new Dictionary<string, LevelObject>();
     }
 }
