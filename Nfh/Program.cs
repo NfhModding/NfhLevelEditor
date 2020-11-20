@@ -10,9 +10,9 @@ namespace Nfh
         {
             /*var img = TgaImage.FromFile(@"c:\TMP\NeighborsFromHell_Assets\tutorial_1.tga");
             img.ToBitmap().Save(@"c:\TMP\NeighborsFromHell_Assets\tutorial_1.png");*/
-            var gameLocator = new GameLocator();
+            /*var gameLocator = new GameLocator();
             foreach (var location in gameLocator.GetGameLocations())
-                System.Console.WriteLine(location);
+                System.Console.WriteLine(location);*/
 
             Playground.BackupGameData();
 		}

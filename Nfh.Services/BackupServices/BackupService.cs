@@ -11,11 +11,27 @@ namespace Nfh.Services.BackupServices
         private readonly IReadOnlyCollection<string> FilesToBackup =
             new List<string> { "gamedata.bnd" };
 
+        private readonly string BackupFolderName = "backup";
+
         private readonly IApplicationWorkFolder applicationWorkFolder;
 
         public BackupService(IApplicationWorkFolder applicationWorkFolder)
         {
             this.applicationWorkFolder = applicationWorkFolder;
+        }
+
+        public bool BackupExists 
+        {
+            get 
+            {
+                var backupFolder = getOrCreateBackupFolder();
+                if (!backupFolder.GetFiles().Any())
+                    return false;
+
+                // Enables to be able to have more files in the backup folder than the required, but fails when the neccessary files are missing
+                var onlyInFilesToBackup = FilesToBackup.Except(backupFolder.EnumerateFiles().Select(f => f.Name));                
+                return !onlyInFilesToBackup.Any();
+            }
         }
 
         public void BackupGameData(string sourceGamePath)
@@ -25,7 +41,7 @@ namespace Nfh.Services.BackupServices
 
             copyGamesData(
                 from: GetGamesDataFolder(sourceGamePath),
-                to: getBackupFolder());
+                to: getOrCreateBackupFolder());
         }
 
         public void RestoreGameData(string targetGamePath)
@@ -34,7 +50,7 @@ namespace Nfh.Services.BackupServices
                 throw new Exception($"{targetGamePath} folder does not exists");
 
             copyGamesData(
-                from: getBackupFolder(),
+                from: getOrCreateBackupFolder(),
                 to: GetGamesDataFolder(targetGamePath));
         }
 
@@ -47,9 +63,9 @@ namespace Nfh.Services.BackupServices
             return dataFolder;
         }
 
-        private DirectoryInfo getBackupFolder()
+        private DirectoryInfo getOrCreateBackupFolder()
         {
-            var backupFolder = new DirectoryInfo(Path.Combine(applicationWorkFolder.Info.FullName, "backup"));
+            var backupFolder = new DirectoryInfo(Path.Combine(applicationWorkFolder.Info.FullName, BackupFolderName));
             backupFolder.Create();
 
             return backupFolder;
