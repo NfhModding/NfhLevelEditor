@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Steam.Acf\Steam.Acf.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ProjectServices\Xml\Models\LevelObjects\" />
+  </ItemGroup>
+
 </Project>

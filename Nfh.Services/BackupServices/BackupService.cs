@@ -1,4 +1,5 @@
 ﻿using Nfh.Domain.Interfaces;
+using Nfh.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,10 +15,12 @@ namespace Nfh.Services.BackupServices
         private readonly string BackupFolderName = "backup";
 
         private readonly IApplicationWorkFolder applicationWorkFolder;
+        private readonly IFolderHelper gameInstallFolderHelper;
 
-        public BackupService(IApplicationWorkFolder applicationWorkFolder)
+        public BackupService(IApplicationWorkFolder applicationWorkFolder, IFolderHelper gameInstallFolderHelper)
         {
             this.applicationWorkFolder = applicationWorkFolder;
+            this.gameInstallFolderHelper = gameInstallFolderHelper;
         }
 
         public bool BackupExists 
@@ -40,7 +43,7 @@ namespace Nfh.Services.BackupServices
                 throw new Exception($"{sourceGamePath} folder does not exists");
 
             copyGamesData(
-                from: GetGamesDataFolder(sourceGamePath),
+                from: gameInstallFolderHelper.GetGamesDataFolder(sourceGamePath),
                 to: getOrCreateBackupFolder());
         }
 
@@ -51,16 +54,7 @@ namespace Nfh.Services.BackupServices
 
             copyGamesData(
                 from: getOrCreateBackupFolder(),
-                to: GetGamesDataFolder(targetGamePath));
-        }
-
-        private static DirectoryInfo GetGamesDataFolder(string gamePath)
-        {
-            var dataFolder = new DirectoryInfo(Path.Combine(gamePath, "data"));
-            if (!dataFolder.Exists)
-                throw new Exception($"Could not find the game's \"/data\" folder!");
-
-            return dataFolder;
+                to: gameInstallFolderHelper.GetGamesDataFolder(targetGamePath));
         }
 
         private DirectoryInfo getOrCreateBackupFolder()
@@ -73,7 +67,7 @@ namespace Nfh.Services.BackupServices
 
         private void copyGamesData(DirectoryInfo from, DirectoryInfo to)
         {
-            foreach (var file in from.GetFiles()
+            foreach (var file in from.EnumerateFiles()
                 .Where(f => FilesToBackup.Contains(f.Name)))
             {
                 file.CopyTo(Path.Combine(to.FullName, file.Name), overwrite: true);
