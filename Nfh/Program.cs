@@ -1,4 +1,5 @@
 ﻿using Image.Tga;
+using Microsoft.Extensions.DependencyInjection;
 using Nfh.Domain.Interfaces;
 using Nfh.Services;
 
@@ -14,7 +15,11 @@ namespace Nfh
             foreach (var location in gameLocator.GetGameLocations())
                 System.Console.WriteLine(location);*/
 
-            Playground.BackupGameData();
+            //Playground.BackupGameData();
+            var startup = new Startup();
+
+            using var scope = startup.ServiceProvider.CreateScope();
+            scope.ServiceProvider.GetRequiredService<Playground>().Run();            
 		}
     }
 }

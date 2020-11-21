@@ -1,5 +1,4 @@
-﻿using Nfh.Services.BackupServices;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Nfh.Services
@@ -11,8 +10,10 @@ namespace Nfh.Services
             var gameLocator = new GameLocator(new List<IGameLocationProvider> { new SteamGameLocationProvider(), });
             var gamePath = gameLocator.GetGameLocations().First();
 
-            var backupService = new BackupService(new ApplicationWorkFolder());
-            backupService.RestoreGameData(gamePath);
+            //var backupService = new BackupService(new ApplicationWorkFolder());
+            //backupService.RestoreGameData(gamePath);
         }
+
+
     }
 }

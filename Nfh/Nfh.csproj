@@ -8,9 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Image.Tga\Image.Tga.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Nfh.Services\Nfh.Services.csproj" />
-    <ProjectReference Include="..\Steam.Acf\Steam.Acf.csproj" />
   </ItemGroup>
 
 </Project>
