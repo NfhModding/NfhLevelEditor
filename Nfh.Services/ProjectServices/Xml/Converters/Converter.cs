@@ -8,31 +8,31 @@ namespace Nfh.Services.ProjectServices.Xml.Converters
 {
     internal class Converter
     {
-        private Dictionary<XmlType, ITypeConverter> toDomainCoverters = new();
-        private Dictionary<DomainType, ITypeConverter> toXmlCoverters = new();
+        private readonly Dictionary<(DomainType, XmlType), ITypeConverter> converters = new();
 
-        public Converter(IReadOnlyCollection<(ITypeConverter converter, Type domainType, Type xmlType)> converters)
+        public Converter(
+            IReadOnlyCollection<(ITypeConverter converter, DomainType domainType, XmlType xmlType)> converters)
         {
             foreach (var (converter, domainType, xmlType) in converters)
             {
-                toDomainCoverters[xmlType] = converter;
-                toXmlCoverters[domainType] = converter;
+                this.converters[(domainType, xmlType)] = converter;
             }
         }
 
         public TTo Convert<TFrom, TTo>(TFrom model)
-            where TTo : class, new()
+            where TFrom : notnull
+            where TTo : notnull
         {
-            return (TTo)convert(typeof(TFrom), model);
+            return (TTo)convert(typeof(TFrom), typeof(TTo), model);
         }
 
-        private object convert(Type from, object model)
+        private object convert(Type from, Type to, object model)
         {
-            var toDomainConverter = toDomainCoverters.GetValueOrDefault(from);
+            var toDomainConverter = converters.GetValueOrDefault((to, from));
             if (toDomainConverter is not null)
                 return toDomainConverter.ConvertToDomain(model);
 
-            var toXmlConverter = toXmlCoverters.GetValueOrDefault(from);
+            var toXmlConverter = converters.GetValueOrDefault((from, to));
             if (toXmlConverter is not null)
                 return toXmlConverter.ConvertToXml(model);
 

@@ -1,5 +1,7 @@
 ﻿using Format.Xml;
+using Nfh.Services.ProjectServices.Xml.Models.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Meta;
+using Nfh.Services.ProjectServices.Xml.Models.Objects;
 using Nfh.Services.ProjectServices.Xml.Serializers.CustomSerializers;
 using System;
 using System.IO;
@@ -13,10 +15,12 @@ namespace Nfh.Services.ProjectServices.Xml.Serializers
         public Serializer()
         {
             // serializer.RegisterValue(typeof(Position), new PositionSerializer());
-            // serializer.RegisterValue(typeof(Time), new TimeSerializer());
             serializer.RegisterValue(typeof(StateAttribute), new StateAttributeSerializer());
             serializer.RegisterValue(typeof(TimeSpan?), new TimeSpanSerializer());
             serializer.RegisterValue(typeof(TimeSpan), new TimeSpanSerializer());
+            serializer.RegisterValue(typeof(Coord), new CoordSerializer());
+            serializer.RegisterValue(typeof(XmlTime), new XmlTimeSerializer());
+            serializer.RegisterValue(typeof(int?), new NullableIntegerSerializer());
         }
 
         public string Serialize(object obj) =>
@@ -33,6 +37,12 @@ namespace Nfh.Services.ProjectServices.Xml.Serializers
 
             var source = File.ReadAllText(file.FullName);
             return Deserialize<T>(source);
+        }
+
+        public void SerializeToFile(object obj, FileInfo file)
+        {
+            var serialized = Serialize(obj);
+            File.WriteAllText(file.FullName, serialized);
         }
     }
 }

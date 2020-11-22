@@ -2,6 +2,7 @@
 using Nfh.Domain.Models.InGame;
 using Nfh.Domain.Models.Meta;
 using Nfh.Services.Common;
+using Nfh.Services.ProjectServices.Loaders;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,12 +16,18 @@ namespace Nfh.Services.ProjectServices
         private readonly IFolderHelper folderHelper;
         private readonly IZipHelper zipHelper;
         private readonly ISeasonPackLoader seasonPackLoader;
+        private readonly ILevelLoader levelLoader;
 
-        public ProjectService(IFolderHelper folderHelper, IZipHelper zipHelper, ISeasonPackLoader seasonPackLoader)
+        public ProjectService(
+            IFolderHelper folderHelper, 
+            IZipHelper zipHelper, 
+            ISeasonPackLoader seasonPackLoader,
+            ILevelLoader levelLoader)
         {
             this.folderHelper = folderHelper;
             this.zipHelper = zipHelper;
             this.seasonPackLoader = seasonPackLoader;
+            this.levelLoader = levelLoader;
         }
 
         public void CreateProject(string gameSourcePath, string targetProjectPath)
@@ -96,12 +103,20 @@ namespace Nfh.Services.ProjectServices
 
         public Level LoadLevel(string sourcePath, string levelId)
         {
-            throw new NotImplementedException();
+            var projectFolder = new DirectoryInfo(sourcePath);
+            if (!projectFolder.Exists)
+                throw new();
+
+            return levelLoader.Load(createGamedataDirectoryInfo(projectFolder), levelId);
         }
 
         public void SaveLevel(Level level, string targetPath)
         {
-            throw new NotImplementedException();
+            var projectFolder = new DirectoryInfo(targetPath);
+            if (!projectFolder.Exists)
+                throw new();
+
+            levelLoader.Save(createGamedataDirectoryInfo(projectFolder), level);
         }
 
         private bool isValidProjectFolder(DirectoryInfo projectFolder)

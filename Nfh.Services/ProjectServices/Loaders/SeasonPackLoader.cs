@@ -22,6 +22,7 @@ namespace Nfh.Services.ProjectServices
         {
             var levelDataFile = new FileInfo(Path.Combine(gamedataFolder.FullName, "leveldata.xml"));
             var levelData = serializer.DeserializeFromFile<LevelDataRoot>(levelDataFile);
+
             var seasonpack = new SeasonPack
             {
                 Seasons = levelData.Sets

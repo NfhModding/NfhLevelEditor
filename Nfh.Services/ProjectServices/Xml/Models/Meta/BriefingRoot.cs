@@ -8,7 +8,7 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Meta
     internal class BriefingRoot
     {
         [XmlElement("string")]
-        public List<String> raw = new();
+        public List<XmlString> raw = new();
 
         [XmlIgnore]
         public string Title 
@@ -38,12 +38,12 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Meta
             set => get("briefing").Text = value;
         }
 
-        private String get(string name)
+        private XmlString get(string name)
         {
             var result = raw.FirstOrDefault(x => x.Name == name);
             if (result == null)
             {
-                result = new String { Name = name, Category = "briefing", Text = string.Empty };
+                result = new XmlString { Name = name, Category = "briefing", Text = string.Empty };
                 raw.Add(result);
             }
             return result;

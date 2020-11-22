@@ -10,11 +10,14 @@ namespace Nfh.Domain.Models.InGame
     public class Localization
     {
         public IDictionary<string, string> Strings { get; set; }
+            = new Dictionary<string, string>();
+
         public string? Name
         {
             get => LookUp("name");
             set => Strings["name"] = value;
         }
+
         public string? Description
         {
             get => LookUp("description");

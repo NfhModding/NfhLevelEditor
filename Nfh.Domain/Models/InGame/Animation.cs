@@ -13,7 +13,7 @@ namespace Nfh.Domain.Models.InGame
 
         public class Frame
         {
-            public string? ImagePath { get; set; }
+            public string ImagePath { get; set; } = string.Empty;
             public Point ImageOffset { get; set; }
             public string? SoundPath { get; set; }
         }

@@ -10,8 +10,8 @@ namespace Nfh.Domain.Models.InGame
         /// <summary>
         /// Relative to the <see cref="Room"/> position.
         /// </summary>
-        public Point Offset { get; set; }
-        public Size Size { get; set; }
+        public Rectangle Bounds { get; set; }
+
         /// <summary>
         /// Undetermined, probably the place to put items on the floor?
         /// </summary>

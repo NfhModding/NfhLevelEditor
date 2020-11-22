@@ -34,20 +34,12 @@ namespace Nfh
             projectService.ListProjects(Path.Combine(@"D:\\")).Print();
 
             var seasonPack = projectService.LoadSeasonPack(projectPath);
-            foreach (var season in seasonPack.Seasons.Values.Select(v => v.Season))
-            {
-                season.Unlocked = true;
-                foreach (var level in season.Levels.Values.Select(v => v.Level))
-                {
-                    level.TrickCount = 69;
-                    level.Description.Title = "Modded!";
-                }
-            }
+            var firstLevelMeta = seasonPack.Seasons.Values.Select(v => v.Season).First().Levels.Values.Select(v => v.Level).First();
 
-            projectService.SaveSeasonPack(seasonPack, projectPath);
+            var firstLevel = projectService.LoadLevel(projectPath, firstLevelMeta.Id);
 
-            projectService.PatchGame(projectPath, location);
-            projectService.DeleteProject(projectPath);
+            // projectService.PatchGame(projectPath, location);
+            //projectService.DeleteProject(projectPath);
         }
     }
 }

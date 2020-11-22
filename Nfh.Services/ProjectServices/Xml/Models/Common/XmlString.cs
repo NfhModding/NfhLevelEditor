@@ -2,7 +2,7 @@
 
 namespace Nfh.Services.ProjectServices.Xml.Models
 {
-    internal class String
+    internal class XmlString
     {
         [XmlAttribute("name")]
         public string Name { get; set; } = string.Empty;
