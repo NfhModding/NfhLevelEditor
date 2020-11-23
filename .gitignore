@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# BackupServices folder was ignored previously in the actual project (which is a business logic)
+!BackupServices/

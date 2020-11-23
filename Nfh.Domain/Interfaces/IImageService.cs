@@ -8,6 +8,7 @@ namespace Nfh.Domain.Interfaces
         /// Loads the thumbnail image for a level.
         /// </summary>
         public Bitmap LoadLevelThumbnail(string levelId, string gamePath);
+
         /// <summary>
         /// Loads the animation frame for a <see cref="Models.InGame.LevelObject"/>.
         /// </summary>
