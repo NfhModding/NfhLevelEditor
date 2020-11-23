@@ -1,5 +1,4 @@
 ﻿using Nfh.Domain.Models.InGame;
-using Nfh.Services.ProjectServices.Xml.Models;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Level;
 using System.Drawing;

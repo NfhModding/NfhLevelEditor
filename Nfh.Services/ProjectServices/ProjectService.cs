@@ -80,7 +80,7 @@ namespace Nfh.Services.ProjectServices
                 return;
 
             var targetFileName = Path.Combine(folderHelper.GetGamesDataFolder(targetGamePath).FullName, "gamedata.bnd");
-            zipHelper.CreateZipFromDirectory(createGamedataDirectoryInfo(sourceProjectFolder).FullName, targetFileName, overrideFile: true);
+            zipHelper.CreateZipFromFolder(createGamedataDirectoryInfo(sourceProjectFolder).FullName, targetFileName, overrideFile: true);
         }
 
         public SeasonPack LoadSeasonPack(string sourcePath)

@@ -19,11 +19,13 @@ namespace Nfh
     {
         private readonly IGameLocator gameLocator;
         private readonly IProjectService projectService;
+        private readonly IImageService imageService;
 
-        public Playground(IGameLocator gameLocator, IProjectService projectService)
+        public Playground(IGameLocator gameLocator, IProjectService projectService, IImageService imageService)
         {
             this.gameLocator = gameLocator;
             this.projectService = projectService;
+            this.imageService = imageService;
         }
 
         public void Run()
@@ -37,6 +39,14 @@ namespace Nfh
             var firstLevelMeta = seasonPack.Seasons.Values.Select(v => v.Season).First().Levels.Values.Select(v => v.Level).First();
 
             var firstLevel = projectService.LoadLevel(projectPath, firstLevelMeta.Id);
+
+            var gfxTmp = new DirectoryInfo(Path.Combine(@"D:", "GFX_TMP"));
+            gfxTmp.Create();
+
+            imageService.LoadLevelThumbnail(firstLevel.Id, location).Save(Path.Combine(gfxTmp.FullName, "thumbnal.png"));
+
+            var obj = firstLevel.Objects["house"];
+            imageService.LoadAnimationFrame(obj.Id, obj.Visuals?.Animations.Values.First().Frames.First().ImagePath, location).Save(Path.Combine(gfxTmp.FullName, "frame.png"));
 
             // projectService.PatchGame(projectPath, location);
             //projectService.DeleteProject(projectPath);

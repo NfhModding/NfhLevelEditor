@@ -1,7 +1,10 @@
-﻿namespace Nfh.Services.Common
+﻿using System.IO;
+
+namespace Nfh.Services.Common
 {
     internal interface IZipHelper
     {
-        void CreateZipFromDirectory(string sourceDirectoryName, string destinationArchiveFileName, bool overrideFile);
+        void CreateZipFromFolder(string sourceFolderName, string destinationArchiveFileName, bool overrideFile);
+        void UnzipToFolderWithOverride(FileInfo file, DirectoryInfo destinationFolder);
     }
 }

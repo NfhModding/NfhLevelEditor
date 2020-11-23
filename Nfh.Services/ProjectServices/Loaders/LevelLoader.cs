@@ -1,17 +1,8 @@
 ﻿using Nfh.Domain.Models.InGame;
 using Nfh.Services.ProjectServices.Xml.Converters;
 using Nfh.Services.ProjectServices.Xml.Models;
-using Nfh.Services.ProjectServices.Xml.Models.Anims;
-using Nfh.Services.ProjectServices.Xml.Models.Common;
-using Nfh.Services.ProjectServices.Xml.Models.GfxData;
-using Nfh.Services.ProjectServices.Xml.Models.Level;
-using Nfh.Services.ProjectServices.Xml.Models.Objects;
-using Nfh.Services.ProjectServices.Xml.Models.Strings;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 
 namespace Nfh.Services.ProjectServices.Loaders
 {

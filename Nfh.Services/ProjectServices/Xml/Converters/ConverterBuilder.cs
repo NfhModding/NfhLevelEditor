@@ -1,14 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Nfh.Domain.Models.InGame;
-using Nfh.Domain.Models.Meta;
-using Nfh.Services.ProjectServices.Xml.Converters.LevelDatas;
-using Nfh.Services.ProjectServices.Xml.Converters.Meta;
-using Nfh.Services.ProjectServices.Xml.Models.Briefing;
-using Nfh.Services.ProjectServices.Xml.Models.Common;
-using Nfh.Services.ProjectServices.Xml.Models.Level;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reflection;
 

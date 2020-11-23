@@ -2,11 +2,7 @@
 using Nfh.Services.ProjectServices.Xml.Models.Anims;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
 {

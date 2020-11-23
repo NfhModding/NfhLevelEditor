@@ -2,6 +2,7 @@
 using Nfh.Services.BackupServices;
 using Nfh.Services.Common;
 using Nfh.Services.GameLocatorServices;
+using Nfh.Services.ImageServices;
 using Nfh.Services.ProjectServices;
 
 namespace Nfh.Services
@@ -16,6 +17,7 @@ namespace Nfh.Services
             services.AddGameLocatorServices();
             services.AddBackupServices();
             services.AddProjectServices();
+            services.AddImageServices();
         }
     }
 }

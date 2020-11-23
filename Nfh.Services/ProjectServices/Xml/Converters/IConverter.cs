@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Nfh.Services.ProjectServices.Xml.Converters
+﻿namespace Nfh.Services.ProjectServices.Xml.Converters
 {
     internal interface IConverter
     {
