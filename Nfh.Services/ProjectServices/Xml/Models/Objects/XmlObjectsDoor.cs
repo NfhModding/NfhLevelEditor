@@ -12,15 +12,15 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Objects
         public string Graphics { get; set; } = string.Empty;
 
         [XmlElement("hotspot")]
-        public List<XmlHotspot> Hotspots { get; set; } = new();
+        public List<XmlObjectsHotspot> Hotspots { get; set; } = new();
 
         [XmlElement("stdaction")]
-        public XmlStdAction StdAction { get; set; }
+        public XmlObjectsStdAction StdAction { get; set; } = new();
 
         [XmlElement("action")]
-        public List<XmlAction> Actions { get; set; } = new();
+        public List<XmlObjectsAction> Actions { get; set; } = new();
 
         [XmlElement("flag")]
-        public XmlFlag Flag { get; set; }
+        public XmlObjectsFlag Flag { get; set; } = new();
     }
 }

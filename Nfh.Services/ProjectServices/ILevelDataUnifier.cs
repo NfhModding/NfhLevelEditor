@@ -4,7 +4,7 @@ namespace Nfh.Services.ProjectServices
 {
     internal interface ILevelDataUnifier
     {
-        LevelData UnifyWithGeneric(LevelData generic, LevelData level);
-        LevelData SeperateFromGeneric(LevelData unified);
+        XmlLevelData UnifyWithGeneric(XmlLevelData generic, XmlLevelData level);
+        XmlLevelData SeperateFromGeneric(XmlLevelData unified);
     }
 }

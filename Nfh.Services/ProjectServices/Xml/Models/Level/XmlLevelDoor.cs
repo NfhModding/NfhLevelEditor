@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Nfh.Services.ProjectServices.Xml.Models.Level
 {
-    internal class XmlLevelObject
+    internal class XmlLevelDoor
     {
         [XmlAttribute("name")]
         public string Name { get; set; } = string.Empty;
@@ -13,7 +13,7 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Level
         public int Layer { get; set; }
 
         [XmlAttribute("position")]
-        public XmlCoord? Position { get; set; } = null;
+        public XmlCoord Position { get; set; } = XmlCoord.Zero;
 
         [XmlHideDefault(true)]
         [XmlAttribute("visible")]

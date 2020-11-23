@@ -5,7 +5,7 @@ namespace Nfh.Services.ProjectServices.Loaders
 {
     internal interface ILevelDataLoader
     {
-        LevelData LoadGenericData(DirectoryInfo gamedataFolder);
-        LevelData LoadLevelSpecificData(DirectoryInfo gamedataFolder, string levelId);
+        XmlLevelData LoadGenericData(DirectoryInfo gamedataFolder);
+        XmlLevelData LoadLevelSpecificData(DirectoryInfo gamedataFolder, string levelId);
     }
 }

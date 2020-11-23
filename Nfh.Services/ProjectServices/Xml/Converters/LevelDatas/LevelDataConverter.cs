@@ -4,7 +4,7 @@ using System;
 
 namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
 {
-    internal class LevelDataConverter : TypeConverterBase<Level, LevelData>
+    internal class LevelDataConverter : TypeConverterBase<Level, XmlLevelData>
     {
         private readonly SizeConverter sizeConverter;
 
@@ -13,7 +13,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.sizeConverter = sizeConverter;
         }
 
-        public override Level convertToDomain(LevelData xmlModel)
+        public override Level convertToDomain(XmlLevelData xmlModel)
         {
             var levelRoot = xmlModel.LevelRoot;
             var level = new Level
@@ -28,7 +28,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             return new();
         }
 
-        public override LevelData convertToXml(Level domain)
+        public override XmlLevelData convertToXml(Level domain)
         {
             throw new NotImplementedException();
         }

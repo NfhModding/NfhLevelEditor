@@ -18,21 +18,21 @@ namespace Nfh.Services.ProjectServices.Loaders
             this.serializer = serializer;
         }
 
-        public LevelData LoadGenericData(DirectoryInfo gamedataFolder) => new()
+        public XmlLevelData LoadGenericData(DirectoryInfo gamedataFolder) => new()
         {
-            StringsRoot = loadGeneric<StringsRoot>(gamedataFolder, "strings"),
-            GfxDataRoot = loadGeneric<GfxDataRoot>(gamedataFolder, "gfxdata"),
-            AnimsRoot = loadGeneric<AnimsRoot>(gamedataFolder, "anims"),
-            ObjectsRoot = loadGeneric<ObjectsRoot>(gamedataFolder, "objects"),
+            StringsRoot = loadGeneric<XmlStringsRoot>(gamedataFolder, "strings"),
+            GfxDataRoot = loadGeneric<XmlGfxRoot>(gamedataFolder, "gfxdata"),
+            AnimsRoot = loadGeneric<XmlAnimsRoot>(gamedataFolder, "anims"),
+            ObjectsRoot = loadGeneric<XmlObjectsRoot>(gamedataFolder, "objects"),
         };
 
-        public LevelData LoadLevelSpecificData(DirectoryInfo gamedataFolder, string levelId) => new()
+        public XmlLevelData LoadLevelSpecificData(DirectoryInfo gamedataFolder, string levelId) => new()
         {
-            LevelRoot = loadFromFolder<LevelRoot>(gamedataFolder, levelId, "level"),
-            StringsRoot = loadFromFolder<StringsRoot>(gamedataFolder, levelId, "strings"),
-            GfxDataRoot = loadFromFolder<GfxDataRoot>(gamedataFolder, levelId, "gfxdata"),
-            AnimsRoot = loadFromFolder<AnimsRoot>(gamedataFolder, levelId, "anims"),
-            ObjectsRoot = loadFromFolder<ObjectsRoot>(gamedataFolder, levelId, "objects"),
+            LevelRoot = loadFromFolder<XmlLevelRoot>(gamedataFolder, levelId, "level"),
+            StringsRoot = loadFromFolder<XmlStringsRoot>(gamedataFolder, levelId, "strings"),
+            GfxDataRoot = loadFromFolder<XmlGfxRoot>(gamedataFolder, levelId, "gfxdata"),
+            AnimsRoot = loadFromFolder<XmlAnimsRoot>(gamedataFolder, levelId, "anims"),
+            ObjectsRoot = loadFromFolder<XmlObjectsRoot>(gamedataFolder, levelId, "objects"),
         };
 
         private T loadFromFolder<T>(DirectoryInfo gamedataFolder, string folderName, string fileName)

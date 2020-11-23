@@ -15,11 +15,11 @@ namespace Nfh.Services.ProjectServices.Xml.Serializers
         public Serializer()
         {
             // serializer.RegisterValue(typeof(Position), new PositionSerializer());
-            serializer.RegisterValue(typeof(StateAttribute), new StateAttributeSerializer());
+            serializer.RegisterValue(typeof(XmlLevelDataStateAttribute), new StateAttributeSerializer());
             serializer.RegisterValue(typeof(TimeSpan?), new TimeSpanSerializer());
             serializer.RegisterValue(typeof(TimeSpan), new TimeSpanSerializer());
-            serializer.RegisterValue(typeof(Coord), new CoordSerializer());
-            serializer.RegisterValue(typeof(XmlTime), new XmlTimeSerializer());
+            serializer.RegisterValue(typeof(XmlCoord), new CoordSerializer());
+            serializer.RegisterValue(typeof(XmlObjectsTime), new XmlTimeSerializer());
             serializer.RegisterValue(typeof(int?), new NullableIntegerSerializer());
         }
 

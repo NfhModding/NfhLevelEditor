@@ -15,18 +15,18 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Objects
         public string? Graphics { get; set; } = null;
 
         [XmlAttribute("hotspot")]
-        public Coord? Hotspot { get; set; } = null;
+        public XmlCoord? Hotspot { get; set; } = null;
 
         [XmlElement("hotspot")]
-        public List<XmlHotspot> Hotspots { get; set; } = new();
+        public List<XmlObjectsHotspot> Hotspots { get; set; } = new();
 
         [XmlElement("speed")]
-        public List<XmlActorSpeed> Speeds { get; set; } = new();
+        public List<XmlObjectsActorSpeed> Speeds { get; set; } = new();
 
         [XmlElement("stdaction")]
-        public XmlStdAction? StdAction { get; set; } = null;
+        public XmlObjectsStdAction? StdAction { get; set; } = null;
 
         [XmlElement("action")]
-        public List<XmlAction> Actions { get; set; } = new();
+        public List<XmlObjectsAction> Actions { get; set; } = new();
     }
 }

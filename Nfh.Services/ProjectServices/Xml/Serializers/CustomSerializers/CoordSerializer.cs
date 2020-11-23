@@ -3,9 +3,9 @@ using Nfh.Services.ProjectServices.Xml.Models.Common;
 
 namespace Nfh.Services.ProjectServices.Xml.Serializers.CustomSerializers
 {
-    internal class CoordSerializer : TypedValueSerializer<Coord>
+    internal class CoordSerializer : TypedValueSerializer<XmlCoord>
     {
-        public override string SerializeTyped(Coord value)
+        public override string SerializeTyped(XmlCoord value)
         {
             if (value == null)
             {
@@ -14,10 +14,10 @@ namespace Nfh.Services.ProjectServices.Xml.Serializers.CustomSerializers
             return $"{value.X}/{value.Y}";
         }
 
-        public override Coord DeserializeTyped(string value)
+        public override XmlCoord DeserializeTyped(string value)
         {
             var parts = value.Split('/');
-            return new Coord
+            return new XmlCoord
             {
                 X = int.Parse(parts[0]),
                 Y = int.Parse(parts[1]),

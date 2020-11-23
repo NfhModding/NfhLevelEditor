@@ -3,15 +3,22 @@ using System.Drawing;
 
 namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
 {
-    internal class PointConverter : TypeConverterBase<Point, Coord>
+    internal class PointConverter : TypeConverterBase<Point, XmlCoord>
     {
-        public override Point convertToDomain(Coord xmlModel) => new()
+        public override Point convertToDomain(XmlCoord xmlModel)
         {
-            X = xmlModel.X,
-            Y = xmlModel.Y,
-        };
+            // ToDo convert back -> null iff object.name = house
+            if (xmlModel is null)
+                return new(0, 0);
 
-        public override Coord convertToXml(Point domain) => new()
+            return new()
+            {
+                X = xmlModel.X,
+                Y = xmlModel.Y,
+            };
+        }
+
+        public override XmlCoord convertToXml(Point domain) => new()
         {
             X = domain.X,
             Y = domain.Y,

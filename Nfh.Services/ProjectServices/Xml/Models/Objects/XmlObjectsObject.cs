@@ -14,18 +14,18 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Objects
         public string Graphics { get; set; } = string.Empty;
 
         [XmlElement("hotspot")]
-        public List<XmlHotspot> Hotspots { get; set; } = new();
+        public List<XmlObjectsHotspot> Hotspots { get; set; } = new();
 
         [XmlElement("flag")]
-        public XmlFlag? Flag { get; set; } = null;
+        public XmlObjectsFlag? Flag { get; set; } = null;
 
         [XmlElement("stdaction")]
-        public XmlStdAction? StdAction { get; set; } = null;
+        public XmlObjectsStdAction? StdAction { get; set; } = null;
 
         [XmlElement("content")]
-        public List<XmlContent> Contents { get; set; } = new();
+        public List<XmlObjectsContent> Contents { get; set; } = new();
 
         [XmlElement("action")]
-        public List<XmlAction> Actions { get; set; } = new();
+        public List<XmlObjectsAction> Actions { get; set; } = new();
     }
 }

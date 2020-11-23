@@ -3,14 +3,14 @@ using Nfh.Services.ProjectServices.Xml.Models.Meta;
 
 namespace Nfh.Services.ProjectServices.Xml.Serializers.CustomSerializers
 {
-    internal class StateAttributeSerializer : TypedValueSerializer<StateAttribute>
+    internal class StateAttributeSerializer : TypedValueSerializer<XmlLevelDataStateAttribute>
     {
-        public override StateAttribute DeserializeTyped(string value) => new()
+        public override XmlLevelDataStateAttribute DeserializeTyped(string value) => new()
         {
             IsUnlocked = value != "locked",
         };
 
-        public override string SerializeTyped(StateAttribute value) =>
+        public override string SerializeTyped(XmlLevelDataStateAttribute value) =>
             value.IsUnlocked ? "playable" : "locked";
     }
 }

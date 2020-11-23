@@ -12,7 +12,7 @@ namespace Nfh.Services.ProjectServices
     internal class LevelDataUnifier : ILevelDataUnifier
     {
         // Idea: make it pure, do not modify generic 
-        public LevelData UnifyWithGeneric(LevelData generic, LevelData level)
+        public XmlLevelData UnifyWithGeneric(XmlLevelData generic, XmlLevelData level)
         {
             return new()
             {
@@ -24,29 +24,29 @@ namespace Nfh.Services.ProjectServices
             };
         }
 
-        public LevelData SeperateFromGeneric(LevelData unified)
+        public XmlLevelData SeperateFromGeneric(XmlLevelData unified)
         {
             return new();
         }
 
-        private static StringsRoot UnifyStrings(StringsRoot generic, StringsRoot level) => new()
+        private static XmlStringsRoot UnifyStrings(XmlStringsRoot generic, XmlStringsRoot level) => new()
         { 
             Entries = generic.Entries.Unify(level.Entries, s => (s.Name, s.Category)),
         };
 
         // ToDo: It could more advanced: if there are only animations only override that or concat, otherwise replace all
-        private static AnimsRoot UnifyAnims(AnimsRoot generic, AnimsRoot level) => new()
+        private static XmlAnimsRoot UnifyAnims(XmlAnimsRoot generic, XmlAnimsRoot level) => new()
         {
             Objects = generic.Objects.Unify(level.Objects, o => o.Name),
         };
 
-        private static GfxDataRoot UnifyGfxData(GfxDataRoot generic, GfxDataRoot level) => new()
+        private static XmlGfxRoot UnifyGfxData(XmlGfxRoot generic, XmlGfxRoot level) => new()
         {
             Objects = generic.Objects.Unify(level.Objects, o => o.Name),
         };
 
         // ToDo
-        private static ObjectsRoot UnifyObjects(ObjectsRoot generic, ObjectsRoot level)
+        private static XmlObjectsRoot UnifyObjects(XmlObjectsRoot generic, XmlObjectsRoot level)
         {
             return new()
             {

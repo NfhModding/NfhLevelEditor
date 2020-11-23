@@ -1,5 +1,6 @@
 ﻿using Nfh.Domain.Models.Meta;
 using Nfh.Services.ProjectServices.Xml.Converters;
+using Nfh.Services.ProjectServices.Xml.Models.Briefing;
 using Nfh.Services.ProjectServices.Xml.Models.Meta;
 using Nfh.Services.ProjectServices.Xml.Serializers;
 using System.IO;
@@ -21,7 +22,7 @@ namespace Nfh.Services.ProjectServices
         public SeasonPack Load(DirectoryInfo gamedataFolder)
         {
             var levelDataFile = new FileInfo(Path.Combine(gamedataFolder.FullName, "leveldata.xml"));
-            var levelData = serializer.DeserializeFromFile<LevelDataRoot>(levelDataFile);
+            var levelData = serializer.DeserializeFromFile<XmlLevelDataRoot>(levelDataFile);
 
             var seasonpack = new SeasonPack
             {
@@ -66,14 +67,14 @@ namespace Nfh.Services.ProjectServices
 
         public void Save(SeasonPack seasonPack, DirectoryInfo gamedataFolder)
         {
-            var levelData = new LevelDataRoot
+            var levelData = new XmlLevelDataRoot
             {
                 Sets = seasonPack.Seasons
                 .OrderBy(s => s.Value.Index)
                 .Select(s => s.Value.Season)
                 .Select(s =>
                 {
-                    var set = new Set
+                    var set = new XmlLevelDataSet
                     {
                         Name = s.Id,
                         State = new() { IsUnlocked = s.Unlocked, },
@@ -83,7 +84,7 @@ namespace Nfh.Services.ProjectServices
                             .Select(l => l.Value.Level)
                             .Select(l =>
                             {
-                                var level = new Level
+                                var level = new XmlLevelDataLevel
                                 {
                                     Name = l.Id,
                                     MinQuota = l.MinPercent,
@@ -115,13 +116,13 @@ namespace Nfh.Services.ProjectServices
             if (!file.Exists)
                 throw new();
 
-            var levelBriefing = serializer.DeserializeFromFile<BriefingRoot>(file);
-            return converter.Convert<BriefingRoot, LevelDescription>(levelBriefing);
+            var levelBriefing = serializer.DeserializeFromFile<XmlBriefingRoot>(file);
+            return converter.Convert<XmlBriefingRoot, LevelDescription>(levelBriefing);
         }
         
         private void saveLevelDescription(DirectoryInfo gamedataFolder, string levelId, LevelDescription levelDescription)
         {
-            var levelBriefing = converter.Convert<LevelDescription, BriefingRoot>(levelDescription);
+            var levelBriefing = converter.Convert<LevelDescription, XmlBriefingRoot>(levelDescription);
             var serialized = serializer.Serialize(levelBriefing);
             File.WriteAllText(Path.Combine(gamedataFolder.FullName, "dialogs", "briefing", $"{levelId}.xml"), serialized);
         }
