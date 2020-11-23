@@ -18,18 +18,18 @@ namespace Nfh.Services.ProjectServices.Loaders
     internal class LevelLoader : ILevelLoader
     {
         private readonly ILevelDataLoader levelDataLoader;
-        //private readonly ILevelMetaLoader levelMetaLoader;
+        private readonly ILevelMetaLoader levelMetaLoader;
         private readonly ILevelDataUnifier levelDataUnifier;
         private readonly IConverter converter;
 
         public LevelLoader(
             ILevelDataLoader levelDataLoader,
-            //ILevelMetaLoader levelMetaLoader,
+            ILevelMetaLoader levelMetaLoader,
             ILevelDataUnifier levelDataUnifier,
             IConverter converter)
         {
             this.levelDataLoader = levelDataLoader;
-            // this.levelMetaLoader = levelMetaLoader;
+            this.levelMetaLoader = levelMetaLoader;
             this.levelDataUnifier = levelDataUnifier;
             this.converter = converter;
         }
@@ -41,7 +41,7 @@ namespace Nfh.Services.ProjectServices.Loaders
                 level: levelDataLoader.LoadLevelSpecificData(gamedataFolder, levelId));
 
             var level = converter.Convert<XmlLevelData, Level>(levelData);
-            // level.Meta = levelMetaLoader.Load(gamedataFolder, levelId);
+            level.Meta = levelMetaLoader.Load(gamedataFolder, levelId);
 
             return level;
         }
