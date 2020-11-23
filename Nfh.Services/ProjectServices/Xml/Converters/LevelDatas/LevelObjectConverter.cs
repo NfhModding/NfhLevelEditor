@@ -15,14 +15,14 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override LevelObject convertToDomain(XmlLevelObject obj) => new(obj.Name)
+        public override LevelObject ConvertToDomain(XmlLevelObject obj) => new(obj.Name)
         {
             Layer = obj.Layer,
             Position = converter.Convert<XmlCoord, Point>(obj.Position), // ToDo nullable things in converters
                                                                          // The rest is connected later
         };
 
-        public override XmlLevelObject convertToXml(LevelObject domain)
+        public override XmlLevelObject ConvertToXml(LevelObject domain)
         {
             throw new System.NotImplementedException();
         }

@@ -19,14 +19,14 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override Actor convertToDomain(XmlLevelActor actor) => new(actor.Name)
+        public override Actor ConvertToDomain(XmlLevelActor actor) => new(actor.Name)
         {
             Layer = actor.Layer,
             Position = converter.Convert<XmlCoord, Point>(actor.Position),
             // The rest is connected later
         };
 
-        public override XmlLevelActor convertToXml(Actor domain)
+        public override XmlLevelActor ConvertToXml(Actor domain)
         {
             throw new NotImplementedException();
         }

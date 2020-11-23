@@ -1,4 +1,5 @@
 ﻿using Nfh.Domain.Models.Meta;
+using Nfh.Services.ProjectServices.Loaders;
 using Nfh.Services.ProjectServices.Xml.Converters;
 using Nfh.Services.ProjectServices.Xml.Models.Briefing;
 using Nfh.Services.ProjectServices.Xml.Models.Meta;
@@ -10,11 +11,13 @@ namespace Nfh.Services.ProjectServices
 {
     internal class SeasonPackLoader : ISeasonPackLoader
     {
+        private readonly ILevelMetaLoader levelMetaLoader;
         private readonly IConverter converter;
         private readonly ISerializer serializer;
 
-        public SeasonPackLoader(IConverter converter, ISerializer serializer)
+        public SeasonPackLoader(ILevelMetaLoader levelMetaLoader, IConverter converter, ISerializer serializer)
         {
+            this.levelMetaLoader = levelMetaLoader;
             this.converter = converter;
             this.serializer = serializer;
         }
@@ -32,21 +35,9 @@ namespace Nfh.Services.ProjectServices
                         var season = new Season(set.Name)
                         {
                             Unlocked = set.State.IsUnlocked,
-                            Levels = set.Levels.Select((l, i) =>
-                            {
-                                var levelId = l.Name;
-                                var level = new LevelMeta(levelId)
-                                {
-                                    Description = loadLevelDescription(gamedataFolder, levelId),
-                                    MinPercent = l.MinQuota,
-                                    TrickCount = l.Reachable,
-                                    Unlocked = l.State.IsUnlocked,
-                                    TimeLimit = l.Time,
-                                };
-
-                                return (level, i);
-                            })
-                            .ToDictionary(v => v.level.Id, v => v),
+                            Levels = set.Levels
+                                .Select((l, i) => (level: levelMetaLoader.Load(gamedataFolder, l.Name), index: i))
+                                .ToDictionary(v => v.level.Id, v => v),
                         };
 
                         return (season, i);

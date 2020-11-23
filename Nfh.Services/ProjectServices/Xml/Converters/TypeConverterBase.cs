@@ -5,12 +5,12 @@
         where TXml : notnull
     {
         public object ConvertToDomain(object xmlModel) =>
-            convertToDomain((TXml)xmlModel);
+            ConvertToDomain((TXml)xmlModel);
 
         public object ConvertToXml(object domain) =>
-            convertToXml((TDomain)domain);
+            ConvertToXml((TDomain)domain);
 
-        public abstract TDomain convertToDomain(TXml xmlModel);
-        public abstract TXml convertToXml(TDomain domain);
+        public abstract TDomain ConvertToDomain(TXml xmlModel);
+        public abstract TXml ConvertToXml(TDomain domain);
     }
 }

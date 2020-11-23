@@ -19,14 +19,14 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override Door convertToDomain(XmlLevelDoor door) => new(door.Name)
+        public override Door ConvertToDomain(XmlLevelDoor door) => new(door.Name)
         {
             Layer = door.Layer,
             Position = converter.Convert<XmlCoord, Point>(door.Position),
             // The rest is connected later
         };
 
-        public override XmlLevelDoor convertToXml(Door domain)
+        public override XmlLevelDoor ConvertToXml(Door domain)
         {
             throw new NotImplementedException();
         }

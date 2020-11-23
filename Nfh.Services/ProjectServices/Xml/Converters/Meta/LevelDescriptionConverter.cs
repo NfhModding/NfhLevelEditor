@@ -5,7 +5,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.Meta
 {
     internal class LevelDescriptionConverter : TypeConverterBase<LevelDescription, XmlBriefingRoot>
     {
-        public override LevelDescription convertToDomain(XmlBriefingRoot briefing) => new()
+        public override LevelDescription ConvertToDomain(XmlBriefingRoot briefing) => new()
         {
             Title = briefing.Title,
             Hint = briefing.Hint,
@@ -13,7 +13,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.Meta
             Description = briefing.LevelDescription,
         };
 
-        public override XmlBriefingRoot convertToXml(LevelDescription levelDescription) => new()
+        public override XmlBriefingRoot ConvertToXml(LevelDescription levelDescription) => new()
         {
             Title = levelDescription.Title,
             Hint = levelDescription.Hint,

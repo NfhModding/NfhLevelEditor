@@ -5,7 +5,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
 {
     internal class PointConverter : TypeConverterBase<Point, XmlCoord>
     {
-        public override Point convertToDomain(XmlCoord xmlModel)
+        public override Point ConvertToDomain(XmlCoord xmlModel)
         {
             // ToDo convert back -> null iff object.name = house
             if (xmlModel is null)
@@ -18,7 +18,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             };
         }
 
-        public override XmlCoord convertToXml(Point domain) => new()
+        public override XmlCoord ConvertToXml(Point domain) => new()
         {
             X = domain.X,
             Y = domain.Y,

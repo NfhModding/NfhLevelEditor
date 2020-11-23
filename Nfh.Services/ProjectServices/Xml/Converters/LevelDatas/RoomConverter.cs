@@ -19,7 +19,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override Room convertToDomain(XmlLevelRoom room) => new(room.Name)
+        public override Room ConvertToDomain(XmlLevelRoom room) => new(room.Name)
         {
             // Path = ... Only has a getter
             Offset = converter.Convert<XmlCoord, Point>(room.Offset),
@@ -32,7 +32,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                      .ToDictionary(v => v.Id, v => v),
         };
 
-        public override XmlLevelRoom convertToXml(Room domain)
+        public override XmlLevelRoom ConvertToXml(Room domain)
         {
             throw new NotImplementedException();
         }

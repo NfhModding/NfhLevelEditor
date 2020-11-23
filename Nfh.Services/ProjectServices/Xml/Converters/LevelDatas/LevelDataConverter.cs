@@ -22,7 +22,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override Level convertToDomain(XmlLevelData levelData)
+        public override Level ConvertToDomain(XmlLevelData levelData)
         {
             var levelRoot = levelData.LevelRoot;
             var level = new Level
@@ -64,7 +64,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             return level;
         }
 
-        public override XmlLevelData convertToXml(Level domain)
+        public override XmlLevelData ConvertToXml(Level domain)
         {
             throw new NotImplementedException();
         }

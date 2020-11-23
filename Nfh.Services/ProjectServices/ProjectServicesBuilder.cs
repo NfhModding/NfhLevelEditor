@@ -14,6 +14,7 @@ namespace Nfh.Services.ProjectServices
             services.AddSerialization();
             services.AddTransient<ISeasonPackLoader, SeasonPackLoader>();
             services.AddTransient<ILevelLoader, LevelLoader>();
+            services.AddTransient<ILevelMetaLoader, LevelMetaLoader>();
             services.AddTransient<ILevelDataLoader, LevelDataLoader>();
             services.AddTransient<ILevelDataUnifier, LevelDataUnifier>();
             services.AddTransient<IProjectService, ProjectService>();

@@ -18,7 +18,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters
     {
         public static IServiceCollection AddConverters(this IServiceCollection services)
         {
-            services.AddSingleton<IConverter, Converter>(provider =>
+            services.AddSingleton<IConverter, Converter>(_ =>
             {
                 var converter = new Converter();
 
@@ -43,8 +43,6 @@ namespace Nfh.Services.ProjectServices.Xml.Converters
 
                     converter.RegisterConverter(domainType, xmlType, (ITypeConverter)typeConverter);
                 }
-
-                converter.RegisterConverter(typeof(Actor), typeof(XmlLevelActor), new ActorConverter(converter));
 
                 return converter;
             });

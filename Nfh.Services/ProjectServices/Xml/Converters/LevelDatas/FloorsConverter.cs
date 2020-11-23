@@ -19,7 +19,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override List<Floor> convertToDomain(List<XmlLevelFloor> floors) => floors
+        public override List<Floor> ConvertToDomain(List<XmlLevelFloor> floors) => floors
                .Where(f => !f.Wall)
                .Select(f => new Floor
                {
@@ -31,7 +31,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                })
                .ToList();
 
-        public override List<XmlLevelFloor> convertToXml(List<Floor> domain)
+        public override List<XmlLevelFloor> ConvertToXml(List<Floor> domain)
         {
             throw new NotImplementedException();
         }

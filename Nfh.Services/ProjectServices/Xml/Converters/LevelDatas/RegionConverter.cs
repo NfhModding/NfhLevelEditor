@@ -19,7 +19,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override VisualRegion convertToDomain(XmlAnimsRegion region) => new()
+        public override VisualRegion ConvertToDomain(XmlAnimsRegion region) => new()
         {
             Bounds = new()
             {
@@ -29,7 +29,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             Text = region.Type == XmlAnimsRegion.RegionType.Text,
         };
 
-        public override XmlAnimsRegion convertToXml(VisualRegion domain)
+        public override XmlAnimsRegion ConvertToXml(VisualRegion domain)
         {
             throw new NotImplementedException();
         }

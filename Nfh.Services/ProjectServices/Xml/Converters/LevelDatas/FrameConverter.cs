@@ -10,14 +10,14 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
 {
     internal class FrameConverter : TypeConverterBase<Animation.Frame, XmlAnimsFrame>
     {
-        public override Animation.Frame convertToDomain(XmlAnimsFrame frame) => new()
+        public override Animation.Frame ConvertToDomain(XmlAnimsFrame frame) => new()
         {
             ImagePath = frame.Graphics,
             SoundPath = frame.Sound,
             // ImageOffset, later (need gfxdata)
         };
 
-        public override XmlAnimsFrame convertToXml(Animation.Frame domain)
+        public override XmlAnimsFrame ConvertToXml(Animation.Frame domain)
         {
             throw new NotImplementedException();
         }

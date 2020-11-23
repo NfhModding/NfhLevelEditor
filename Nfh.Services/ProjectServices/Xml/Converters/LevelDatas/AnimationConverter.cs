@@ -17,13 +17,13 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             this.converter = converter;
         }
 
-        public override Animation convertToDomain(XmlAnimsAnimation animation) => new(animation.Name)
+        public override Animation ConvertToDomain(XmlAnimsAnimation animation) => new(animation.Name)
         {
             Frames = animation.Frames.Select(converter.Convert<XmlAnimsFrame, Animation.Frame>).ToList(),
             Kind_ = converter.Convert<XmlAnimsAnimation.Kind, Animation.Kind>(animation.Type),
         };
 
-        public override XmlAnimsAnimation convertToXml(Animation domain)
+        public override XmlAnimsAnimation ConvertToXml(Animation domain)
         {
             throw new NotImplementedException();
         }
