@@ -29,10 +29,10 @@ namespace Nfh.Editor.ViewModels
 
         public LevelViewModel(Level level)
         {
-            Objects = new(level.Objects
-                .Concat(level.Rooms.SelectMany(room => room.Value.Objects))
-                .Select(kv => kv.Value)
-                .Select(ToViewModel)
+            Objects = new(level.Objects.Values
+                .Select(obj => (Object: obj, Room: (Room?)null))
+                .Concat(level.Rooms.Values.SelectMany(room => room.Objects.Values.Select(obj => (Object: obj, Room: room))))
+                .Select(pair => ToViewModel(pair.Room, pair.Object))
                 .ToDictionary(obj => obj.Model));
             Layers = new(new(Objects.Values
                 .GroupBy(obj => obj.Model.Layer)
@@ -42,11 +42,11 @@ namespace Nfh.Editor.ViewModels
             LayersReverse = new(new(Layers.Reverse()));
         }
 
-        private LevelObjectViewModel ToViewModel(LevelObject lo) => lo switch
+        private LevelObjectViewModel ToViewModel(Room? room, LevelObject lo) => lo switch
         {
-            Door door => new DoorViewModel(this, door),
-            Actor actor => new ActorViewModel(this, actor),
-            _ => new LevelObjectViewModel(this, lo),
+            Door door => new DoorViewModel(this, room, door),
+            Actor actor => new ActorViewModel(this, room, actor),
+            _ => new LevelObjectViewModel(this, room, lo),
         };
     }
 }

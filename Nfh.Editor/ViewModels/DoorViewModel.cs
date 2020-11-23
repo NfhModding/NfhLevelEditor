@@ -35,8 +35,8 @@ namespace Nfh.Editor.ViewModels
             set => ChangeProperty(Model, value?.Model);
         }
 
-        public DoorViewModel(LevelViewModel level, Door door) 
-            : base(level, door)
+        public DoorViewModel(LevelViewModel level, Room? room, Door door) 
+            : base(level, room, door)
         {
             SetExit = new RelayCommand<object?>(
                 _ =>

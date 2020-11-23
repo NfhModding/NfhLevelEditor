@@ -140,6 +140,7 @@ namespace Nfh.Editor
                 Services.Project.PatchGame(
                     MetaViewModel.Current.SeasonPack.Path,
                     Services.GamePath);
+                MessageBox.Show("Game patched!");
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Nfh.Domain.Models.InGame;
+using Nfh.Services.Common;
 using Nfh.Services.ProjectServices.Xml.Models;
 using Nfh.Services.ProjectServices.Xml.Models.Anims;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
@@ -55,7 +56,12 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             foreach (var visual in visuals.Values)
                 appendOffsetToVisualsFrames(visual, levelData.GfxDataRoot);
 
-            var objectsInObjectsRoot = levelData.ObjectsRoot.Objects.ToDictionary(o => o.Name);
+            var objectsInObjectsRoot = levelData
+                .ObjectsRoot.Objects
+                .Cast<XmlObjectsBase>()
+                .Concat(levelData.ObjectsRoot.Doors)
+                .Concat(levelData.ObjectsRoot.Actors)
+                .ToLastKeepDictionary(o => o.Name);
             applyToAllLevelObjects(level, lo => appendVisualsToLevelObject(lo, visuals, objectsInObjectsRoot));
 
             // Connect InteractionSpots with LevelObjects
@@ -116,16 +122,16 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             }
         }
 
-        private void appendVisualsToLevelObject(LevelObject levelObject, IReadOnlyDictionary<string, Visuals> visuals, IReadOnlyDictionary<string, XmlObjectsObject> objects)
+        private void appendVisualsToLevelObject(LevelObject levelObject, IReadOnlyDictionary<string, Visuals> visuals, IReadOnlyDictionary<string, XmlObjectsBase> objects)
         {
-            if (!objects.TryGetValue(levelObject.Id, out var obj))
+            if (!objects.TryGetValue(levelObject.Id, out var obj) || obj.Graphics is null)
                 return;
 
             if (visuals.TryGetValue(obj.Graphics, out var v))
                 levelObject.Visuals = v;
         }
 
-        private void appendInteractionPointsToLevelObjects(LevelObject levelObject, IReadOnlyDictionary<string, XmlObjectsObject> objects)
+        private void appendInteractionPointsToLevelObjects(LevelObject levelObject, IReadOnlyDictionary<string, XmlObjectsBase> objects)
         {
             if (!objects.TryGetValue(levelObject.Id, out var obj))
                 return;

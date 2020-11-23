@@ -5,17 +5,8 @@ using System.Xml.Serialization;
 namespace Nfh.Services.ProjectServices.Xml.Models.Objects
 {
     [XmlNoCompoundTag]
-    internal class XmlObjectsObject
+    internal class XmlObjectsObject : XmlObjectsBase
     {
-        [XmlAttribute("name")]
-        public string Name { get; set; } = string.Empty;
-
-        [XmlAttribute("gfx")]
-        public string Graphics { get; set; } = string.Empty;
-
-        [XmlElement("hotspot")]
-        public List<XmlObjectsHotspot> Hotspots { get; set; } = new();
-
         [XmlElement("flag")]
         public XmlObjectsFlag? Flag { get; set; } = null;
 

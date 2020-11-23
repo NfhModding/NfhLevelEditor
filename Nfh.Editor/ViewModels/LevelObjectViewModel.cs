@@ -13,8 +13,37 @@ namespace Nfh.Editor.ViewModels
     {
         public Point Position
         {
-            get => Model.Position;
-            set => ChangeProperty(Model, value);
+            get
+            {
+                var result = Model.Position;
+                if (room != null)
+                {
+                    result.X += room.Offset.X;
+                    result.Y += room.Offset.Y;
+                }
+                if (Model.Visuals != null && Model.Visuals.Regions.Count > 0)
+                {
+                    var firstRegion = Model.Visuals.Regions.First();
+                    result.X += firstRegion.Bounds.Left;
+                    result.Y += firstRegion.Bounds.Top;
+                }
+                return result;
+            }
+            set
+            {
+                if (room != null)
+                {
+                    value.X -= room.Offset.X;
+                    value.Y -= room.Offset.Y;
+                }
+                if (Model.Visuals != null && Model.Visuals.Regions.Count > 0)
+                {
+                    var firstRegion = Model.Visuals.Regions.First();
+                    value.X -= firstRegion.Bounds.Left;
+                    value.Y -= firstRegion.Bounds.Top;
+                }
+                ChangeProperty(Model, value);
+            }
         }
         public BitmapImage? Image { get; protected set; }
         
@@ -22,10 +51,13 @@ namespace Nfh.Editor.ViewModels
         public LevelObject Model { get; }
         public LevelViewModel Level { get; }
 
-        public LevelObjectViewModel(LevelViewModel level, LevelObject levelObject)
+        private Room? room;
+
+        public LevelObjectViewModel(LevelViewModel level, Room? room, LevelObject levelObject)
             : base(levelObject)
         {
             Level = level;
+            this.room = room;
             Model = levelObject;
 
             DetermineVisuals();
