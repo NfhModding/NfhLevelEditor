@@ -102,13 +102,14 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                 ?.Files
                 .ToDictionary(f => f.Image);
 
-            if (files is null)
-                throw new("AnimObject is not found in gfxdata");
+            if (files is null) return;
 
             foreach (var animation in visuals.Animations.Values)
             {
                 foreach (var frame in animation.Frames)
                 {
+                    if (string.IsNullOrEmpty(frame.ImagePath)) continue;
+
                     frame.ImageOffset = converter.Convert<XmlCoord, Point>(
                         files[frame.ImagePath].Offset);
                 }

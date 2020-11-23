@@ -1,4 +1,5 @@
 ﻿using Nfh.Domain.Models.InGame;
+using Nfh.Services.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Level;
 using System;
@@ -27,7 +28,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                      .Concat(room.Objects.Select(converter.Convert<XmlLevelObject, LevelObject>))
                      .Concat(room.Actors.Select(converter.Convert<XmlLevelActor, Actor>))
                      .Concat(room.Doors.Select(converter.Convert<XmlLevelDoor, Door>))
-                     .ToDictionary(v => v.Id, v => v),
+                     .ToLastKeepDictionary(v => v.Id),
         };
 
         public override XmlLevelRoom ConvertToXml(Room domain)

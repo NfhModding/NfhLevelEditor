@@ -21,6 +21,7 @@ namespace Nfh.Services.ProjectServices.Xml.Serializers
             serializer.RegisterValue(typeof(XmlCoord), new CoordSerializer());
             serializer.RegisterValue(typeof(XmlObjectsTime), new XmlTimeSerializer());
             serializer.RegisterValue(typeof(int?), new NullableIntegerSerializer());
+            serializer.RegisterValue(typeof(bool?), new NullableBoolSerializer());
         }
 
         public string Serialize(object obj) =>
