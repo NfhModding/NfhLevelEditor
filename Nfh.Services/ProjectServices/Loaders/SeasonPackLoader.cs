@@ -10,10 +10,10 @@ namespace Nfh.Services.ProjectServices
 {
     internal class SeasonPackLoader : ISeasonPackLoader
     {
-        private readonly Converter converter;
+        private readonly IConverter converter;
         private readonly ISerializer serializer;
 
-        public SeasonPackLoader(Converter converter, ISerializer serializer)
+        public SeasonPackLoader(IConverter converter, ISerializer serializer)
         {
             this.converter = converter;
             this.serializer = serializer;

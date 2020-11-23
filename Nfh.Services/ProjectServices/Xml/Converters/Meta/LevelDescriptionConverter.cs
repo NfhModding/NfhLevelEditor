@@ -3,15 +3,9 @@ using Nfh.Services.ProjectServices.Xml.Models.Briefing;
 
 namespace Nfh.Services.ProjectServices.Xml.Converters.Meta
 {
-    internal class LevelDescriptionConverter : ITypeConverter
+    internal class LevelDescriptionConverter : TypeConverterBase<LevelDescription, XmlBriefingRoot>
     {
-        public object ConvertToDomain(object xmlModel) =>
-            convertToDomain((XmlBriefingRoot)xmlModel);
-
-        public object ConvertToXml(object domain) =>
-            convertToXml((LevelDescription)domain);
-
-        private LevelDescription convertToDomain(XmlBriefingRoot briefing) => new()
+        public override LevelDescription convertToDomain(XmlBriefingRoot briefing) => new()
         {
             Title = briefing.Title,
             Hint = briefing.Hint,
@@ -19,7 +13,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.Meta
             Description = briefing.LevelDescription,
         };
 
-        private XmlBriefingRoot convertToXml(LevelDescription levelDescription) => new()
+        public override XmlBriefingRoot convertToXml(LevelDescription levelDescription) => new()
         {
             Title = levelDescription.Title,
             Hint = levelDescription.Hint,
