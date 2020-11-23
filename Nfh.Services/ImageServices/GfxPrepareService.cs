@@ -29,12 +29,12 @@ namespace Nfh.Services.ImageServices
             var gfxdataFile = new FileInfo(Path.Combine(gamePath.FullName, "data", "gfxdata.bnd"));
 
             var appGfxdataFolder = new DirectoryInfo(Path.Combine(applicationWorkFolder.Info.FullName, "gfxdata"));
-            if (!appGfxdataFolder.Exists)
-                appGfxdataFolder.Create();
-
+            gfxDataFolder = appGfxdataFolder;
+            if (appGfxdataFolder.Exists) return gfxDataFolder;
+            
+            appGfxdataFolder.Create();
             zipHelper.UnzipToFolderWithOverride(gfxdataFile, appGfxdataFolder);
 
-            gfxDataFolder = appGfxdataFolder;
             return gfxDataFolder;
         }
     }

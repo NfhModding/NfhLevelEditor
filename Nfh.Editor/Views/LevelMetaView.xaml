@@ -192,7 +192,7 @@
                     <Label Grid.Column="1" Content="{Binding TrickCount}"/>
                 </Grid>
                 
-                <Button Grid.Column="1" Content="Edit this level"/>
+                <Button Grid.Column="1" Content="Edit this level" Click="EditThisLevelButton_Click"/>
             </Grid>
         </Grid>
     </Grid>

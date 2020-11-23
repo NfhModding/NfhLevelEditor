@@ -1,4 +1,5 @@
 ﻿using Mvvm.Framework.ViewModel;
+using Nfh.Domain.Models.InGame;
 using Nfh.Editor.Commands.UiCommands;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,10 @@ namespace Nfh.Editor.ViewModels
             }
         }
 
-        public LevelEditViewModel() 
+        public LevelEditViewModel(Level level) 
             : base(Services.ModelChangeNotifier)
         {
-            // TODO: Temp
-            Level = new LevelViewModel(Services.Project.LoadLevel("", ""));
+            Level = new LevelViewModel(level);
         }
     }
 }

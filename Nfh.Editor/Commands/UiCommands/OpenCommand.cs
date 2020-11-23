@@ -34,6 +34,7 @@ namespace Nfh.Editor.Commands.UiCommands
             if (dialog.ShowDialog() != DialogResult.OK) return;
             // Load the project from there
             Services.UndoRedo.Reset();
+            Services.ProjectPath = dialog.SelectedPath;
             metaViewModel.SeasonPack = new SeasonPackViewModel(
                 dialog.SelectedPath,
                 Services.Project.LoadSeasonPack(dialog.SelectedPath));

@@ -51,7 +51,7 @@ namespace Nfh.Editor.ViewModels
                     .FirstOrDefault(path => path != null);
             if (firstNonNullPath == null) return;
 
-            var image = Services.Image.LoadAnimationFrame(Model.Id, firstNonNullPath, Services.GamePath);
+            var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstNonNullPath, Services.GamePath);
             Image = BitmapToImageSource(image);
         }
     }

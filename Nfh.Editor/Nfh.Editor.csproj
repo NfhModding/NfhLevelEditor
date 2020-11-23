@@ -11,12 +11,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Mvvm.Framework\Mvvm.Framework.csproj" />
     <ProjectReference Include="..\Nfh.Domain\Nfh.Domain.csproj" />
+    <ProjectReference Include="..\Nfh.Services\Nfh.Services.csproj" />
 
-	<PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.1" />
-	<PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="4.8.0" />
-	  
-	<!-- TODO: Temporary -->
-	<ProjectReference Include="..\Image.Tga\Image.Tga.csproj" />
+	  <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.1" />
+	  <PackageReference Include="MahApps.Metro.IconPacks.Modern" Version="4.8.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

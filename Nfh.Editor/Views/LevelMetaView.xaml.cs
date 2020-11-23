@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nfh.Editor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace Nfh.Editor.Views
         public LevelMetaView()
         {
             InitializeComponent();
+        }
+
+        private void EditThisLevelButton_Click(object sender, RoutedEventArgs e)
+        {
+            var levelMetaVm = DataContext as LevelMetaViewModel;
+            if (levelMetaVm == null) return;
+
+            var window = new LevelEditWindow(Services.ProjectPath, levelMetaVm.Name);
+            window.Show();
         }
     }
 }

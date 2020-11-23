@@ -1,6 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
+using Nfh.Domain.Interfaces;
 using Nfh.Editor.Dialogs;
 using Nfh.Editor.ViewModels;
+using Nfh.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,17 +24,31 @@ namespace Nfh.Editor
     /// </summary>
     public partial class App : Application
     {
+        public IServiceProvider ServiceProvider { get; private set; }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
+            Services.Initialize(ServiceProvider);
+
             if (!FindGameInstallation()) return;
             BackupIfNeeded();
+
+            var metaWindow = new MetaWindow();
+            metaWindow.Show();
+        }
+
+        private void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDomainServices();
         }
 
         private static bool FindGameInstallation()
         {
-            // Find game installations
             var gameInstalls = Services.GameLocator.GetGameLocations().ToList();
-            // Choose one
             if (gameInstalls.Count == 0)
             {
                 // Need manual selection
@@ -39,10 +56,10 @@ namespace Nfh.Editor
                     "There's no game installation found on your computer. Please locate it manually.",
                     "Game installation",
                     MessageBoxButton.OK);
-                var dialog = new FolderBrowserDialog();
-                if (dialog.ShowDialog() != DialogResult.OK)
+                var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 {
-                    Current.Shutdown();
+                    Application.Current.Shutdown();
                     return false;
                 }
                 Services.GamePath = dialog.SelectedPath;
@@ -58,7 +75,7 @@ namespace Nfh.Editor
                 var dialog = new SelectInstallationDialog(gameInstalls);
                 if ((dialog.ShowDialog() ?? false) == false)
                 {
-                    Current.Shutdown();
+                    Application.Current.Shutdown();
                     return false;
                 }
                 Services.GamePath = dialog.ChosenInstallation;
@@ -71,7 +88,7 @@ namespace Nfh.Editor
                     "Error",
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                Current.Shutdown();
+                Application.Current.Shutdown();
                 return false;
             }
             return true;
