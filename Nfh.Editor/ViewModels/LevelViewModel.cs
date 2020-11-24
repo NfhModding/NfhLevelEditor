@@ -39,6 +39,10 @@ namespace Nfh.Editor.ViewModels
                 .Select(g => (LayerIndex: g.Key, Objects: (IEnumerable<LevelObjectViewModel>)g))
                 .OrderBy(t => t.LayerIndex)
                 .Select(t => new LevelLayerViewModel(t.Objects))));
+            if (Layers.Count > 0)
+            {
+                Layers[0].Editable = false;
+            }
             LayersReverse = new(new(Layers.Reverse()));
         }
 
