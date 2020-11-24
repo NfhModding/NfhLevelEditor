@@ -21,12 +21,16 @@ namespace Nfh.Editor.ViewModels
                     result.X += room.Offset.X;
                     result.Y += room.Offset.Y;
                 }
+                /*
+                NOTE: This is probably for user intercation hitbox
                 if (Model.Visuals != null && Model.Visuals.Regions.Count > 0)
                 {
                     var firstRegion = Model.Visuals.Regions.First();
                     result.X += firstRegion.Bounds.Left;
                     result.Y += firstRegion.Bounds.Top;
-                }
+                }*/
+                result.X += frameOffset.X;
+                result.Y += frameOffset.Y;
                 return result;
             }
             set
@@ -36,12 +40,17 @@ namespace Nfh.Editor.ViewModels
                     value.X -= room.Offset.X;
                     value.Y -= room.Offset.Y;
                 }
+                /*
+                NOTE: This is probably for user intercation hitbox
                 if (Model.Visuals != null && Model.Visuals.Regions.Count > 0)
                 {
                     var firstRegion = Model.Visuals.Regions.First();
                     value.X -= firstRegion.Bounds.Left;
                     value.Y -= firstRegion.Bounds.Top;
                 }
+                */
+                value.X -= frameOffset.X;
+                value.Y -= frameOffset.Y;
                 ChangeProperty(Model, value);
             }
         }
@@ -52,6 +61,7 @@ namespace Nfh.Editor.ViewModels
         public LevelViewModel Level { get; }
 
         private Room? room;
+        private Point frameOffset = new Point();
 
         public LevelObjectViewModel(LevelViewModel level, Room? room, LevelObject levelObject)
             : base(levelObject)
@@ -78,12 +88,12 @@ namespace Nfh.Editor.ViewModels
         {
             if (Model.Visuals == null) return;
             if (!Model.Visuals.Animations.TryGetValue("ms", out var ms)) return;
-            var firstNonNullPath = ms.Frames
-                    .Select(frame => frame.ImagePath)
-                    .FirstOrDefault(path => path != null);
-            if (firstNonNullPath == null) return;
+            var firstVisibleFrame = ms.Frames
+                    .FirstOrDefault(frame => frame.ImagePath != null);
+            if (firstVisibleFrame == null) return;
 
-            var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstNonNullPath, Services.GamePath);
+            frameOffset = firstVisibleFrame.ImageOffset;
+            var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstVisibleFrame.ImagePath, Services.GamePath);
             Image = BitmapToImageSource(image);
         }
     }
