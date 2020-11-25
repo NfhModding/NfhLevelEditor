@@ -20,11 +20,19 @@ namespace Nfh.Editor
     /// </summary>
     public partial class LevelEditWindow : Window
     {
-        public LevelEditWindow(string projectPath, string levelId)
+        public LevelEditWindow(string levelId)
         {
             InitializeComponent();
-            var level = Services.Project.LoadLevel(projectPath, levelId);
+            var level = Services.Project.LoadLevel(MetaViewModel.Current.ProjectPath, levelId);
             levelEditView.DataContext = new LevelEditViewModel(level);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (levelEditView.DataContext is LevelEditViewModel levelVm)
+            {
+                e.Cancel = levelVm.SaveIfHasChanges() == MessageBoxResult.Cancel;
+            }
         }
     }
 }

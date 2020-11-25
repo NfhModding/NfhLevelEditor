@@ -33,7 +33,7 @@ namespace Nfh.Editor.ViewModels
         public ObservableCollection<LevelObjectViewModel> Objects { get; }
 
         public LevelLayerViewModel(IEnumerable<LevelObjectViewModel> levelObjects)
-            : base(levelObjects.Select(wm => wm.Model).ToArray())
+            : base(LevelEditViewModel.Current.UndoRedo, levelObjects.Select(wm => wm.Model).ToArray())
         {
             Objects = new ObservableCollection<LevelObjectViewModel>(levelObjects);
         }

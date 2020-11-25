@@ -24,20 +24,15 @@ namespace Nfh.Editor.Commands.UiCommands
         private static void Open(object? parameter)
         {
             var metaViewModel = parameter as MetaViewModel;
-            if (metaViewModel == null)
-            {
-                throw new ArgumentException("Wrong command parameter type!", nameof(parameter));
-            }
-            if (App.SaveIfHasChanges() == MessageBoxResult.Cancel) return;
+            if (metaViewModel == null) throw new ArgumentException();
+
+            // Actual logic
+            if (metaViewModel.SaveIfHasChanges() == MessageBoxResult.Cancel) return;
             // Browse the folder
             var dialog = new FolderBrowserDialog();
             if (dialog.ShowDialog() != DialogResult.OK) return;
             // Load the project from there
-            Services.UndoRedo.Reset();
-            Services.ProjectPath = dialog.SelectedPath;
-            metaViewModel.SeasonPack = new SeasonPackViewModel(
-                dialog.SelectedPath,
-                Services.Project.LoadSeasonPack(dialog.SelectedPath));
+            metaViewModel.LoadProject(dialog.SelectedPath);
         }
     }
 }

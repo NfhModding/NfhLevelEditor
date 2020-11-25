@@ -1,17 +1,19 @@
-﻿using Mvvm.Framework.ViewModel;
+﻿using Mvvm.Framework.UndoRedo;
+using Mvvm.Framework.ViewModel;
 using Nfh.Domain.Models.Meta;
+using Nfh.Editor.Commands.ModelCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Nfh.Editor.ViewModels
 {
     public class SeasonPackViewModel : ViewModelBase
     {
-        public string Path { get; }
         public SeasonPack SeasonPack { get; }
 
         public ReadOnlyObservableCollection<SeasonViewModel> Seasons { get; }
@@ -22,10 +24,9 @@ namespace Nfh.Editor.ViewModels
             set { selectedSeason = value; NotifyPropertyChanged(); }
         }
 
-        public SeasonPackViewModel(string path, SeasonPack seasonPack) 
-            : base(Services.ModelChangeNotifier, seasonPack)
+        public SeasonPackViewModel(SeasonPack seasonPack)
+           : base(MetaViewModel.Current.ModelChangeNotifier, seasonPack)
         {
-            Path = path;
             SeasonPack = seasonPack;
             Seasons = new ReadOnlyObservableCollection<SeasonViewModel>(
                 new ObservableCollection<SeasonViewModel>(

@@ -31,7 +31,7 @@ namespace Nfh.Editor.Views
             var levelMetaVm = DataContext as LevelMetaViewModel;
             if (levelMetaVm == null) return;
 
-            var window = new LevelEditWindow(Services.ProjectPath, levelMetaVm.Name);
+            var window = new LevelEditWindow(levelMetaVm.Name);
             window.Show();
         }
     }

@@ -64,7 +64,7 @@ namespace Nfh.Editor.ViewModels
         private Point frameOffset = new Point();
 
         public LevelObjectViewModel(LevelViewModel level, Room? room, LevelObject levelObject)
-            : base(levelObject)
+            : base(LevelEditViewModel.Current.UndoRedo, levelObject)
         {
             Level = level;
             this.room = room;
@@ -93,7 +93,7 @@ namespace Nfh.Editor.ViewModels
             if (firstVisibleFrame == null) return;
 
             frameOffset = firstVisibleFrame.ImageOffset;
-            var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstVisibleFrame.ImagePath, Services.GamePath);
+            var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstVisibleFrame.ImagePath, MetaViewModel.Current.GamePath);
             Image = BitmapToImageSource(image);
         }
     }

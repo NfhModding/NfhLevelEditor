@@ -6,6 +6,7 @@ using Nfh.Domain.Interfaces;
 using Nfh.Domain.Models.InGame;
 using Nfh.Domain.Models.Meta;
 using Nfh.Editor.Commands.ModelCommands;
+using Nfh.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,25 +17,20 @@ using System.Transactions;
 
 namespace Nfh.Editor
 {
+    // TODO: This is a hack, we basically make them globals
     internal static class Services
     {
-        public static string? GamePath { get; set; }
-        public static string? ProjectPath { get; set; }
-
         public static IBackupService Backup { get; private set; }
         public static IGameLocator GameLocator { get; private set; }
         public static IImageService Image { get; private set; }
         public static IProjectService Project { get; private set; }
 
-        // Frontend
-        public static IModelChangeNotifier ModelChangeNotifier { get; } = new ModelChangeNotifier();
-        public static IUndoRedoStack UndoRedo { get; } = new UndoRedoStack
+        static Services()
         {
-            MergeStrategy = new CommandMergeStrategy(),
-        };
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddDomainServices();
+            var serviceProvider = serviceCollection.BuildServiceProvider();
 
-        public static void Initialize(IServiceProvider serviceProvider)
-        {
             Backup = serviceProvider.GetRequiredService<IBackupService>();
             GameLocator = serviceProvider.GetRequiredService<IGameLocator>();
             Image = serviceProvider.GetRequiredService<IImageService>();

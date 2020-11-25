@@ -27,8 +27,12 @@ namespace Nfh.Editor.ViewModels
             }
         }
 
+        public Level Level { get; }
+
         public LevelViewModel(Level level)
+            : base(LevelEditViewModel.Current.UndoRedo, level)
         {
+            Level = level;
             Objects = new(level.Objects.Values
                 .Select(obj => (Object: obj, Room: (Room?)null))
                 .Concat(level.Rooms.Values.SelectMany(room => room.Objects.Values.Select(obj => (Object: obj, Room: room))))

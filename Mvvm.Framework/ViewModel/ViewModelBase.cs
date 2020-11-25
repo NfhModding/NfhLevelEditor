@@ -21,7 +21,7 @@ namespace Mvvm.Framework.ViewModel
         /// The <see cref="IModelChangeNotifier"/> that helps dispatching change notifications
         /// for relevant model changes.
         /// </summary>
-        protected IModelChangeNotifier ModelChangeNotifier { get; }
+        public IModelChangeNotifier ModelChangeNotifier { get; }
 
         private object[] watchedModels;
         private PropertyInfo[] cachedProperties;

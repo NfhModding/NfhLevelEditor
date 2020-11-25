@@ -1,5 +1,7 @@
 ﻿using Mvvm.Framework.Command;
+using Mvvm.Framework.UndoRedo;
 using Mvvm.Framework.ViewModel;
+using Nfh.Editor.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,27 @@ namespace Nfh.Editor.Commands.UiCommands
         public override InputGesture Gesture { get; } = new KeyGesture(Key.Z, ModifierKeys.Control);
 
         public UndoCommand() 
-            : base(p => Services.UndoRedo.Undo(), p => Services.UndoRedo.CanUndo)
+            : base(p => Undo(p), p => CanUndo(p))
         {
+        }
+
+        private static void Undo(object parameter)
+        {
+            if (!(parameter is ITopLevelViewModel vm))
+            {
+                throw new ArgumentException("The parameter of an undo command must be a top level VM!", nameof(parameter));
+            }
+            vm.UndoRedo.Undo();
+        }
+
+        private static bool CanUndo(object parameter)
+        {
+            if (parameter == null) return false;
+            if (!(parameter is ITopLevelViewModel vm))
+            {
+                throw new ArgumentException("The parameter of an undo command must be a top level VM!", nameof(parameter));
+            }
+            return vm.UndoRedo.CanUndo;
         }
     }
 }

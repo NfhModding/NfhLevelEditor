@@ -14,8 +14,27 @@ namespace Nfh.Editor.Commands.UiCommands
         public override InputGesture? Gesture => null;
 
         public PatchCommand() 
-            : base(p => App.PatchGame(), p => (p as MetaViewModel)?.SeasonPack != null)
+            : base(p => Patch(p), p => CanPatch(p))
         {
+        }
+
+        private static void Patch(object parameter)
+        {
+            if (!(parameter is MetaViewModel vm))
+            {
+                throw new ArgumentException("The parameter of a patch command must the Meta-VM!", nameof(parameter));
+            }
+            vm.PatchGame();
+        }
+
+        private static bool CanPatch(object parameter)
+        {
+            if (parameter == null) return false;
+            if (!(parameter is MetaViewModel vm))
+            {
+                throw new ArgumentException("The parameter of a patch command must the Meta-VM!", nameof(parameter));
+            }
+            return vm.SeasonPack != null;
         }
     }
 }

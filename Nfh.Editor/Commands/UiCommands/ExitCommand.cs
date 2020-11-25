@@ -21,10 +21,9 @@ namespace Nfh.Editor.Commands.UiCommands
 
         private static void Exit(object? parameter)
         {
-            var window = parameter as Window;
-            if (window == null)
+            if (!(parameter is Window window))
             {
-                throw new ArgumentException("Wrong command parameter type!", nameof(parameter));
+                throw new ArgumentException("Parameter of exit command must be a window!", nameof(parameter));
             }
             window.Close();
         }

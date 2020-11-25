@@ -57,10 +57,10 @@ namespace Nfh.Editor.ViewModels
         private LevelMeta levelMeta;
 
         public LevelMetaViewModel(LevelMeta levelMeta) 
-            : base(Services.ModelChangeNotifier, levelMeta)
+            : base(MetaViewModel.Current.UndoRedo, levelMeta)
         {
             this.levelMeta = levelMeta;
-            Thumbnail = BitmapToImageSource(Services.Image.LoadLevelThumbnail(levelMeta.Id, Services.GamePath));
+            Thumbnail = BitmapToImageSource(Services.Image.LoadLevelThumbnail(levelMeta.Id, MetaViewModel.Current.GamePath));
         }
     }
 }

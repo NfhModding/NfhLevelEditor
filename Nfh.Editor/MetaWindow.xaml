@@ -7,8 +7,10 @@
         xmlns:views="clr-namespace:Nfh.Editor.Views" xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
         mc:Ignorable="d"
         Title="Level Metadata Editor" 
-        Width="850" Height="650">
-    <views:MetaView>
+        Width="850" Height="650"
+        Closing="Window_Closing"
+        Closed="Window_Closed">
+    <views:MetaView x:Name="metaView">
         <views:MetaView.DataContext>
             <viewmodels:MetaViewModel/>
         </views:MetaView.DataContext>

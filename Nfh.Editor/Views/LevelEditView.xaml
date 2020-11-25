@@ -15,15 +15,15 @@
         <converters:UiCommandToTooltipConverter x:Key="uiCommandToTooltipConverter"/>
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding Save}" Gesture="Ctrl+S"/>
+        <KeyBinding Command="{Binding Save}" CommandParameter="{Binding}" Gesture="Ctrl+S"/>
 
-        <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding Undo}" CommandParameter="{Binding}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding Redo}" CommandParameter="{Binding}" Gesture="Ctrl+Y"/>
     </UserControl.InputBindings>
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Save" Command="{Binding Save}" InputGestureText="{Binding Save.GestureText}">
+                <MenuItem Header="_Save" Command="{Binding Save}" CommandParameter="{Binding}" InputGestureText="{Binding Save.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="Save" />
                     </MenuItem.Icon>
@@ -35,12 +35,12 @@
             </MenuItem>
 
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" Command="{Binding Undo}" InputGestureText="{Binding Undo.GestureText}">
+                <MenuItem Header="_Undo" Command="{Binding Undo}" CommandParameter="{Binding}" InputGestureText="{Binding Undo.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="UndoCurve" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Redo" Command="{Binding Redo}" InputGestureText="{Binding Redo.GestureText}">
+                <MenuItem Header="_Redo" Command="{Binding Redo}" CommandParameter="{Binding}" InputGestureText="{Binding Redo.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="RedoCurve" />
                     </MenuItem.Icon>
@@ -49,22 +49,27 @@
         </Menu>
 
         <ToolBar DockPanel.Dock="Top">
-            <Button Command="{Binding Save}" ToolTip="{Binding Save, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Save}" CommandParameter="{Binding}" 
+                    ToolTip="{Binding Save, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="Save" />
             </Button>
 
             <Separator/>
 
-            <Button Command="{Binding Undo}" ToolTip="{Binding Undo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Undo}" CommandParameter="{Binding}"
+                    ToolTip="{Binding Undo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="UndoCurve" />
             </Button>
-            <Button Command="{Binding Redo}" ToolTip="{Binding Redo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Redo}" CommandParameter="{Binding}"
+                    ToolTip="{Binding Redo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="RedoCurve" />
             </Button>
 
             <Separator/>
 
-            <Button Command="{Binding Exit}" ToolTip="{Binding Exit, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Exit}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    ToolTip="{Binding Exit, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="DoorLeave" />
             </Button>
         </ToolBar>

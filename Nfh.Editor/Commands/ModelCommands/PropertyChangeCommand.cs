@@ -1,4 +1,5 @@
 ﻿using Mvvm.Framework.ViewModel;
+using Nfh.Editor.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Nfh.Editor.Commands.ModelCommands
         private object? newValue;
 
         public PropertyChangeCommand(object model, object target, PropertyInfo propertyInfo, object? newValue)
-            : base(Services.ModelChangeNotifier, model)
+            : base(MetaViewModel.Current.ModelChangeNotifier, model)
         {
             Model = model;
             Target = target;

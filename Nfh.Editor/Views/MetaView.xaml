@@ -19,10 +19,10 @@
     <UserControl.InputBindings>
         <KeyBinding Command="{Binding New}" CommandParameter="{Binding}" Gesture="Ctrl+N"/>
         <KeyBinding Command="{Binding Open}" CommandParameter="{Binding}" Gesture="Ctrl+O"/>
-        <KeyBinding Command="{Binding Save}" Gesture="Ctrl+S"/>
-        
-        <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z"/>
-        <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y"/>
+        <KeyBinding Command="{Binding Save}" CommandParameter="{Binding}" Gesture="Ctrl+S"/>
+
+        <KeyBinding Command="{Binding Undo}" CommandParameter="{Binding}" Gesture="Ctrl+Z"/>
+        <KeyBinding Command="{Binding Redo}" CommandParameter="{Binding}" Gesture="Ctrl+Y"/>
     </UserControl.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -37,7 +37,7 @@
                         <iconPacks:PackIconModern Kind="FolderOpen" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Save" Command="{Binding Save}" InputGestureText="{Binding Save.GestureText}">
+                <MenuItem Header="_Save" Command="{Binding Save}" CommandParameter="{Binding}" InputGestureText="{Binding Save.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="Save" />
                     </MenuItem.Icon>
@@ -49,12 +49,12 @@
             </MenuItem>
 
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Undo" Command="{Binding Undo}" InputGestureText="{Binding Undo.GestureText}">
+                <MenuItem Header="_Undo" Command="{Binding Undo}" CommandParameter="{Binding}" InputGestureText="{Binding Undo.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="UndoCurve" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="_Redo" Command="{Binding Redo}" InputGestureText="{Binding Redo.GestureText}">
+                <MenuItem Header="_Redo" Command="{Binding Redo}" CommandParameter="{Binding}" InputGestureText="{Binding Redo.GestureText}">
                     <MenuItem.Icon>
                         <iconPacks:PackIconModern Kind="RedoCurve" />
                     </MenuItem.Icon>
@@ -77,16 +77,22 @@
                     ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="FolderOpen" />
             </Button>
-            <Button Command="{Binding Save}" ToolTip="{Binding Save, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Save}" CommandParameter="{Binding}"
+                    ToolTip="{Binding Save, Converter={StaticResource uiCommandToTooltipConverter}}" 
+                    ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="Save" />
             </Button>
 
             <Separator/>
 
-            <Button Command="{Binding Undo}" ToolTip="{Binding Undo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Undo}" CommandParameter="{Binding}"
+                    ToolTip="{Binding Undo, Converter={StaticResource uiCommandToTooltipConverter}}" 
+                    ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="UndoCurve" />
             </Button>
-            <Button Command="{Binding Redo}" ToolTip="{Binding Redo, Converter={StaticResource uiCommandToTooltipConverter}}" ToolTipService.ShowOnDisabled="True">
+            <Button Command="{Binding Redo}" CommandParameter="{Binding}"
+                    ToolTip="{Binding Redo, Converter={StaticResource uiCommandToTooltipConverter}}" 
+                    ToolTipService.ShowOnDisabled="True">
                 <iconPacks:PackIconModern Kind="RedoCurve" />
             </Button>
         </ToolBar>

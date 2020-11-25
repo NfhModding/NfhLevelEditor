@@ -33,7 +33,7 @@ namespace Nfh.Editor.ViewModels
         private Season season;
 
         public SeasonViewModel(SeasonPackViewModel seasonPackVm, Season season) 
-            : base(Services.ModelChangeNotifier, season)
+            : base(MetaViewModel.Current.ModelChangeNotifier, season)
         {
             this.seasonPackVm = seasonPackVm;
             this.season = season;

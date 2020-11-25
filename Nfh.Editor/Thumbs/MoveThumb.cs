@@ -34,7 +34,7 @@ namespace Nfh.Editor.Thumbs
             // First we force a new command on the stack
             element.Position = element.Position;
             // Then allow merging to this command
-            var ms = (CommandMergeStrategy)Services.UndoRedo.MergeStrategy;
+            var ms = (CommandMergeStrategy)LevelEditViewModel.Current.UndoRedo.MergeStrategy;
             ms.AllowMerge = true;
         }
 
@@ -57,7 +57,7 @@ namespace Nfh.Editor.Thumbs
 
         private void MoveThumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            var ms = (CommandMergeStrategy)Services.UndoRedo.MergeStrategy;
+            var ms = (CommandMergeStrategy)LevelEditViewModel.Current.UndoRedo.MergeStrategy;
             ms.AllowMerge = false;
         }
     }

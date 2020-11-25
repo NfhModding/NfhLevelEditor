@@ -1,4 +1,5 @@
-﻿using Mvvm.Framework.ViewModel;
+﻿using Mvvm.Framework.UndoRedo;
+using Mvvm.Framework.ViewModel;
 using Nfh.Editor.Commands.ModelCommands;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,12 @@ namespace Nfh.Editor.ViewModels
 {
     public abstract class EditorViewModelBase : ViewModelBase
     {
-        protected EditorViewModelBase(params object[] watchedModels)
-            : base(Services.ModelChangeNotifier, watchedModels)
+        private IUndoRedoStack undoRedoStack;
+
+        protected EditorViewModelBase(IUndoRedoStack undoRedo, params object[] watchedModels)
+            : base(MetaViewModel.Current.ModelChangeNotifier, watchedModels)
         {
+            undoRedoStack = undoRedo;
         }
 
         protected void ChangeProperty(object model, object? newValue, [CallerMemberName] string propertyName = "")
@@ -52,7 +56,7 @@ namespace Nfh.Editor.ViewModels
         protected void ChangeProperty(object model, object target, PropertyInfo propertyInfo, object? newValue)
         {
             var command = new PropertyChangeCommand(model, target, propertyInfo, newValue);
-            Services.UndoRedo.Execute(command);
+            undoRedoStack.Execute(command);
         }
 
         // Source: https://stackoverflow.com/questions/22499407/how-to-display-a-bitmap-in-a-wpf-image
