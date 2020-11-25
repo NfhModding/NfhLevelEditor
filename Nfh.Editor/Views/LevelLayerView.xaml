@@ -7,7 +7,8 @@
              xmlns:views="clr-namespace:Nfh.Editor.Views"
              xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
              xmlns:selectors="clr-namespace:Nfh.Editor.Selectors" 
-             xmlns:converters="clr-namespace:Nfh.Editor.Converters"
+             xmlns:converters="clr-namespace:Nfh.Editor.Converters" 
+             xmlns:controls="clr-namespace:Nfh.Editor.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -26,11 +27,11 @@
             <local:ActorView/>
         </DataTemplate>
     </UserControl.Resources>
-    
+
     <ItemsControl 
-            ItemsSource="{Binding Objects}"
-            ItemTemplateSelector="{StaticResource levelObjectSelector}"
-            Visibility="{Binding Visible, Converter={StaticResource boolToVisibilityConverter}}">
+                ItemsSource="{Binding Objects}"
+                ItemTemplateSelector="{StaticResource levelObjectSelector}"
+                Visibility="{Binding Visible, Converter={StaticResource boolToVisibilityConverter}}">
         <ItemsControl.ItemContainerStyle>
             <Style>
                 <Setter Property="Canvas.Left" Value="{Binding Position.X}"/>
@@ -39,7 +40,7 @@
         </ItemsControl.ItemContainerStyle>
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <Canvas />
+                <controls:AutoSizeCanvas />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
     </ItemsControl>

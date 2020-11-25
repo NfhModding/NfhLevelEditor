@@ -20,7 +20,7 @@
         <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z"/>
         <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y"/>
     </UserControl.InputBindings>
-    <DockPanel LastChildFill="False">
+    <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Save" Command="{Binding Save}" InputGestureText="{Binding Save.GestureText}">
@@ -69,7 +69,10 @@
             </Button>
         </ToolBar>
 
-        <local:LevelView DockPanel.Dock="Left" DataContext="{Binding Level}"/>
-        <local:LevelLayerListView DockPanel.Dock="Right" DataContext="{Binding Level}"/>
+        <local:LevelLayerListView 
+            Width="200px"
+            DockPanel.Dock="Right" DataContext="{Binding Level}"/>
+        <local:LevelView
+            DockPanel.Dock="Left" DataContext="{Binding Level}"/>
     </DockPanel>
 </UserControl>

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Nfh.Editor" 
         xmlns:views="clr-namespace:Nfh.Editor.Views" xmlns:viewmodels="clr-namespace:Nfh.Editor.ViewModels"
         mc:Ignorable="d"
-        Title="MetaWindow" Height="450" Width="800">
+        Title="Level Metadata Editor" 
+        Width="850" Height="650">
     <views:MetaView>
         <views:MetaView.DataContext>
             <viewmodels:MetaViewModel/>

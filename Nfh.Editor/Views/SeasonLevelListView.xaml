@@ -6,28 +6,26 @@
              xmlns:local="clr-namespace:Nfh.Editor.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ListView ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}"
-                  BorderBrush="Transparent" BorderThickness="0"
-                  PreviewMouseWheel="HandlePreviewMouseWheel">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Width="360px" Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="80px" Height="85px">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
+    <ListView ItemsSource="{Binding Levels}" SelectedItem="{Binding SelectedLevel}"
+          BorderBrush="Transparent" BorderThickness="0"
+          PreviewMouseWheel="HandlePreviewMouseWheel">
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel Width="360px" Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid Width="80px" Height="105px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40px"/>
+                    </Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" Width="80px" Height="60px" Stretch="Fill" Source="{Binding Thumbnail}"/>
-                        <TextBlock Grid.Row="1" TextAlignment="Center" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+                    <Image Grid.Row="0" Width="80px" Height="60px" Stretch="Fill" Source="{Binding Thumbnail}"/>
+                    <TextBlock Grid.Row="1" TextAlignment="Center" Text="{Binding Title}" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </UserControl>
