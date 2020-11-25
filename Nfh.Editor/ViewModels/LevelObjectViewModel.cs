@@ -55,7 +55,7 @@ namespace Nfh.Editor.ViewModels
             }
         }
         public BitmapImage? Image { get; protected set; }
-        
+
         // Needed for backreferencing
         public LevelObject Model { get; }
         public LevelViewModel Level { get; }

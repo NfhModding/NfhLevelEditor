@@ -1,6 +1,8 @@
-﻿using Nfh.Editor.ViewModels;
+﻿using Nfh.Editor.Adorners;
+using Nfh.Editor.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,27 @@ namespace Nfh.Editor.Views
     /// </summary>
     public partial class LevelObjectView : UserControl
     {
+        private class SelectedAdornerVisibilityConverter : IValueConverter
+        {
+            private LevelObjectViewModel levelObject;
+
+            public SelectedAdornerVisibilityConverter(LevelObjectViewModel levelObject)
+            {
+                this.levelObject = levelObject;
+            }
+
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                if (value == null) return Visibility.Hidden;
+                if (!(value is LevelLayerViewModel levelLayerVm)) throw new ArgumentException();
+
+                return levelLayerVm.Objects.Contains(levelObject) ? Visibility.Visible : Visibility.Hidden;
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+                throw new NotSupportedException();
+        }
+
         public LevelObjectView()
         {
             InitializeComponent();
@@ -58,6 +81,22 @@ namespace Nfh.Editor.Views
         {
             var vm = DataContext as LevelObjectViewModel;
             if (vm != null) vm.EndClickAction();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var adornerLayer = AdornerLayer.GetAdornerLayer(this);
+            var selectedItemAdorner = new SelectedItemAdorner(this);
+            adornerLayer.Add(selectedItemAdorner);
+
+            selectedItemAdorner.SetBinding(
+                VisibilityProperty, 
+                new Binding()
+                { 
+                    Source = DataContext,
+                    Path = new PropertyPath("Level.SelectedLayer"),
+                    Converter = new SelectedAdornerVisibilityConverter((LevelObjectViewModel)DataContext),
+                });
         }
     }
 }
