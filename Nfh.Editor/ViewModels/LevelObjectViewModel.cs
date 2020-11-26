@@ -11,7 +11,7 @@ namespace Nfh.Editor.ViewModels
 {
     public class LevelObjectViewModel : EditorViewModelBase
     {
-        public Point Position
+        public virtual Point Position
         {
             get
             {
@@ -87,7 +87,8 @@ namespace Nfh.Editor.ViewModels
         private void DetermineVisuals()
         {
             if (Model.Visuals == null) return;
-            if (!Model.Visuals.Animations.TryGetValue("ms", out var ms)) return;
+            var ms = GetAnimation(Model.Visuals);
+            if (ms == null) return;
             var firstVisibleFrame = ms.Frames
                     .FirstOrDefault(frame => frame.ImagePath != null);
             if (firstVisibleFrame == null) return;
@@ -95,6 +96,13 @@ namespace Nfh.Editor.ViewModels
             frameOffset = firstVisibleFrame.ImageOffset;
             var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstVisibleFrame.ImagePath, MetaViewModel.Current.GamePath);
             Image = BitmapToImageSource(image);
+        }
+
+        private static Animation? GetAnimation(Visuals visuals)
+        {
+            if (visuals.Animations.TryGetValue("ms", out var ms)) return ms;
+            if (visuals.Animations.TryGetValue("ms2", out var ms2)) return ms2;
+            return null;
         }
     }
 }
