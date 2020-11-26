@@ -64,6 +64,17 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                 .ToLastKeepDictionary(o => o.Name);
             applyToAllLevelObjects(level, lo => appendVisualsToLevelObject(lo, visuals, objectsInObjectsRoot));
 
+            // Add hotspot to actors
+            var xmlActors = levelData.ObjectsRoot.Actors.ToDictionary(a => a.Name);
+            foreach (var actor in level.Rooms.Values.SelectMany(r => r.Objects.Values).Concat(level.Objects.Values).OfType<Actor>())
+            {
+                if (xmlActors.TryGetValue(actor.Id, out var xmlActor))
+                {
+                    actor.Hotspot = xmlActor.Hotspot == null ? new Point(0, 0) : converter.Convert<XmlCoord, Point>(xmlActor.Hotspot);
+                }
+            }
+
+
             // Connect InteractionSpots with LevelObjects
             applyToAllLevelObjects(level, lo => appendInteractionPointsToLevelObjects(lo, objectsInObjectsRoot));
 

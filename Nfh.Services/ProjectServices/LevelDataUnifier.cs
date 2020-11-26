@@ -30,31 +30,63 @@ namespace Nfh.Services.ProjectServices
         }
 
         private static XmlStringsRoot UnifyStrings(XmlStringsRoot generic, XmlStringsRoot level) => new()
-        { 
+        {
             Entries = generic.Entries.Unify(level.Entries, s => (s.Name, s.Category)),
         };
 
         // ToDo: It could more advanced: if there are only animations only override that or concat, otherwise replace all
-        private static XmlAnimsRoot UnifyAnims(XmlAnimsRoot generic, XmlAnimsRoot level) => new()
+        private static XmlAnimsRoot UnifyAnims(XmlAnimsRoot generic, XmlAnimsRoot level)
         {
-            Objects = generic.Objects.Unify(level.Objects, o => o.Name),
-        };
+            var unified = generic.Objects.ToDictionary(g => g.Name);
+            foreach (var obj in level.Objects)
+            {
+                if (unified.TryGetValue(obj.Name, out var animsObj))
+                {
+                    animsObj.Animations.AddRange(obj.Animations);
+                    animsObj.Regions.AddRange(obj.Regions);
+                }
+                else
+                {
+                    unified[obj.Name] = obj;
+                }
+            }
 
-        private static XmlGfxRoot UnifyGfxData(XmlGfxRoot generic, XmlGfxRoot level) => new()
+            return new()
+            {
+                Objects = unified.Values.ToList(),
+            };
+        }
+
+        private static XmlGfxRoot UnifyGfxData(XmlGfxRoot generic, XmlGfxRoot level)
         {
-            Objects = generic.Objects.Unify(level.Objects, o => o.Name),
-        };
+            var unified = generic.Objects.ToDictionary(o => o.Name);
+            foreach (var obj in level.Objects)
+            {
+                if (unified.TryGetValue(obj.Name, out var gfxObj))
+                {
+                    gfxObj.Files.AddRange(obj.Files);
+                }
+                else
+                {
+                    unified[obj.Name] = obj;
+                }
+            }
 
-        // ToDo
+            return new()
+            {
+                Objects = unified.Values.ToList(),
+            };
+        }
+
         private static XmlObjectsRoot UnifyObjects(XmlObjectsRoot generic, XmlObjectsRoot level)
         {
             return new()
             {
-                Actors = generic.Actors.Concat(level.Actors).ToList(),
-                Doors = generic.Doors.Concat(level.Doors).ToList(),
-                Icons = generic.Icons.Concat(level.Icons).ToList(),
-                Objects = generic.Objects.Concat(level.Objects).ToList(),
-                Inventars = generic.Inventars.Concat(level.Inventars).ToList(),
+                Actors = generic.Actors.Unify(level.Actors, o => o.Name),
+                Doors = generic.Doors.Unify(level.Doors, o => o.Name),
+                Icons = generic.Icons.Unify(level.Icons, o => o.Name),
+                Objects = generic.Objects.Unify(level.Objects, o => o.Name),
+                Inventars = generic.Inventars.Unify(level.Inventars, o => o.Name),
             };
         }
     }
