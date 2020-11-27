@@ -2,12 +2,12 @@
 
 namespace Nfh.Services.Common
 {
-    internal static class Builder
+    internal static class CommonServicesBuilder
     {
         public static IServiceCollection AddHelpers(this IServiceCollection services)
         {
-            services.AddTransient<IFolderHelper, FolderHelper>();
-            services.AddTransient<IZipHelper, ZipHelper>();
+            services.AddTransient<IFolderService, FolderService>();
+            services.AddTransient<IZipService, ZipService>();
             return services;
         }
     }

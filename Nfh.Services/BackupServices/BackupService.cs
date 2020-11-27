@@ -15,12 +15,12 @@ namespace Nfh.Services.BackupServices
         private readonly string BackupFolderName = "backup";
 
         private readonly IApplicationWorkFolder applicationWorkFolder;
-        private readonly IFolderHelper gameInstallFolderHelper;
+        private readonly IFolderService gameInstallFolderService;
 
-        public BackupService(IApplicationWorkFolder applicationWorkFolder, IFolderHelper gameInstallFolderHelper)
+        public BackupService(IApplicationWorkFolder applicationWorkFolder, IFolderService gameInstallFolderService)
         {
             this.applicationWorkFolder = applicationWorkFolder;
-            this.gameInstallFolderHelper = gameInstallFolderHelper;
+            this.gameInstallFolderService = gameInstallFolderService;
         }
 
         public bool BackupExists 
@@ -43,7 +43,7 @@ namespace Nfh.Services.BackupServices
                 throw new Exception($"{sourceGamePath} folder does not exists");
 
             copyGamesData(
-                from: gameInstallFolderHelper.GetGamesDataFolder(sourceGamePath),
+                from: gameInstallFolderService.GetGamesDataFolder(sourceGamePath),
                 to: getOrCreateBackupFolder());
         }
 
@@ -54,7 +54,7 @@ namespace Nfh.Services.BackupServices
 
             copyGamesData(
                 from: getOrCreateBackupFolder(),
-                to: gameInstallFolderHelper.GetGamesDataFolder(targetGamePath));
+                to: gameInstallFolderService.GetGamesDataFolder(targetGamePath));
         }
 
         private DirectoryInfo getOrCreateBackupFolder()

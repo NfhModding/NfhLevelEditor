@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Nfh.Services.Common
 {
-    internal class FolderHelper : IFolderHelper
+    internal class FolderService : IFolderService
     {
         public DirectoryInfo GetGamesDataFolder(string gameSourcePath)
         {

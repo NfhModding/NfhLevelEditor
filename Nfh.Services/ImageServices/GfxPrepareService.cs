@@ -9,9 +9,9 @@ namespace Nfh.Services.ImageServices
         private DirectoryInfo? gfxDataFolder = null;
 
         private readonly IApplicationWorkFolder applicationWorkFolder;
-        private readonly IZipHelper zipHelper;
+        private readonly IZipService zipHelper;
 
-        public GfxPrepareService(IApplicationWorkFolder applicationWorkFolder, IZipHelper zipHelper)
+        public GfxPrepareService(IApplicationWorkFolder applicationWorkFolder, IZipService zipHelper)
         {
             this.applicationWorkFolder = applicationWorkFolder;
             this.zipHelper = zipHelper;

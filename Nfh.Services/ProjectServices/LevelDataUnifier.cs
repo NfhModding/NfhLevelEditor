@@ -1,4 +1,5 @@
-﻿using Nfh.Services.ProjectServices.Xml.Models;
+﻿using Nfh.Services.Helpers;
+using Nfh.Services.ProjectServices.Xml.Models;
 using Nfh.Services.ProjectServices.Xml.Models.Anims;
 using Nfh.Services.ProjectServices.Xml.Models.GfxData;
 using Nfh.Services.ProjectServices.Xml.Models.Objects;
@@ -29,7 +30,7 @@ namespace Nfh.Services.ProjectServices
 
         private static XmlStringsRoot UnifyStrings(XmlStringsRoot generic, XmlStringsRoot level) => new()
         {
-            Entries = generic.Entries.Unify(level.Entries, s => (s.Name, s.Category)),
+            Entries = generic.Entries.SetOrOverride(level.Entries, s => (s.Name, s.Category)),
         };
 
         private static XmlStringsRoot SeperateStrings(XmlStringsRoot generic, XmlStringsRoot unified)
@@ -96,25 +97,12 @@ namespace Nfh.Services.ProjectServices
         {
             return new()
             {
-                Actors = generic.Actors.Unify(level.Actors, o => o.Name),
-                Doors = generic.Doors.Unify(level.Doors, o => o.Name),
-                Icons = generic.Icons.Unify(level.Icons, o => o.Name),
-                Objects = generic.Objects.Unify(level.Objects, o => o.Name),
-                Inventars = generic.Inventars.Unify(level.Inventars, o => o.Name),
+                Actors = generic.Actors.SetOrOverride(level.Actors, o => o.Name),
+                Doors = generic.Doors.SetOrOverride(level.Doors, o => o.Name),
+                Icons = generic.Icons.SetOrOverride(level.Icons, o => o.Name),
+                Objects = generic.Objects.SetOrOverride(level.Objects, o => o.Name),
+                Inventars = generic.Inventars.SetOrOverride(level.Inventars, o => o.Name),
             };
-        }
-    }
-
-    internal static class IEnumerableExtensions
-    {
-        public static List<TSource> Unify<TSource, TKey>(this IEnumerable<TSource> generic, IEnumerable<TSource> level, Func<TSource, TKey> keySelector)
-        {
-            var unified = generic.ToDictionary(keySelector, v => v);
-            foreach (var item in level)
-            {
-                unified[keySelector(item)] = item;
-            }
-            return unified.Values.ToList();
         }
     }
 }

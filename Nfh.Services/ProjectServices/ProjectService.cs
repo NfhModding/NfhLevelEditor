@@ -13,19 +13,19 @@ namespace Nfh.Services.ProjectServices
 {
     internal class ProjectService : IProjectService
     {
-        private readonly IFolderHelper folderHelper;
-        private readonly IZipHelper zipHelper;
+        private readonly IFolderService folderService;
+        private readonly IZipService zipService;
         private readonly ISeasonPackLoader seasonPackLoader;
         private readonly ILevelLoader levelLoader;
 
         public ProjectService(
-            IFolderHelper folderHelper, 
-            IZipHelper zipHelper, 
+            IFolderService folderService, 
+            IZipService zipService, 
             ISeasonPackLoader seasonPackLoader,
             ILevelLoader levelLoader)
         {
-            this.folderHelper = folderHelper;
-            this.zipHelper = zipHelper;
+            this.folderService = folderService;
+            this.zipService = zipService;
             this.seasonPackLoader = seasonPackLoader;
             this.levelLoader = levelLoader;
         }
@@ -40,7 +40,8 @@ namespace Nfh.Services.ProjectServices
                 projectFolder.Create();
 
             var gamedataFolder = createGamedataDirectoryInfo(projectFolder);
-            var dataFolder = folderHelper.GetGamesDataFolder(gameSourcePath);
+            var dataFolder = folderService.GetGamesDataFolder(gameSourcePath);
+
             ZipFile.ExtractToDirectory(Path.Combine(dataFolder.FullName, "gamedata.bnd"), gamedataFolder.FullName, overwriteFiles: true);
         }
 
@@ -79,8 +80,8 @@ namespace Nfh.Services.ProjectServices
             if (!Directory.Exists(targetGamePath))
                 return;
 
-            var targetFileName = Path.Combine(folderHelper.GetGamesDataFolder(targetGamePath).FullName, "gamedata.bnd");
-            zipHelper.CreateZipFromFolder(createGamedataDirectoryInfo(sourceProjectFolder).FullName, targetFileName, overrideFile: true);
+            var targetFileName = Path.Combine(folderService.GetGamesDataFolder(targetGamePath).FullName, "gamedata.bnd");
+            zipService.CreateZipFromFolder(createGamedataDirectoryInfo(sourceProjectFolder).FullName, targetFileName, overrideFile: true);
         }
 
         public SeasonPack LoadSeasonPack(string sourcePath)

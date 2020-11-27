@@ -2,7 +2,7 @@
 
 namespace Nfh.Services.Common
 {
-    internal interface IZipHelper
+    internal interface IZipService
     {
         void CreateZipFromFolder(string sourceFolderName, string destinationArchiveFileName, bool overrideFile);
         void UnzipToFolderWithOverride(FileInfo file, DirectoryInfo destinationFolder);

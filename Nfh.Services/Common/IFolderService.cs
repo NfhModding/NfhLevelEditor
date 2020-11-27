@@ -2,7 +2,7 @@
 
 namespace Nfh.Services.Common
 {
-    internal interface IFolderHelper
+    internal interface IFolderService
     {
         public bool IsValidSourcePath(string gameSourcePath);
         public DirectoryInfo GetGamesDataFolder(string gameSourcePath);

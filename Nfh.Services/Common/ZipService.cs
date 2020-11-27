@@ -3,7 +3,7 @@ using System.IO.Compression;
 
 namespace Nfh.Services.Common
 {
-    internal class ZipHelper : IZipHelper
+    internal class ZipService : IZipService
     {
         public void CreateZipFromFolder(string sourceDirectoryName, string destinationArchiveFileName, bool overrideFile)
         {
