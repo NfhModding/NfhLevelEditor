@@ -35,6 +35,15 @@ namespace Nfh.Services.ProjectServices.Loaders
             ObjectsRoot = loadFromFolder<XmlObjectsRoot>(gamedataFolder, levelId, "objects"),
         };
 
+        public void SaveLevelSpecificData(DirectoryInfo gamedataFolder, string levelId, XmlLevelData levelData)
+        {
+            saveToFolder(gamedataFolder, levelData.LevelRoot, levelId, "level");
+            saveToFolder(gamedataFolder, levelData.StringsRoot, levelId, "strings");
+            // saveToFolder(gamedataFolder, levelData.GfxDataRoot, levelId, "gfxdata");
+            // saveToFolder(gamedataFolder, levelData.AnimsRoot, levelId, "anims");
+            // saveToFolder(gamedataFolder, levelData.ObjectsRoot, levelId, "objects");
+        }
+
         private T loadFromFolder<T>(DirectoryInfo gamedataFolder, string folderName, string fileName)
             where T : new()
         {
@@ -43,6 +52,14 @@ namespace Nfh.Services.ProjectServices.Loaders
         }
 
         private T loadGeneric<T>(DirectoryInfo gamedataFolder, string fileName)
-            where T : new() => loadFromFolder<T>(gamedataFolder, "generic", fileName);
+                where T : new() => 
+            loadFromFolder<T>(gamedataFolder, "generic", fileName);
+
+        private void saveToFolder<T>(DirectoryInfo gamedataFolder, T data, string folderName, string fileName)
+            where T : notnull
+        {
+            var levelFile = new FileInfo(Path.Combine(gamedataFolder.FullName, folderName, $"{fileName}.xml")); ;
+            serializer.SerializeToFile(data, levelFile);
+        }
     }
 }

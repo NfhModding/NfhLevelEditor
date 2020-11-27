@@ -1,7 +1,6 @@
 ﻿using Nfh.Domain.Models.InGame;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Level;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -29,9 +28,14 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                  })
                  .ToList();
 
-        public override IList<XmlLevelFloor> ConvertToXml(IList<Wall> domain)
-        {
-            throw new NotImplementedException();
-        }
+        public override IList<XmlLevelFloor> ConvertToXml(IList<Wall> walls) => walls
+            .Select(w => new XmlLevelFloor
+            {
+                Wall = true,
+                Size = converter.Convert<Size, XmlCoord>(w.Bounds.Size),
+                Offset = converter.Convert<Point, XmlCoord>(w.Bounds.Location),
+                // Walls do not have Hotspots, only floors do
+            })
+            .ToList();
     }
 }

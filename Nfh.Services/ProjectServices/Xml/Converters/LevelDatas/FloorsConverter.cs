@@ -1,7 +1,6 @@
 ﻿using Nfh.Domain.Models.InGame;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Level;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -26,12 +25,18 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                        Size = converter.Convert<XmlCoord, Size>(f.Size),
                        Location = converter.Convert<XmlCoord, Point>(f.Offset),
                    },
+                   Hotspot = f.Hotspot is null ? Point.Empty : converter.Convert<XmlCoord, Point>(f.Hotspot),
                })
                .ToList();
 
-        public override List<XmlLevelFloor> ConvertToXml(List<Floor> domain)
-        {
-            throw new NotImplementedException();
-        }
+        public override List<XmlLevelFloor> ConvertToXml(List<Floor> floors) => floors
+            .Select(f => new XmlLevelFloor()
+            {
+                Wall = false,
+                Size = converter.Convert<Size, XmlCoord>(f.Bounds.Size),
+                Offset = converter.Convert<Point, XmlCoord>(f.Bounds.Location),
+                Hotspot = f.Hotspot == Point.Empty ? null : converter.Convert<Point, XmlCoord >(f.Hotspot),
+            })
+            .ToList();
     }
 }

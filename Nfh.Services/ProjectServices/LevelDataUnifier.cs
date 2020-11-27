@@ -11,30 +11,44 @@ namespace Nfh.Services.ProjectServices
 {
     internal class LevelDataUnifier : ILevelDataUnifier
     {
-        // Idea: make it pure, do not modify generic 
-        public XmlLevelData UnifyWithGeneric(XmlLevelData generic, XmlLevelData level)
+        public XmlLevelData UnifyWithGeneric(XmlLevelData generic, XmlLevelData level) => new()
         {
-            return new()
-            {
-                LevelRoot = level.LevelRoot,
-                StringsRoot = UnifyStrings(generic.StringsRoot, level.StringsRoot),
-                AnimsRoot = UnifyAnims(generic.AnimsRoot, level.AnimsRoot),
-                GfxDataRoot = UnifyGfxData(generic.GfxDataRoot, level.GfxDataRoot),
-                ObjectsRoot = UnifyObjects(generic.ObjectsRoot, level.ObjectsRoot),
-            };
-        }
+            LevelRoot = level.LevelRoot,
+            StringsRoot = UnifyStrings(generic.StringsRoot, level.StringsRoot),
+            AnimsRoot = UnifyAnims(generic.AnimsRoot, level.AnimsRoot),
+            GfxDataRoot = UnifyGfxData(generic.GfxDataRoot, level.GfxDataRoot),
+            ObjectsRoot = UnifyObjects(generic.ObjectsRoot, level.ObjectsRoot),
+        };
 
-        public XmlLevelData SeperateFromGeneric(XmlLevelData unified)
+        public XmlLevelData SeperateFromGeneric(XmlLevelData generic, XmlLevelData unified) => new()
         {
-            return new();
-        }
+            LevelRoot = unified.LevelRoot,
+            StringsRoot = SeperateStrings(generic.StringsRoot, unified.StringsRoot),
+        };
+
 
         private static XmlStringsRoot UnifyStrings(XmlStringsRoot generic, XmlStringsRoot level) => new()
         {
             Entries = generic.Entries.Unify(level.Entries, s => (s.Name, s.Category)),
         };
 
-        // ToDo: It could more advanced: if there are only animations only override that or concat, otherwise replace all
+        private static XmlStringsRoot SeperateStrings(XmlStringsRoot generic, XmlStringsRoot unified)
+        {
+            var genericEntries = generic.Entries.ToDictionary(s => (s.Name, s.Category));
+
+            var root = new XmlStringsRoot();
+            foreach (var entry in unified.Entries)
+            {
+                if (!genericEntries.TryGetValue((Name: entry.Name, Category: entry.Category), out var _))
+                {
+                    root.Entries.Add(entry);
+                }
+            }
+
+            return root;
+        }
+
+        
         private static XmlAnimsRoot UnifyAnims(XmlAnimsRoot generic, XmlAnimsRoot level)
         {
             var unified = generic.Objects.ToDictionary(g => g.Name);

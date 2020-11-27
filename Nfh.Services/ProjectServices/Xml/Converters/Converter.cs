@@ -31,6 +31,8 @@ namespace Nfh.Services.ProjectServices.Xml.Converters
                 return toDomainConverter.ConvertToDomain(model);
            
             var toXmlConverter = converters.GetValueOrDefault((from, to));
+            if (toXmlConverter is null)
+                toXmlConverter = supportSpecialCasesToXml(from, to);
             if (toXmlConverter is not null)
                 return toXmlConverter.ConvertToXml(model);
 
@@ -45,6 +47,19 @@ namespace Nfh.Services.ProjectServices.Xml.Converters
                 return converters.Values.FirstOrDefault(c => c.GetType().Name.Contains("WallsConverter"));
             }
             if (from == typeof(List<Xml.Models.Level.XmlLevelFloor>) && to == typeof(List<Domain.Models.InGame.Floor>))
+            {
+                return converters.Values.FirstOrDefault(c => c.GetType().Name.Contains("FloorsConverter"));
+            }
+            return null;
+        }
+
+        private ITypeConverter? supportSpecialCasesToXml(Type from, Type to)
+        {
+            if (to == typeof(List<Xml.Models.Level.XmlLevelFloor>) && from == typeof(List<Domain.Models.InGame.Wall>))
+            {
+                return converters.Values.FirstOrDefault(c => c.GetType().Name.Contains("WallsConverter"));
+            }
+            if (to == typeof(List<Xml.Models.Level.XmlLevelFloor>) && from == typeof(List<Domain.Models.InGame.Floor>))
             {
                 return converters.Values.FirstOrDefault(c => c.GetType().Name.Contains("FloorsConverter"));
             }

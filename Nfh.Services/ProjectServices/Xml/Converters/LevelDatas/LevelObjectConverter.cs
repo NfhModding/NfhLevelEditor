@@ -18,12 +18,15 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
         {
             Layer = obj.Layer,
             Position = converter.Convert<XmlCoord, Point>(obj.Position), // ToDo nullable things in converters
-                                                                         // The rest is connected later
+            // The rest is connected later
         };
 
-        public override XmlLevelObject ConvertToXml(LevelObject domain)
+        public override XmlLevelObject ConvertToXml(LevelObject levelObject) => new()
         {
-            throw new System.NotImplementedException();
-        }
+            Name = levelObject.Id,
+            Layer = levelObject.Layer,
+            Position = converter.Convert<Point, XmlCoord>(levelObject.Position),
+            Visible = true, // default
+        };
     }
 }

@@ -5,16 +5,16 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
 {
     internal class SizeConverter : TypeConverterBase<Size, XmlCoord>
     {
-        public override Size ConvertToDomain(XmlCoord xmlModel) => new()
+        public override Size ConvertToDomain(XmlCoord coord) => new()
         {
-            Width = xmlModel.X,
-            Height = xmlModel.Y,
+            Width = coord.X,
+            Height = coord.Y,
         };
 
-        public override XmlCoord ConvertToXml(Size domain) => new()
+        public override XmlCoord ConvertToXml(Size size) => new()
         {
-            X = domain.Width,
-            Y = domain.Height,
+            X = size.Width,
+            Y = size.Height,
         };
     }
 }

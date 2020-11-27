@@ -17,7 +17,7 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
     internal class LevelDataConverter : TypeConverterBase<Level, XmlLevelData>
     {
         private readonly IConverter converter;
-
+        
         public LevelDataConverter(IConverter converter)
         {
             this.converter = converter;
@@ -37,9 +37,23 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             };
 
             // Append localization
-            applyToAllLevelObjects(level, (lo) => appendLocalization(lo, lo.Id, levelData.StringsRoot));
+            var strings = levelData.StringsRoot.Entries.Select(e => (xmlString: e, hasRead: false)).ToList();
+
+            applyToAllLevelObjects(level, (lo) => appendLocalization(lo, lo.Id, strings));
             foreach (var room in level.Rooms.Values)
-                appendLocalization(room, room.Id, levelData.StringsRoot);
+                appendLocalization(room, room.Id, strings);
+
+            foreach (var (str, _) in strings.Where(s => !s.hasRead).ToList())
+            {
+                if (level.ObjectDependentLocalizations.TryGetValue(str.Name, out var localization))
+                {
+                    localization.Strings.Add(str.Category, str.Text);
+                }
+                else
+                {
+                    level.ObjectDependentLocalizations[str.Name] = new Localization { Strings = new Dictionary<string, string>() { [str.Category] = str.Text } };
+                }
+            }
 
             // Connect all the doors
             var doors = level.Rooms.Values
@@ -81,9 +95,57 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             return level;
         }
 
-        public override XmlLevelData ConvertToXml(Level domain)
+        public override XmlLevelData ConvertToXml(Level level)
         {
-            throw new NotImplementedException();
+            // LevelRoot
+            var levelRoot = new XmlLevelRoot
+            {
+                Name = level.Name,
+                AngryTime = level.AngryTime,
+                Size = converter.Convert<Size, XmlCoord>(level.Size),
+                Objects = level.Objects.Values.Select(converter.Convert<LevelObject, XmlLevelObject>).ToList(),
+                Rooms = level.Rooms.Values.Select(converter.Convert<Room, XmlLevelRoom>).ToList(),
+            };
+
+            // StringRoot
+            var entries = new List<XmlString>();
+            var allLocalizationString = getFromAllLevelObject(level, lo => (id: lo.Id, strings: lo.Localization.Strings))
+                .Concat(level.ObjectDependentLocalizations.Select(pair => (id: pair.Key, strings: pair.Value.Strings)));
+            foreach (var loc in allLocalizationString)
+            {
+                foreach (var str in loc.strings)
+                {
+                    entries.Add(new()
+                    {
+                        Name = loc.id,
+                        Category = str.Key,
+                        Text = str.Value,
+                    });
+                }
+            }
+            var stringsRoot = new XmlStringsRoot
+            {
+                Entries = entries.Distinct(new XmlStringsEqualityComparer()).ToList(),
+            };
+
+            return new()
+            {
+                LevelRoot = levelRoot,
+                StringsRoot = stringsRoot,
+                // Right now the UI only changes the above mentiont things
+            };
+        }
+
+        private List<TReturn> getFromAllLevelObject<TReturn>(Level level, Func<LevelObject, TReturn> getFunc)
+        {
+            var result = new List<TReturn>();
+            foreach (var obj in level.Objects.Values)
+                result.Add(getFunc(obj));
+
+            foreach (var obj in level.Rooms.Values.SelectMany(r => r.Objects.Values))
+                result.Add(getFunc(obj));
+
+            return result;
         }
 
         private void applyToAllLevelObjects(Level level, Action<LevelObject> action)
@@ -95,10 +157,15 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                 action(obj);
         }
 
-        private void appendLocalization(ILocalizable localizable, string id, XmlStringsRoot stringsRoot)
+        private void appendLocalization(ILocalizable localizable, string id, List<(XmlString xmlString, bool hasRead)> strings)
         {
-            foreach (var e in stringsRoot.Entries.Where(e => e.Name == id))
-                localizable.Localization.Strings[e.Category] = e.Text;
+            var currentStrings = strings.Where(e => e.xmlString.Name == id).ToList();
+            for (var i = 0; i < currentStrings.Count; i++)
+            {
+                var str = currentStrings[i];
+                localizable.Localization.Strings[str.xmlString.Category] = str.xmlString.Text;
+                str.hasRead = true;
+            }   
         }
 
         private void connectDoors(Door door, IReadOnlyList<Door> others, XmlLevelRoot levelRoot)
@@ -119,13 +186,15 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
                 ?.Files
                 .ToDictionary(f => f.Image);
 
-            if (files is null) return;
+            if (files is null)
+                return;
 
             foreach (var animation in visuals.Animations.Values)
             {
                 foreach (var frame in animation.Frames)
                 {
-                    if (string.IsNullOrEmpty(frame.ImagePath)) continue;
+                    if (string.IsNullOrEmpty(frame.ImagePath))
+                        continue;
 
                     frame.ImageOffset = converter.Convert<XmlCoord, Point>(
                         files[frame.ImagePath].Offset);

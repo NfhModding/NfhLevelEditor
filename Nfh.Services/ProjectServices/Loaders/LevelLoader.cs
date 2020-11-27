@@ -1,7 +1,7 @@
 ﻿using Nfh.Domain.Models.InGame;
 using Nfh.Services.ProjectServices.Xml.Converters;
 using Nfh.Services.ProjectServices.Xml.Models;
-using System;
+using Nfh.Services.ProjectServices.Xml.Serializers;
 using System.IO;
 
 namespace Nfh.Services.ProjectServices.Loaders
@@ -12,17 +12,20 @@ namespace Nfh.Services.ProjectServices.Loaders
         private readonly ILevelMetaLoader levelMetaLoader;
         private readonly ILevelDataUnifier levelDataUnifier;
         private readonly IConverter converter;
+        private readonly ISerializer serializer;
 
         public LevelLoader(
             ILevelDataLoader levelDataLoader,
             ILevelMetaLoader levelMetaLoader,
             ILevelDataUnifier levelDataUnifier,
-            IConverter converter)
+            IConverter converter,
+            ISerializer serializer)
         {
             this.levelDataLoader = levelDataLoader;
             this.levelMetaLoader = levelMetaLoader;
             this.levelDataUnifier = levelDataUnifier;
             this.converter = converter;
+            this.serializer = serializer;
         }
 
         public Level Load(DirectoryInfo gamedataFolder, string levelId)
@@ -39,7 +42,12 @@ namespace Nfh.Services.ProjectServices.Loaders
 
         public void Save(DirectoryInfo gamedataFolder, Level level)
         {
-            throw new NotImplementedException();
+            var allLevelData = converter.Convert<Level, XmlLevelData>(level);
+            var meta = level.Meta; // ToDo
+
+            var generic = levelDataLoader.LoadGenericData(gamedataFolder);
+            var levelSpecific = levelDataUnifier.SeperateFromGeneric(generic, allLevelData);
+            levelDataLoader.SaveLevelSpecificData(gamedataFolder, level.Id, levelSpecific);
         }
     }
 }

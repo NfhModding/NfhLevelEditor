@@ -7,5 +7,7 @@ namespace Nfh.Services.ProjectServices.Loaders
     {
         XmlLevelData LoadGenericData(DirectoryInfo gamedataFolder);
         XmlLevelData LoadLevelSpecificData(DirectoryInfo gamedataFolder, string levelId);
+
+        void SaveLevelSpecificData(DirectoryInfo gamedataFolder, string levelId, XmlLevelData levelData);
     }
 }

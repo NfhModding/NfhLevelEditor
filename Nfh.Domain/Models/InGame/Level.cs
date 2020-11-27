@@ -16,5 +16,6 @@ namespace Nfh.Domain.Models.InGame
         public Size Size { get; set; }
         public IDictionary<string, Room> Rooms { get; set; } = new Dictionary<string, Room>();
         public IDictionary<string, LevelObject> Objects { get; set; } = new Dictionary<string, LevelObject>();
+        public IDictionary<string, Localization> ObjectDependentLocalizations { get; set; } = new Dictionary<string, Localization>();
     }
 }

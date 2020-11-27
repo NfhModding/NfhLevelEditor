@@ -100,16 +100,6 @@ namespace Nfh.Services.ProjectServices
             // WriteAll
             File.WriteAllText(Path.Combine(gamedataFolder.FullName, "leveldata.xml"), serialized);
         }
-
-        private LevelDescription loadLevelDescription(DirectoryInfo gamedataFolder, string levelId)
-        {
-            var file = new FileInfo(Path.Combine(gamedataFolder.FullName, "dialogs", "briefing", $"{levelId}.xml"));
-            if (!file.Exists)
-                throw new();
-
-            var levelBriefing = serializer.DeserializeFromFile<XmlBriefingRoot>(file);
-            return converter.Convert<XmlBriefingRoot, LevelDescription>(levelBriefing);
-        }
         
         private void saveLevelDescription(DirectoryInfo gamedataFolder, string levelId, LevelDescription levelDescription)
         {

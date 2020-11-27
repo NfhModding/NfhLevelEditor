@@ -11,7 +11,7 @@ namespace Nfh.Domain.Models.InGame
         /// <summary>
         /// Probably used for pathfinding in the game.
         /// </summary>
-        public Point[] Path { get; } = new Point[2];
+        public Point[] Path { get; set; } = new Point[2];
         public Localization Localization { get; set; } = new();
         public IList<Floor> Floors { get; set; } = new List<Floor>();
         public IList<Wall> Walls { get; set; } = new List<Wall>();

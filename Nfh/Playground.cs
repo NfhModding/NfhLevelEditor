@@ -18,12 +18,14 @@ namespace Nfh
     internal class Playground
     {
         private readonly IGameLocator gameLocator;
+        private readonly IBackupService backupService;
         private readonly IProjectService projectService;
         private readonly IImageService imageService;
 
-        public Playground(IGameLocator gameLocator, IProjectService projectService, IImageService imageService)
+        public Playground(IGameLocator gameLocator, IBackupService backupService, IProjectService projectService, IImageService imageService)
         {
             this.gameLocator = gameLocator;
+            this.backupService = backupService;
             this.projectService = projectService;
             this.imageService = imageService;
         }
@@ -43,13 +45,15 @@ namespace Nfh
             var gfxTmp = new DirectoryInfo(Path.Combine(@"D:", "GFX_TMP"));
             gfxTmp.Create();
 
-            imageService.LoadLevelThumbnail(firstLevel.Id, location).Save(Path.Combine(gfxTmp.FullName, "thumbnal.png"));
+            //imageService.LoadLevelThumbnail(firstLevel.Id, location).Save(Path.Combine(gfxTmp.FullName, "thumbnal.png"));
 
             var obj = firstLevel.Objects["house"];
-            imageService.LoadAnimationFrame(obj.Id, obj.Visuals?.Animations.Values.First().Frames.First().ImagePath, location).Save(Path.Combine(gfxTmp.FullName, "frame.png"));
+            //imageService.LoadAnimationFrame(obj.Id, obj.Visuals?.Animations.Values.First().Frames.First().ImagePath, location).Save(Path.Combine(gfxTmp.FullName, "frame.png"));
 
             // projectService.PatchGame(projectPath, location);
             //projectService.DeleteProject(projectPath);
+
+            backupService.RestoreGameData(location);
         }
     }
 }

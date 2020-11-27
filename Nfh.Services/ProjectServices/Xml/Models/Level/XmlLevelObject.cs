@@ -15,6 +15,7 @@ namespace Nfh.Services.ProjectServices.Xml.Models.Level
         [XmlAttribute("position")]
         public XmlCoord? Position { get; set; } = null;
 
+        // Note: In some rare cases the visible="true" is written in the XML, after deserialization they are disappearing (most likely it's not an error
         [XmlHideDefault(true)]
         [XmlAttribute("visible")]
         public bool Visible { get; set; } = true;

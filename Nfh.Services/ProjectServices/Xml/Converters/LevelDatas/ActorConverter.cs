@@ -1,7 +1,6 @@
 ﻿using Nfh.Domain.Models.InGame;
 using Nfh.Services.ProjectServices.Xml.Models.Common;
 using Nfh.Services.ProjectServices.Xml.Models.Level;
-using System;
 using System.Drawing;
 
 namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
@@ -22,9 +21,12 @@ namespace Nfh.Services.ProjectServices.Xml.Converters.LevelDatas
             // The rest is connected later
         };
 
-        public override XmlLevelActor ConvertToXml(Actor domain)
+        public override XmlLevelActor ConvertToXml(Actor actor) => new()
         {
-            throw new NotImplementedException();
-        }
+            Name = actor.Id,
+            Layer = actor.Layer,
+            Position = converter.Convert<Point, XmlCoord>(actor.Position),
+            // ToDo Animation = 
+        };
     }
 }
