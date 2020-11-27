@@ -9,10 +9,12 @@ namespace Nfh.Services.ImageServices
     internal class ImageService : IImageService
     {
         private readonly IGfxPrepareService gfxPrepareService;
+        private readonly IImageCache imageCache;
 
-        public ImageService(IGfxPrepareService gfxPrepareService)
+        public ImageService(IGfxPrepareService gfxPrepareService, IImageCache imageCache)
         {
             this.gfxPrepareService = gfxPrepareService;
+            this.imageCache = imageCache;
         }
 
         public Bitmap LoadLevelThumbnail(string levelId, string gamePath)
@@ -28,11 +30,18 @@ namespace Nfh.Services.ImageServices
             return LoadImage(new(Path.Combine(gfxdataFolder.FullName, objectPath, frameName)));
         }    
         
-        private static Bitmap LoadImage(FileInfo fileInfo)
+        private Bitmap LoadImage(FileInfo fileInfo)
         {
             if (!fileInfo.Exists)
                 throw new($"Image loading: {fileInfo.FullName} does not exists");
-            return TgaImage.FromFile(fileInfo.FullName).ToBitmap();
+
+            if (!imageCache.TryGetImage(fileInfo, out var image))
+            {
+                image = TgaImage.FromFile(fileInfo.FullName).ToBitmap();
+                imageCache.Set(fileInfo, image);
+            }
+
+            return image;
         }
     }
 }

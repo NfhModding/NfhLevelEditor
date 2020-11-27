@@ -9,6 +9,7 @@ namespace Nfh.Services.ImageServices
         {
             services.AddTransient<IImageService, ImageService>();
             services.AddSingleton<IGfxPrepareService, GfxPrepareService>();
+            services.AddSingleton<IImageCache, ImageCache>();
             return services;
         }
     }
