@@ -2,6 +2,7 @@
 using Nfh.Domain.Interfaces;
 using Nfh.Domain.Models.InGame;
 using Nfh.Domain.Models.Meta;
+using Nfh.Editor.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -60,7 +61,9 @@ namespace Nfh.Editor.ViewModels
             : base(MetaViewModel.Current.UndoRedo, levelMeta)
         {
             this.levelMeta = levelMeta;
-            Thumbnail = BitmapToImageSource(Services.Image.LoadLevelThumbnail(levelMeta.Id, MetaViewModel.Current.GamePath));
+            var thumbnail = new LoadingDialog().Execute(() => 
+                BitmapToImageSource(Services.Image.LoadLevelThumbnail(levelMeta.Id, MetaViewModel.Current.GamePath)));
+            Thumbnail = (BitmapImage)thumbnail;
         }
     }
 }

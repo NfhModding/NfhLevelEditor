@@ -71,6 +71,7 @@ namespace Nfh.Editor.ViewModels
                 bitmapimage.StreamSource = memory;
                 bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapimage.EndInit();
+                bitmapimage.Freeze();
                 return bitmapimage;
             }
         }

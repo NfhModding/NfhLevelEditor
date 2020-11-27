@@ -1,4 +1,6 @@
-﻿using Nfh.Editor.ViewModels;
+﻿using Nfh.Domain.Models.InGame;
+using Nfh.Editor.Dialogs;
+using Nfh.Editor.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +25,9 @@ namespace Nfh.Editor
         public LevelEditWindow(string levelId)
         {
             InitializeComponent();
-            var level = Services.Project.LoadLevel(MetaViewModel.Current.ProjectPath, levelId);
-            levelEditView.DataContext = new LevelEditViewModel(level);
+            var level = new LoadingDialog().Execute(() =>
+                Services.Project.LoadLevel(MetaViewModel.Current.ProjectPath, levelId));
+            levelEditView.DataContext = new LevelEditViewModel((Level)level);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

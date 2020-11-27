@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Nfh.Editor.Dialogs
 {
@@ -21,30 +22,44 @@ namespace Nfh.Editor.Dialogs
     /// </summary>
     public partial class LoadingDialog : Window
     {
-        public object? Result { get; set; }
+        private volatile bool isRunning;
+        private BackgroundWorker? worker;
 
-        private Func<object?> process;
-        private BackgroundWorker worker;
-
-        public LoadingDialog(Func<object?> process)
+        public LoadingDialog()
         {
-            this.process = process;
-            worker = new BackgroundWorker();
-
             InitializeComponent();
-
-            worker.DoWork += RunWork;
-            worker.RunWorkerCompleted += RunWorkCompleted;
-
-            worker.RunWorkerAsync();
         }
 
-        private void RunWork(object sender, DoWorkEventArgs args) => Result = process();
-
-        private void RunWorkCompleted(object sender, RunWorkerCompletedEventArgs args)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
-            DialogResult = true;
-            Close();
+            e.Cancel = isRunning;
+        }
+
+        public object? Execute(Func<object?> action)
+        {
+            isRunning = true;
+            object? result = null;
+
+            worker = new BackgroundWorker();
+            worker.DoWork += (sender, ev) =>
+            {
+                ev.Result = action();
+            };
+            worker.RunWorkerCompleted += (sender, ev) =>
+            {
+                result = ev.Result;
+
+                Dispatcher.Invoke(() =>
+                {
+                    isRunning = false;
+                    Close();
+                });
+            };
+
+            worker.RunWorkerAsync();
+            ShowDialog();
+
+            return result;
         }
     }
 }

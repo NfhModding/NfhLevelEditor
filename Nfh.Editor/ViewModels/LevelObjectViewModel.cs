@@ -1,4 +1,5 @@
 ﻿using Nfh.Domain.Models.InGame;
+using Nfh.Editor.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -94,8 +95,10 @@ namespace Nfh.Editor.ViewModels
             if (firstVisibleFrame == null) return;
 
             frameOffset = firstVisibleFrame.ImageOffset;
-            var image = Services.Image.LoadAnimationFrame(Model.Visuals.Id, firstVisibleFrame.ImagePath, MetaViewModel.Current.GamePath);
-            Image = BitmapToImageSource(image);
+            var image = new LoadingDialog().Execute(() => 
+                BitmapToImageSource(Services.Image.LoadAnimationFrame(
+                    Model.Visuals.Id, firstVisibleFrame.ImagePath, MetaViewModel.Current.GamePath)));
+            Image = (BitmapImage)image;
         }
 
         private static Animation? GetAnimation(Visuals visuals)

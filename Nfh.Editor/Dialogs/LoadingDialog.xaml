@@ -4,9 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Nfh.Editor.Dialogs"
+        xmlns:behaviors="clr-namespace:Nfh.Editor.Behaviors"
+        behaviors:HideCloseButtonBehavior.HideCloseButton="True"
+        WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing"
         mc:Ignorable="d"
         Title="Loading..." Height="100" Width="200">
     <Grid>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Loading, please wait..."/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <ProgressBar Grid.Row="0" x:Name="ProgressBar" Grid.Column="0" IsIndeterminate="True" Height="22" />
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Loading, please wait..."/>
     </Grid>
 </Window>

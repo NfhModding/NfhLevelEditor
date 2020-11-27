@@ -1,5 +1,6 @@
 ﻿using Mvvm.Framework.UndoRedo;
 using Mvvm.Framework.ViewModel;
+using Nfh.Domain.Models.Meta;
 using Nfh.Editor.Commands;
 using Nfh.Editor.Commands.ModelCommands;
 using Nfh.Editor.Commands.UiCommands;
@@ -77,7 +78,8 @@ namespace Nfh.Editor.ViewModels
             if (SaveIfHasChanges() == MessageBoxResult.Cancel) return;
 
             ProjectPath = path;
-            SeasonPack = new SeasonPackViewModel(Services.Project.LoadSeasonPack(path));
+            var seasonPack = new LoadingDialog().Execute(() => Services.Project.LoadSeasonPack(path));
+            SeasonPack = new SeasonPackViewModel((SeasonPack)seasonPack);
             UndoRedo.Reset();
         }
 
@@ -118,7 +120,11 @@ namespace Nfh.Editor.ViewModels
                     "Backup",
                     MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    Services.Backup.BackupGameData(GamePath);
+                    new LoadingDialog().Execute(() =>
+                    {
+                        Services.Backup.BackupGameData(GamePath);
+                        return null;
+                    });
                     MessageBox.Show("Successfully backed up game!", "Backup");
                 }
             }
