@@ -1,7 +1,4 @@
-﻿using Image.Tga;
-using Microsoft.Extensions.DependencyInjection;
-using Nfh.Domain.Interfaces;
-using Nfh.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Nfh
 {

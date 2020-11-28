@@ -1,14 +1,7 @@
-﻿using Mvvm.Framework.UndoRedo;
-using Mvvm.Framework.ViewModel;
+﻿using Mvvm.Framework.ViewModel;
 using Nfh.Domain.Models.Meta;
-using Nfh.Editor.Commands.ModelCommands;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Nfh.Editor.ViewModels
 {

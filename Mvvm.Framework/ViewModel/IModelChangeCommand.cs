@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Mvvm.Framework.ViewModel
+﻿namespace Mvvm.Framework.ViewModel
 {
     /// <summary>
     /// A command that can be executed to modify the model.

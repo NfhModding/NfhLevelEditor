@@ -1,15 +1,6 @@
-﻿using Mvvm.Framework.ViewModel;
-using Nfh.Domain.Interfaces;
-using Nfh.Domain.Models.InGame;
-using Nfh.Domain.Models.Meta;
+﻿using Nfh.Domain.Models.Meta;
 using Nfh.Editor.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace Nfh.Editor.ViewModels

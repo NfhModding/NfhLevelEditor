@@ -1,19 +1,6 @@
-﻿using Image.Tga;
-using Microsoft.Extensions.DependencyInjection;
-using Mvvm.Framework.UndoRedo;
-using Mvvm.Framework.ViewModel;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Nfh.Domain.Interfaces;
-using Nfh.Domain.Models.InGame;
-using Nfh.Domain.Models.Meta;
-using Nfh.Editor.Commands.ModelCommands;
 using Nfh.Services;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace Nfh.Editor
 {

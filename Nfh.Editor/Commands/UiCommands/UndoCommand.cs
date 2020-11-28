@@ -1,12 +1,5 @@
-﻿using Mvvm.Framework.Command;
-using Mvvm.Framework.UndoRedo;
-using Mvvm.Framework.ViewModel;
-using Nfh.Editor.ViewModels;
+﻿using Nfh.Editor.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Nfh.Editor.Commands.UiCommands
