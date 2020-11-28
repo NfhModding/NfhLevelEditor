@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Nfh.Dal;
 using Nfh.Services.BackupServices;
 using Nfh.Services.Common;
 using Nfh.Services.GameLocatorServices;
@@ -11,9 +12,11 @@ namespace Nfh.Services
     {
         public static void AddDomainServices(this IServiceCollection services)
         {
+            services.AddDal();
+
             services.AddSingleton<IApplicationWorkFolder, ApplicationWorkFolder>();
             services.AddHelpers();
-
+            
             services.AddGameLocatorServices();
             services.AddBackupServices();
             services.AddProjectServices();

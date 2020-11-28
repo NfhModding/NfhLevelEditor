@@ -1,8 +1,8 @@
-﻿using Nfh.Domain.Interfaces;
+﻿using Nfh.Dal.Repositories;
+using Nfh.Domain.Interfaces;
 using Nfh.Domain.Models.InGame;
 using Nfh.Domain.Models.Meta;
 using Nfh.Services.Common;
-using Nfh.Services.ProjectServices.Loaders;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,14 +15,14 @@ namespace Nfh.Services.ProjectServices
     {
         private readonly IFolderService folderService;
         private readonly IZipService zipService;
-        private readonly ISeasonPackLoader seasonPackLoader;
-        private readonly ILevelLoader levelLoader;
+        private readonly ISeasonPackRepository seasonPackLoader;
+        private readonly ILevelRepostory levelLoader;
 
         public ProjectService(
             IFolderService folderService, 
             IZipService zipService, 
-            ISeasonPackLoader seasonPackLoader,
-            ILevelLoader levelLoader)
+            ISeasonPackRepository seasonPackLoader,
+            ILevelRepostory levelLoader)
         {
             this.folderService = folderService;
             this.zipService = zipService;

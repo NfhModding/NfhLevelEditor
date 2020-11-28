@@ -14,6 +14,7 @@
   <ItemGroup>	
     <ProjectReference Include="..\Format.Xml\Format.Xml.csproj" />
     <ProjectReference Include="..\Image.Tga\Image.Tga.csproj" />
+    <ProjectReference Include="..\Nfh.Dal\Nfh.Dal.csproj" />
     <ProjectReference Include="..\Nfh.Domain\Nfh.Domain.csproj" />
     <ProjectReference Include="..\Steam.Acf\Steam.Acf.csproj" />
   </ItemGroup>
