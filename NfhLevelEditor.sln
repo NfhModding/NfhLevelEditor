@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfh.Services", "Nfh.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nfh.Editor", "Nfh.Editor\Nfh.Editor.csproj", "{CF5422F2-20E9-404C-958A-361D034D1B42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvvm.Framework", "Mvvm.Framework\Mvvm.Framework.csproj", "{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mvvm.Framework", "Mvvm.Framework\Mvvm.Framework.csproj", "{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nfh.Dal", "Nfh.Dal\Nfh.Dal.csproj", "{195F84EF-443A-4085-85EE-CEC22272D52C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{685BA3C9-3B6F-4F6C-A9CD-D3A83497C8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195F84EF-443A-4085-85EE-CEC22272D52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195F84EF-443A-4085-85EE-CEC22272D52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195F84EF-443A-4085-85EE-CEC22272D52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195F84EF-443A-4085-85EE-CEC22272D52C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
