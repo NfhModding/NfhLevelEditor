@@ -184,7 +184,7 @@ namespace Nfh.Dal.Xml.Converters.LevelDatas
             var files = gfxDataRoot.Objects
                 .FirstOrDefault(o => o.Name == visuals.Id)
                 ?.Files
-                .ToDictionary(f => f.Image);
+                .ToLastKeepDictionary(f => f.Image);
 
             if (files is null)
                 return;
